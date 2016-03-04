@@ -6,6 +6,14 @@ void Edge::setNodes(Node first, Node second)
     mEndNode=second;
 }
 
+bool Edge::chceckEdges(const Edge &mE)
+{
+   return *this==mE;
+}
+
+
+
+
 Node Edge::endNode() const
 {
     return mEndNode;
@@ -14,4 +22,9 @@ Node Edge::endNode() const
 Node Edge::startNode() const
 {
     return mStartNode;
+}
+
+void Edge::setWeight(const Weight &weight)
+{
+    mWeight = weight;
 }

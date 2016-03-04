@@ -10,6 +10,7 @@ public:
     bool operator==(const Node &other ) const {
         return other.mCoordinate==this->mCoordinate;
     }
+
 private:
     Coordinate mCoordinate;
 };
