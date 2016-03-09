@@ -6,24 +6,44 @@ class TestWeightGraph: public testing::Test {
 public:
     TestWeightGraph(){}
     WeightGraph sut;
-    Edge sut2;
-    Edge sut3;
-
+    Edge edge1;
+    Edge edge2;
 };
 TEST_F(TestWeightGraph, appendEdges){
-    sut2.setNodes(Node(Coordinate(5,6)), Node(Coordinate(7,8)));
-    sut.append(sut2);
+    edge1.setNodes(Node(Coordinate(5,6)), Node(Coordinate(7,8)));
+    sut.append(edge1);
     EXPECT_EQ(sut.edgeCollection().size(), 1);
-    sut3.setNodes(Node(Coordinate(5,6)), Node(Coordinate(7,8)));
-    EXPECT_EQ(sut.edgeCollection().at(0), sut3);
+    edge2.setNodes(Node(Coordinate(5,6)), Node(Coordinate(7,8)));
+    EXPECT_EQ(sut.edgeCollection().at(0), edge2);
 }
 TEST_F(TestWeightGraph, isEdgeInGraph){
-    sut2.setNodes(Node(Coordinate(7,6)), Node(Coordinate(7,8)));
-    sut.append(sut2);
-    EXPECT_FALSE(sut.isEdgeInGraph(sut2));
+    edge1.setNodes(Node(Coordinate(7,6)), Node(Coordinate(7,8)));
+    sut.append(edge1);
+    EXPECT_TRUE(sut.isEdgeInGraph(edge1));
+    EXPECT_FALSE(sut.isEdgeInGraph(edge2));
 }
 
-TEST_F(TestWeightGraph, increasingNode){
+TEST_F(TestWeightGraph, searchNeighbours){
+    edge1.setNodes(Node(Coordinate(5,6)), Node(Coordinate(7,8)));
+    edge2.setNodes(Node(Coordinate(5,6)), Node(Coordinate(7,9)));
+    sut.append(edge1);
+    sut.append(edge2);
+    sut.searchNeighbours(Node(Coordinate(5,6)));
+    EXPECT_EQ(edge1, sut.neighbours().at(0));
+    EXPECT_EQ(edge2, sut.neighbours().at(1));
+}
+
+TEST_F(TestWeightGraph, countNode){
     //sut.increaseNode();
-
 }
+
+TEST_F(TestWeightGraph, changeEdgeWeight){
+    sut.changeEdgeWeight(edge1, Weight(5));
+    EXPECT_EQ(edge1.getWeight(), Weight(5));
+}
+
+//TEST_F(TestWeightGraph, searchEdge){
+//    edge1.setNodes(Node(Coordinate(5,6)), Node(Coordinate(7,8)));
+//    sut.append(edge1);
+//    EXPECT_EQ(sut.searchEdge(Node(Coordinate(5,6)), Node(Coordinate(7,8))), sut.edgeCollection().at(0));
+//}

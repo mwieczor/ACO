@@ -13,12 +13,10 @@ public:
 
 
 TEST_F(TestEdge, settingNodes){
-
-sut.setNodes(Node(Coordinate(32, 42)), Node(Coordinate(12, 15)));
-   EXPECT_EQ(sut.startNode(), Node(Coordinate(32, 42)));
+    sut.setNodes(Node(Coordinate(32, 42)), Node(Coordinate(12, 15)));
+    EXPECT_EQ(sut.startNode(), Node(Coordinate(32, 42)));
 
 }
-
 
 TEST_F(TestEdge, eqEdges){
     sut.setNodes(Node(Coordinate(32, 42)), Node(Coordinate(12, 15)));
@@ -28,4 +26,21 @@ TEST_F(TestEdge, eqEdges){
 
 TEST_F(TestEdge, checkingEdges){
     EXPECT_TRUE(sut.chceckEdges(sut2));
+}
+
+
+TEST_F(TestEdge, getOtherNode){
+    sut.setNodes(Node(Coordinate(32, 42)), Node(Coordinate(12, 15)));
+    EXPECT_EQ(sut.getOtherNode(Node(Coordinate(32, 42))), Node(Coordinate(12, 15)));
+}
+
+TEST_F(TestEdge, checkEdgeByNodes){
+    sut.setNodes(Node(Coordinate(32, 42)), Node(Coordinate(12, 15)));
+    EXPECT_TRUE(sut.hasNode(Node(Coordinate(32, 42))));
+    EXPECT_TRUE(sut.hasNode(Node(Coordinate(12, 15))));
+}
+
+TEST_F(TestEdge, changeWeight){
+    sut.changeWeight(Weight(5));
+    EXPECT_EQ(sut.getWeight(), Weight(5));
 }
