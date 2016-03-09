@@ -9,8 +9,8 @@ public:
     WeightGraph(){} ///NOTE reprezentacja grafu doczytac
     void append(const Edge &mE);
     bool isEdgeInGraph(const Edge &mE) const;
-    void changeEdgeWeight(Edge &mE, const Weight &mW);
-    Edge searchEdge(const Edge &mE)  const;
+    void changeEdgeWeight(Edge &mE, int mW);
+    Edge edge(const Edge &mE)  const;
     std::vector <Edge> searchNeighbours(const Node &mN);
 
     std::vector<Edge> edgeCollection() const;

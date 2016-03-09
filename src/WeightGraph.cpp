@@ -17,18 +17,23 @@ bool WeightGraph::isEdgeInGraph(const Edge &mE) const
     return false;
 }
 
-void WeightGraph::changeEdgeWeight(Edge &mE, const Weight &mW)
+void WeightGraph::changeEdgeWeight(Edge &mE,int mW)
 {
     mE.changeWeight(mW);
 }
 
-Edge WeightGraph::searchEdge(const Edge &mE) const
+Edge WeightGraph::edge(const Edge &mE) const
 {
-
+    for(auto edge:mEdgeCollection){
+        if(edge.chceckEdges(mE)){
+            return edge;
+        }
+    }
 }
 
 std::vector<Edge> WeightGraph::searchNeighbours(const Node &mN)
 {
+    mNeighbours.clear();
     for(auto edge:mEdgeCollection){
         if(edge.hasNode(mN)){
             mNeighbours.push_back(edge);
