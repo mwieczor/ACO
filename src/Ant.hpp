@@ -12,25 +12,26 @@ public:
     Ant(Node mN):
         mPosition(mN){}
 
-    Node choosePath(const std::vector<Edge> &neighbour );
+    Edge choosePath(const std::vector<Edge> &neighbour );
 
     void changePosition(const Node &mN);
 
-
+    void moveAnt(const std::vector<Edge> &neighbours); //krok 2. poruszam mrowka i zostawiam feromon
 
     Node position() const;
-    void setPosition(const Node &position);
+    void setPosition(const Node &position); // krok 1. Ustawiam mrowke na starcie
     Node getMlastPosition() const;
 
     int getPhermonon() const;
 
 private:
-    void leavePheromon(); //niepotrzebne
+    void leavePheromon(Edge &bestPosition); //niepotrzebne?
     bool wasAntThere(const Edge &E);
     double probabilityNodeChosen(const Edge &E);
-    Node chooseNode(const std::vector<Edge> &n) const;
+    Edge chooseBestPosition(const std::vector<Edge> &neighbours);
     void calculateProbability();
-
+    void addEdgeToMemory (const Edge &edge);
+    int bestProbabilityPosition();
 
 
     Edge edge;
@@ -41,5 +42,6 @@ private:
     double mProbability=0;
     double mNodeProbability=0;
     std::vector<double> nodeProbability;
+    std::vector<Edge> whereAntWas;
 
 };

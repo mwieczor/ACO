@@ -28,12 +28,21 @@ TEST_F(TestAnt, choosePath){
     graph.append(edge2);
     graph.append(edge3);
     graph.searchNeighbours(Node(Coordinate(5,6)));
-    EXPECT_EQ(sut.choosePath(graph.neighbours()),Node(Coordinate(7,9)));
+    EXPECT_EQ(sut.choosePath(graph.neighbours()).endNode(),Node(Coordinate(7,9)));
     edge4= Edge(Node(Coordinate(5,6)), Node(Coordinate(7,12)), 5, Weight(15));
     graph.append(edge4);
     graph.searchNeighbours(Node(Coordinate(5,6)));
-    EXPECT_EQ(sut.choosePath(graph.neighbours()),Node(Coordinate(7,12)));
+    EXPECT_EQ(sut.choosePath(graph.neighbours()).endNode(),Node(Coordinate(7,12)));
 
+}
+
+
+TEST_F(TestAnt, moveAntOneEdge){
+    edge1= Edge(Node(Coordinate(5,6)), Node(Coordinate(7,8)), 5, Weight(1));
+    graph.append(edge1);
+    sut.setPosition(Node(Coordinate(5,6)));
+    sut.moveAnt(graph.searchNeighbours(sut.position()));
+    EXPECT_EQ(sut.position(),Node(Coordinate(7,8)));
 }
 
 TEST_F(TestAnt, moveAnt){
@@ -47,11 +56,10 @@ TEST_F(TestAnt, moveAnt){
     graph.append(edge3);
     graph.append(edge4);
     graph.append(edge5);
-
-    sut.setPosition(Node(Coordinate(5,6)));
-    sut.changePosition(sut.choosePath(graph.searchNeighbours(sut.position())));
-    graph.searchNeighbours(sut.position());
-    sut.changePosition(sut.choosePath(graph.neighbours()));
+//    sut.setPosition(Node(Coordinate(5,6)));
+//    sut.changePosition(sut.choosePath(graph.searchNeighbours(sut.position())));
+//    graph.searchNeighbours(sut.position());
+//    sut.changePosition(sut.choosePath(graph.neighbours()));
     EXPECT_EQ(sut.position(),Node(Coordinate(8,9)));
 
 }

@@ -1,13 +1,13 @@
 #include "Ant.hpp"
 
-void Ant::leavePheromon()
+void Ant::leavePheromon(Edge &bestPosition)
 {
-    edge.setNodes(getMlastPosition(),position());
-    // WeightGraph::changeEdgeWeight(WeightGraph::edge(edge), phermonon);
+    bestPosition.changeWeight(this->getPhermonon());
 }
 
 bool Ant::wasAntThere(const Edge &E)
 {
+
     return (E.endNode()==this->getMlastPosition() || E.startNode()==this->getMlastPosition())?  true: false;
 }
 
@@ -20,16 +20,9 @@ double Ant::probabilityNodeChosen(const Edge &E)// niepotrzebna zmienna mNodePro
 
 }
 
-Node Ant::chooseNode(const std::vector<Edge> &n) const //zrobic iteratorem?
-{
-    double max=-1;
-    int maxPosition=-1;
-    for (int i=0; i<nodeProbability.size(); i++){
-        if(max<nodeProbability.at(i))
-            maxPosition=i;
-            max=nodeProbability.at(i);
-    }
-    return n.at(maxPosition).endNode(); //czy na pewno end?
+Edge Ant::chooseBestPosition(const std::vector<Edge> &neighbours)
+{ 
+    return neighbours.at(bestProbabilityPosition());
 }
 
 void Ant::calculateProbability()
@@ -39,12 +32,29 @@ void Ant::calculateProbability()
     }
 }
 
+void Ant::addEdgeToMemory(const Edge &edge)// lista tabu
+{
+    whereAntWas.push_back(edge);
+}
+
+int Ant::bestProbabilityPosition()
+{
+    double max=-1;
+    int bestPosition=-1;
+    for (int i=0; i<nodeProbability.size(); i++){
+        if(max<nodeProbability.at(i))
+            bestPosition=i;
+        max=nodeProbability.at(i);
+    }
+    return bestPosition;
+}
+
 int Ant::getPhermonon() const
 {
     return phermonon;
 }
 
-Node Ant::choosePath(const std::vector<Edge> &neighbour)
+Edge Ant::choosePath(const std::vector<Edge> &neighbour)
 {
     mProbability=0; //czyscimy prawdopodobienstwo dla nowych sąsiadów
     nodeProbability.clear();
@@ -53,8 +63,8 @@ Node Ant::choosePath(const std::vector<Edge> &neighbour)
             nodeProbability.push_back(this->probabilityNodeChosen(edge));
         }
     }
-    calculateProbability();
-    return chooseNode(neighbour);
+    this->calculateProbability();
+    return chooseBestPosition(neighbour);
 
 }
 
@@ -62,6 +72,13 @@ void Ant::changePosition(const Node &mN)
 {
     mlastPosition=mPosition; //jak to jest z notacja? uzywac zmiennych czy funkcji doostepowych do zmiennych?
     this->setPosition(mN);
+}
+
+void Ant::moveAnt(const std::vector<Edge> &neighbours)
+{
+    Edge bestPosition=this->choosePath(neighbours);
+    this->changePosition(bestPosition.endNode());
+    this->leavePheromon(bestPosition); // zostawiam feromon na krawedzi, ktora przeszla
 }
 
 Node Ant::position() const
