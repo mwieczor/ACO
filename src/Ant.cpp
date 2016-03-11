@@ -7,11 +7,12 @@ void Ant::leavePheromon(Edge &bestPosition)
 
 bool Ant::wasAntThere(const Edge &E)
 {
-
     return (E.endNode()==this->getMlastPosition() || E.startNode()==this->getMlastPosition())?  true: false;
 }
 
-double Ant::probabilityNodeChosen(const Edge &E)// niepotrzebna zmienna mNodeProbabilty?
+double Ant::probabilityNodeChosen(const Edge &E)
+// niepotrzebna zmienna mNodeProbabilty?
+///NOTE BW zmiennej tej używasz tylko w tym miejscu, więc nie, nie jest potrzebna jako pole klasy :)
 {
     mNodeProbability=0;
     mNodeProbability=std::pow(E.getWeight().weight(), 0.5) * std::pow(std::pow(E.getMlenght(),-1),0.5);

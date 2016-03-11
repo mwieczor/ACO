@@ -33,6 +33,11 @@ Edge WeightGraph::edge(const Edge &mE) const
 
 std::vector<Edge> WeightGraph::searchNeighbours(const Node &mN)
 {
+    ///NOTE BW funkcje szukające zmiennych nie powinny modyfikować obiektu na którym wykonują operację.
+    /// Wyjątkiem są niektóre kontenery z CPP które jeżeli nie mają danego klucza,
+    /// tworzą go i oddają iterator do nowego wpisu np.
+    /// http://en.cppreference.com/w/cpp/container/map/find
+
     mNeighbours.clear();
     for(auto edge:mEdgeCollection){
         if(edge.hasNode(mN)){
@@ -49,6 +54,10 @@ std::vector<Edge> WeightGraph::edgeCollection() const // nazwa: getGraph?
 
 std::vector<Edge> WeightGraph::neighbours() const
 {
+    ///NOTE BW zmienna ta jest zmieniana przez WeightGraph::searchNeighbours()
+    /// tworzy to swojego rodzaju problem, bo żeby dostać sąsiadów, najpierw musisz ich wyszukać
+    /// czyli tak naprawdę nie użyjesz tej funkcji bezpośrednio nigdy
+    /// (ze względu na to że i tak wcześniej musisz wywołać WeightGraph::searchNeighbours, które ci tą wartość zwraca)
     return mNeighbours;
 }
 
