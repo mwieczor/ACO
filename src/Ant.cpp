@@ -1,18 +1,18 @@
 #include "Ant.hpp"
 
-void Ant::leavePheromon(Edge &bestPosition)
+#include <cmath>
+
+void Ant::leavePheromon(Edge &bestPosition) const
 {
-    bestPosition.changeWeight(this->getPhermonon());
+    bestPosition.incrementWeight(this->getPhermonon());
 }
 
-bool Ant::wasAntThere(const Edge &E)
+bool Ant::wasAntThere(const Edge &E) const
 {
     return (E.endNode()==this->getMlastPosition() || E.startNode()==this->getMlastPosition())?  true: false;
 }
 
 double Ant::probabilityNodeChosen(const Edge &E)
-// niepotrzebna zmienna mNodeProbabilty?
-///NOTE BW zmiennej tej używasz tylko w tym miejscu, więc nie, nie jest potrzebna jako pole klasy :)
 {
     mNodeProbability=0;
     mNodeProbability=std::pow(E.getWeight().weight(), 0.5) * std::pow(std::pow(E.getMlenght(),-1),0.5);
@@ -21,7 +21,7 @@ double Ant::probabilityNodeChosen(const Edge &E)
 
 }
 
-Edge Ant::chooseBestPosition(const std::vector<Edge> &neighbours)
+Edge Ant::chooseBestPosition(const std::vector<Edge> &neighbours) const
 { 
     return neighbours.at(bestProbabilityPosition());
 }
@@ -38,7 +38,7 @@ void Ant::addEdgeToMemory(const Edge &edge)// lista tabu
     whereAntWas.push_back(edge);
 }
 
-int Ant::bestProbabilityPosition()
+int Ant::bestProbabilityPosition() const
 {
     double max=-1;
     int bestPosition=-1;
@@ -55,8 +55,9 @@ int Ant::getPhermonon() const
     return phermonon;
 }
 
-Edge Ant::choosePath(const std::vector<Edge> &neighbour)
+boost::optional<Edge> Ant::choosePath(const std::vector<Edge> &neighbour)
 {
+
     mProbability=0; //czyscimy prawdopodobienstwo dla nowych sąsiadów
     nodeProbability.clear();
     for(auto edge:neighbour){
@@ -64,8 +65,12 @@ Edge Ant::choosePath(const std::vector<Edge> &neighbour)
             nodeProbability.push_back(this->probabilityNodeChosen(edge));
         }
     }
-    this->calculateProbability();
-    return chooseBestPosition(neighbour);
+    if(nodeProbability.size()!=0){
+        this->calculateProbability();
+        return chooseBestPosition(neighbour);
+    }
+
+    return boost::none;
 
 }
 
@@ -77,9 +82,15 @@ void Ant::changePosition(const Node &mN)
 
 void Ant::moveAnt(const std::vector<Edge> &neighbours)
 {
-    Edge bestPosition=this->choosePath(neighbours);
-    this->changePosition(bestPosition.endNode());
-    this->leavePheromon(bestPosition); // zostawiam feromon na krawedzi, ktora przeszla
+    if(neighbours.size()>0){
+
+        auto bestPosition=this->choosePath(neighbours);
+        if( bestPosition.is_initialized()){
+            this->changePosition(bestPosition->endNode());
+            this->leavePheromon(bestPosition.get()); // zostawiam feromon na krawedzi, ktora przeszla
+        }
+    }
+
 }
 
 Node Ant::position() const

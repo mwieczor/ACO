@@ -1,9 +1,7 @@
 #pragma once
 
 #include "WeightGraph.hpp"
-
-///NOTE BW minor: nie potrzebujesz tego tu, przenieś do cppka
-#include <cmath>
+#include <boost/optional.hpp>
 
 class Ant{
 public:
@@ -13,7 +11,7 @@ public:
     Ant(Node mN):
         mPosition(mN){}
 
-    Edge choosePath(const std::vector<Edge> &neighbour );
+
 
     void changePosition(const Node &mN);
 
@@ -27,21 +25,15 @@ public:
     ///NOTE BW pamiętasz o klasie PheromonWeight ??
     int getPhermonon() const;
 
-private:
-    ///NOTE BW minor: funkcja nie modyfikuje this'a, może być const
-    void leavePheromon(Edge &bestPosition); //niepotrzebne?
-    ///NOTE BW minor: funkcja nie modyfikuje this'a, może być const
-    bool wasAntThere(const Edge &E);
+private:  
+    boost::optional <Edge> choosePath(const std::vector<Edge> &neighbour );
+    void leavePheromon(Edge &bestPosition) const; //niepotrzebne?
+    bool wasAntThere(const Edge &E) const;
     double probabilityNodeChosen(const Edge &E);
-    ///NOTE BW minor: funkcja nie modyfikuje this'a, może być const
-    Edge chooseBestPosition(const std::vector<Edge> &neighbours);
+    Edge chooseBestPosition(const std::vector<Edge> &neighbours) const;
     void calculateProbability();
     void addEdgeToMemory (const Edge &edge);
-    ///NOTE BW minor: funkcja nie modyfikuje this'a, może być const
-    int bestProbabilityPosition();
-
-    ///NOTE BW po co jest ta zmienna??
-    Edge edge;
+    int bestProbabilityPosition() const;
 
     ///NOTE BW do przechowywania pozycji masz inną zmienną,
     /// zrzutuj Coordinate antC na Node i to zapisz w mPosition

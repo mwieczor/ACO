@@ -26,7 +26,7 @@ void Edge::setWeight(const Weight &weight)
     mWeight = weight;
 }
 
-void Edge::changeWeight(const int &mW)
+void Edge::incrementWeight(const int &mW)
 {
     this->setWeight(this->mWeight.weight()+mW);
 }

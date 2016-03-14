@@ -38,8 +38,7 @@ public:
     Node startNode() const;
 
     void setWeight(const Weight &weight);
-    ///NOTE BW minor: wydaje mi się że nazwa jest myląca lepsza byłaby incrementWeight
-    void changeWeight(const int &mW); ///NOTE czy na pewno tutaj zmiany wagi? czy krawedz ma przechowywac swoja wage?
+    void incrementWeight(const int &mW);
 
     Node getOtherNode(const Node &mN) const;
     bool hasNode(const Node &mN) const;

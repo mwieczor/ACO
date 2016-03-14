@@ -41,6 +41,6 @@ TEST_F(TestEdge, checkEdgeByNodes){
 }
 
 TEST_F(TestEdge, changeWeight){
-    sut.changeWeight(5);
+    sut.incrementWeight(5);
     EXPECT_EQ(sut.getWeight(), Weight(5));
 }
