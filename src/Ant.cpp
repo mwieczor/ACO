@@ -40,8 +40,8 @@ void Ant::addEdgeToMemory(const Edge &edge)// lista tabu
 
 int Ant::bestProbabilityPosition() const
 {
-    double max=-1;
-    int bestPosition=-1;
+    double max=0;
+    int bestPosition=0;
     for (int i=0; i<nodeProbability.size(); i++){
         if(max<nodeProbability.at(i))
             bestPosition=i;
@@ -60,14 +60,16 @@ boost::optional<Edge> Ant::choosePath(const std::vector<Edge> &neighbour)
 
     mProbability=0; //czyscimy prawdopodobienstwo dla nowych sąsiadów
     nodeProbability.clear();
+    std::vector <Edge> copyNeighbour; //do it better
     for(auto edge:neighbour){
         if(!this->wasAntThere(edge)){
             nodeProbability.push_back(this->probabilityNodeChosen(edge));
+            copyNeighbour.push_back(edge);
         }
     }
     if(nodeProbability.size()!=0){
         this->calculateProbability();
-        return chooseBestPosition(neighbour);
+        return chooseBestPosition(copyNeighbour);
     }
 
     return boost::none;

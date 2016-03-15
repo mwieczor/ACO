@@ -8,7 +8,7 @@ public:
         ///NOTE BW nie rób tego w testach, tylko tutaj, nie duplikuj kodu
         edge1= Edge(Node(Coordinate(5,6)), Node(Coordinate(7,8)), 5, Weight(1));
         edge2= Edge(Node(Coordinate(5,6)), Node(Coordinate(7,9)), 3, Weight(5));
-        edge3= Edge(Node(Coordinate(7,8)), Node(Coordinate(8,10)), 15, Weight(0));
+        edge3= Edge(Node(Coordinate(7,8)), Node(Coordinate(8,10)), 15, Weight(1));
         edge4= Edge(Node(Coordinate(7,9)), Node(Coordinate(8,10)), 5, Weight(15));
     }
 
@@ -59,15 +59,24 @@ TEST_F(TestAnt, moveAntOneNode){
     sut.moveAnt(graph.searchNeighbours(sut.position()));
     EXPECT_EQ(sut.position(),Node(Coordinate(7,8)));
     sut.moveAnt(graph.searchNeighbours(Node(Coordinate(7,8))));
-   // EXPECT_EQ(sut.position(),Node(Coordinate(7,8)));
+    EXPECT_EQ(sut.position(),Node(Coordinate(7,8)));
 }
-TEST_F(TestAnt, moveAntOneEdge){
-    edge1= Edge(Node(Coordinate(5,6)), Node(Coordinate(7,8)), 5, Weight(1));
+
+
+TEST_F(TestAnt, moveAntTwoEdges){
     graph.append(edge1);
+    graph.append(edge3);
     sut.setPosition(Node(Coordinate(5,6)));
     sut.moveAnt(graph.searchNeighbours(sut.position()));
     EXPECT_EQ(sut.position(),Node(Coordinate(7,8)));
+    sut.moveAnt(graph.searchNeighbours(sut.position()));
+    EXPECT_EQ(sut.position(),Node(Coordinate(8,10)));
 }
+
+TEST_F(TestAnt, moveAntThreeEdges){
+   //TO DO
+}
+
 
 TEST_F(TestAnt, moveAnt){
     graph.append(edge1);
