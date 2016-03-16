@@ -73,8 +73,15 @@ TEST_F(TestAnt, moveAntTwoEdges){
     EXPECT_EQ(sut.position(),Node(Coordinate(8,10)));
 }
 
-TEST_F(TestAnt, moveAntThreeEdges){
-   //TO DO
+TEST_F(TestAnt, moveAntSameEdges){ //czy zakladamy ze taka sytuacji nie wystapi?
+    graph.append(edge1);
+    edge3.setNodes(Node(Coordinate(5,6)), Node(Coordinate(7,8)));
+    graph.append(edge3);
+    sut.setPosition(Node(Coordinate(5,6)));
+    sut.moveAnt(graph.searchNeighbours(sut.position()));
+    EXPECT_EQ(sut.position(),Node(Coordinate(7,8)));
+
+
 }
 
 
@@ -85,8 +92,19 @@ TEST_F(TestAnt, moveAnt){
     graph.append(edge4);
     graph.append(edge5);
     sut.setPosition(Node(Coordinate(5,6)));
-    //while(sut.position()!=Node(Coordinate(8,10)))
     sut.moveAnt(graph.searchNeighbours(sut.position()));
     EXPECT_EQ(sut.position(),Node(Coordinate(7,9)));
 
 }
+
+TEST_F(TestAnt, increaseWeight){ //czy zakladamy ze taka sytuacji nie wystapi?
+    graph.append(edge1);
+    sut.setPosition(Node(Coordinate(5,6)));
+    edge1.setWeight(Weight(1));
+    sut.moveAnt(graph.searchNeighbours(sut.position()));
+    EXPECT_EQ(edge1.getWeight().weight(),6);
+
+
+}
+
+

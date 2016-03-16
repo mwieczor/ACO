@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Node.hpp"
-#include "PheromonWeight.hpp"
 
 class Weight{
 public :

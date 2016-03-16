@@ -2,7 +2,7 @@
 
 #include <cmath>
 
-void Ant::leavePheromon(Edge &bestPosition) const
+void Ant::leavePheromon(Edge &bestPosition)
 {
     bestPosition.incrementWeight(this->getPhermonon());
 }
@@ -50,6 +50,12 @@ int Ant::bestProbabilityPosition() const
     return bestPosition;
 }
 
+Edge Ant::getBestPosition() const
+{
+    return bestPosition.get();
+}
+
+
 int Ant::getPhermonon() const
 {
     return phermonon;
@@ -86,10 +92,11 @@ void Ant::moveAnt(const std::vector<Edge> &neighbours)
 {
     if(neighbours.size()>0){
 
-        auto bestPosition=this->choosePath(neighbours);
+        bestPosition=this->choosePath(neighbours);
         if( bestPosition.is_initialized()){
             this->changePosition(bestPosition->endNode());
-            this->leavePheromon(bestPosition.get()); // zostawiam feromon na krawedzi, ktora przeszla
+//            this->leavePheromon(bestPosition.get()); // NIE MAM DOSTEPU DO KRAWEDZI
+//            WeightGraph::changeEdgeWeight(bestPosition.get(), phermonon);
         }
     }
 
@@ -109,3 +116,4 @@ Node Ant::getMlastPosition() const
 {
     return mlastPosition;
 }
+ int Ant::phermonon=5;

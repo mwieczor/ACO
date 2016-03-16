@@ -16,13 +16,12 @@ bool WeightGraph::isEdgeInGraph(const Edge &mE) const
     }
     return false;
 }
-
-void WeightGraph::changeEdgeWeight(Edge &mE,int mW)
+ void WeightGraph::changeEdgeWeight(Edge &mE,int mW)
 {
     mE.incrementWeight(mW);
 }
 
-Edge WeightGraph::edge(const Edge &mE) const
+Edge WeightGraph::edge(Edge mE) const
 {
     for(auto edge:mEdgeCollection){
         if(edge.chceckEdges(mE)){

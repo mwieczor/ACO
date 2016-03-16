@@ -18,16 +18,19 @@ public:
     void moveAnt(const std::vector<Edge> &neighbours); //krok 2. poruszam mrowka i zostawiam feromon
 
     Node position() const;
-    ///NOTE BW jeżeli ustawiasz pozycję startową, dlaczego nie nazywasz funkcji setStartPosition
     void setPosition(const Node &position); // krok 1. Ustawiam mrowke na starcie
     Node getMlastPosition() const;
 
     ///NOTE BW pamiętasz o klasie PheromonWeight ??
     int getPhermonon() const;
 
-private:  
+
+
+    Edge getBestPosition() const;
+
+private:
     boost::optional <Edge> choosePath(const std::vector<Edge> &neighbour );
-    void leavePheromon(Edge &bestPosition) const; //niepotrzebne?
+    void leavePheromon(Edge &bestPosition); //niepotrzebne?
     bool wasAntThere(const Edge &E) const;
     double probabilityNodeChosen(const Edge &E);
     Edge chooseBestPosition(const std::vector<Edge> &neighbours) const;
@@ -40,12 +43,13 @@ private:
     Coordinate mCoordinate;
 
     ///NOTE BW pamiętasz o klasie PheromonWeight ??
-    int phermonon; //wartosc stala?
+    static int phermonon; //wartosc stala?
     Node mPosition;
     Node mlastPosition;
     double mProbability=0;
     double mNodeProbability=0;
     std::vector<double> nodeProbability;
     std::vector<Edge> whereAntWas;
+    boost::optional<Edge> bestPosition;
 
 };

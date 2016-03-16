@@ -10,7 +10,7 @@ public:
     void append(const Edge &mE);
     bool isEdgeInGraph(const Edge &mE) const;
     void changeEdgeWeight(Edge &mE, int mW);
-    Edge edge(const Edge &mE)  const;
+    Edge edge(Edge mE)  const;
 
     std::vector <Edge> searchNeighbours(const Node &mN) const;
 
