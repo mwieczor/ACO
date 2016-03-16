@@ -21,9 +21,9 @@ bool WeightGraph::isEdgeInGraph(const Edge &mE) const
     mE.incrementWeight(mW);
 }
 
-Edge WeightGraph::edge(Edge mE) const
+Edge &WeightGraph::edge(const Edge &mE)
 {
-    for(auto edge:mEdgeCollection){
+    for(auto &edge:mEdgeCollection){
         if(edge.chceckEdges(mE)){
             return edge;
         }

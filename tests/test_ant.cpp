@@ -97,14 +97,14 @@ TEST_F(TestAnt, moveAnt){
 
 }
 
-TEST_F(TestAnt, increaseWeight){ //czy zakladamy ze taka sytuacji nie wystapi?
-    graph.append(edge1);
-    sut.setPosition(Node(Coordinate(5,6)));
-    edge1.setWeight(Weight(1));
-    sut.moveAnt(graph.searchNeighbours(sut.position()));
-    EXPECT_EQ(edge1.getWeight().weight(),6);
+//TEST_F(TestAnt, increaseWeight){ //czy zakladamy ze taka sytuacji nie wystapi?
+//    graph.append(edge1);
+//    sut.setPosition(Node(Coordinate(5,6)));
+//    edge1.setWeight(Weight(1));
+//    sut.moveAnt(graph.searchNeighbours(sut.position()));
+//    EXPECT_EQ(edge1.getWeight().weight(),6);
 
 
-}
+//}
 
 
