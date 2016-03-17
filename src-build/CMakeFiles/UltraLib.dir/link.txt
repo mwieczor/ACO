@@ -1,0 +1,2 @@
+/usr/bin/ar cq libUltraLib.a  CMakeFiles/UltraLib.dir/Edge.o CMakeFiles/UltraLib.dir/WeightGraph.o CMakeFiles/UltraLib.dir/Coordinate.o CMakeFiles/UltraLib.dir/PhermonWeight.o CMakeFiles/UltraLib.dir/Node.o CMakeFiles/UltraLib.dir/Ant.o
+/usr/bin/ranlib libUltraLib.a
