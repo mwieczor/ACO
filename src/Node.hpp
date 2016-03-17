@@ -10,6 +10,11 @@ public:
     bool operator==(const Node &other ) const {
         return other.mCoordinate==this->mCoordinate;
     }
+    bool operator!=(const Node &other ) const {
+        return other.mCoordinate!=this->mCoordinate;
+    }
+
+    Coordinate coordinate() const;
 
 private:
     Coordinate mCoordinate;

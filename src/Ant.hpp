@@ -23,6 +23,7 @@ public:
 
     ///NOTE BW pamiętasz o klasie PheromonWeight ??
     int getPhermonon() const;
+    void positionToString() const;
 
 
 

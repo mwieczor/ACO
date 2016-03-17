@@ -17,6 +17,9 @@ public:
     bool operator==(const Coordinate &other) const {
         return other.mX==this->mX && other.mY==this->mY;
     }
+    bool operator!=(const Coordinate &other) const {
+        return other.mX!=this->mX || other.mY!=this->mY;
+    }
 
 
 private:

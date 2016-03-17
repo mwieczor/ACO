@@ -6,16 +6,16 @@ class Weight{
 public :
     Weight():
         mWeight(){}
-    Weight(int mW):
+    Weight(double mW):
         mWeight(mW){}
     bool operator==(const Weight &mW) const {
         return this->mWeight==mW.mWeight;
     }
 
-    int weight() const;
+    double weight() const;
 
 private:
-    int mWeight;
+    double mWeight;
 };
 
 class Edge{

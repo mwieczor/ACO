@@ -1,6 +1,7 @@
 #include "Ant.hpp"
 
 #include <cmath>
+#include <iostream>
 
 void Ant::leavePheromon(Edge &bestPosition)
 {
@@ -43,7 +44,7 @@ int Ant::bestProbabilityPosition() const
     double max=0;
     int bestPosition=0;
     for (int i=0; i<nodeProbability.size(); i++){
-        if(max<nodeProbability.at(i))
+        if(max<nodeProbability.at(i)) // what if there are two the same node's probability?
             bestPosition=i;
         max=nodeProbability.at(i);
     }
@@ -59,6 +60,14 @@ Edge Ant::getBestPosition() const
 int Ant::getPhermonon() const
 {
     return phermonon;
+}
+
+void Ant::positionToString() const
+{
+
+    std::string str =  std::to_string(this->position().coordinate().y());
+    std::string strX =  std::to_string(this->position().coordinate().x());
+    std::cout<< "Mrówka jest w pkt:"<<strX<< "i y"<<str;
 }
 
 boost::optional<Edge> Ant::choosePath(const std::vector<Edge> &neighbour)
@@ -95,8 +104,6 @@ void Ant::moveAnt(const std::vector<Edge> &neighbours)
         bestPosition=this->choosePath(neighbours);
         if( bestPosition.is_initialized()){
             this->changePosition(bestPosition->endNode());
-//            this->leavePheromon(bestPosition.get()); // NIE MAM DOSTEPU DO KRAWEDZI
-//            WeightGraph::changeEdgeWeight(bestPosition.get(), phermonon);
         }
     }
 
