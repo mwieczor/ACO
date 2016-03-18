@@ -5,7 +5,7 @@ class PheromonWeight{
 public:
     PheromonWeight(){}
       void leavePheromon(WeightGraph &mGraph, Edge mE);
-      void vanishPheromon(WeightGraph &mGraph);
+      void evaporatePheromon(WeightGraph &mGraph);
 
 private:
 

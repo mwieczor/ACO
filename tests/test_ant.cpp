@@ -24,34 +24,10 @@ public:
 };
 
 
-TEST_F(TestAnt, changeNode){
-    sut.changePosition(Node(Coordinate(32,45)));
-    EXPECT_EQ(sut.position(),Node(Coordinate(32, 45)));
-}
-
-//TEST_F(TestAnt, choosePath){
-//    ///NOTE BW nie dokładaj sobie pracy, po to masz konstruktur żeby z niego korzystać
-//    /// poniżej przykład, zrób to samo dla innych testów
-
-//    //    graph.searchNeighbours(Node(Coordinate(5,6)));
-//    //    EXPECT_EQ(sut.choosePath(graph.neighbours()).endNode(),Node(Coordinate(7,9)));
-//    //    edge4= Edge(Node(Coordinate(5,6)), Node(Coordinate(7,12)), 5, Weight(15));
-//    //    graph.append(edge4);
-//    //    graph.searchNeighbours(Node(Coordinate(5,6)));
-//    //    EXPECT_EQ(sut.choosePath(graph.neighbours()).endNode(),Node(Coordinate(7,12)));
-
-//    graph.append(edge1);
-//    graph.append(edge2);
-//    graph.append(edge3);
-//    ///NOTE BW dlaczego nie wyołujesz searchNeighbours(Node(Coordinate(5,6))) bezpośrednio w teście?
-//    //    graph.searchNeighbours(Node(Coordinate(5,6)));
-//    //    EXPECT_EQ(sut.choosePath(graph.neighbours()).endNode(),Node(Coordinate(7,9)));
-//    EXPECT_EQ(sut.choosePath(graph.searchNeighbours(Node(Coordinate(5,6)))).endNode(),Node(Coordinate(7,9)));
-
-//    graph.append(edge4);
-//    EXPECT_EQ(sut.choosePath(graph.searchNeighbours(Node(Coordinate(5,6)))).endNode(),Node(Coordinate(7,12)));
+//TEST_F(TestAnt, changeNode){
+//    sut.changePosition(Node(Coordinate(32,45)));
+//    EXPECT_EQ(sut.position(),Node(Coordinate(32, 45)));
 //}
-
 
 TEST_F(TestAnt, moveAntOneNode){
     graph.append(edge1);

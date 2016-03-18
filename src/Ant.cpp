@@ -3,11 +3,6 @@
 #include <cmath>
 #include <iostream>
 
-void Ant::leavePheromon(Edge &bestPosition)
-{
-    bestPosition.incrementWeight(this->getPhermonon());
-}
-
 bool Ant::wasAntThere(const Edge &E) const
 {
     return (E.endNode()==this->getMlastPosition() || E.startNode()==this->getMlastPosition())?  true: false;
@@ -56,11 +51,6 @@ Edge Ant::getBestPosition() const
     return bestPosition.get();
 }
 
-
-int Ant::getPhermonon() const
-{
-    return phermonon;
-}
 
 void Ant::positionToString() const
 {

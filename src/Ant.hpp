@@ -13,31 +13,25 @@ public:
 
 
 
-    void changePosition(const Node &mN);
-
     void moveAnt(const std::vector<Edge> &neighbours); //krok 2. poruszam mrowka i zostawiam feromon
 
     Node position() const;
     void setPosition(const Node &position); // krok 1. Ustawiam mrowke na starcie
     Node getMlastPosition() const;
 
-    ///NOTE BW pamiętasz o klasie PheromonWeight ??
-    int getPhermonon() const;
     void positionToString() const;
-
-
 
     Edge getBestPosition() const;
 
 private:
     boost::optional <Edge> choosePath(const std::vector<Edge> &neighbour );
-    void leavePheromon(Edge &bestPosition); //niepotrzebne?
     bool wasAntThere(const Edge &E) const;
     double probabilityNodeChosen(const Edge &E);
     Edge chooseBestPosition(const std::vector<Edge> &neighbours) const;
     void calculateProbability();
     void addEdgeToMemory (const Edge &edge);
     int bestProbabilityPosition() const;
+    void changePosition(const Node &mN);
 
     ///NOTE BW do przechowywania pozycji masz inną zmienną,
     /// zrzutuj Coordinate antC na Node i to zapisz w mPosition

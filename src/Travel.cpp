@@ -2,18 +2,21 @@
 
 void Travel::generateTravel(){
     do{
-        for(auto ant:mAntColony)
-            ant.moveAnt(mGraph.searchNeighbours(ant.position()));
+        for(auto &ant:mAntColony)
+        { ant.moveAnt(mGraph.searchNeighbours(ant.position()));
+            weight.leavePheromon(mGraph, ant.getBestPosition());
+        }
+        weight.evaporatePheromon(mGraph);
     }
     while(!isFinalCity());
 
-    Ant test;
-    test.setPosition(startCity);
-    while(test.position()!=finalCity){
-        test.positionToString();
-        test.moveAnt(mGraph.searchNeighbours(test.position()));
+    //    Ant test;
+    //    test.setPosition(startCity);
+    //    while(test.position()!=finalCity){
+    //        test.positionToString();
+    //        test.moveAnt(mGraph.searchNeighbours(test.position()));
 
-    }
+    //    }
 }
 
 
@@ -38,8 +41,16 @@ void Travel::setStartCity(const Node &value)
 }
 
 
-int Travel::getRouteLenght() const
+double Travel::getRouteLenght()
 {
+    Ant test;
+            test.setPosition(startCity);
+            while(test.position()!=finalCity){
+                //test.positionToString();
+                test.moveAnt(mGraph.searchNeighbours(test.position()));
+                routeLenght=routeLenght+test.getBestPosition().getMlenght();
+
+            }
     return routeLenght;
 }
 
