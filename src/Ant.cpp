@@ -11,7 +11,7 @@ bool Ant::wasAntThere(const Edge &E) const
 double Ant::probabilityNodeChosen(const Edge &E)
 {
     mNodeProbability=0;
-    mNodeProbability=std::pow(E.getWeight().weight(), 0.5) * std::pow(std::pow(E.getMlenght(),-1),0.5);
+    mNodeProbability=std::pow(E.getWeight(), 0.5) * std::pow(std::pow(E.getMlenght(),-1),0.5);
     mProbability=mProbability+mNodeProbability;
     return mNodeProbability;
 
@@ -65,7 +65,7 @@ boost::optional<Edge> Ant::choosePath(const std::vector<Edge> &neighbour)
 
     mProbability=0; //czyscimy prawdopodobienstwo dla nowych sąsiadów
     nodeProbability.clear();
-    std::vector <Edge> copyNeighbour; //do it better
+    std::vector <Edge> copyNeighbour; //do it better?
     for(auto edge:neighbour){
         if(!this->wasAntThere(edge)){
             nodeProbability.push_back(this->probabilityNodeChosen(edge));
@@ -83,11 +83,11 @@ boost::optional<Edge> Ant::choosePath(const std::vector<Edge> &neighbour)
 
 void Ant::changePosition(const Node &mN)
 {
-    mlastPosition=mPosition; //jak to jest z notacja? uzywac zmiennych czy funkcji doostepowych do zmiennych?
+    mlastPosition=mPosition;
     this->setPosition(mN);
 }
 
-void Ant::moveAnt(const std::vector<Edge> &neighbours)
+void Ant::moveAnt(const std::vector<Edge&> &neighbours)
 {
     if(neighbours.size()>0){
 
@@ -113,4 +113,4 @@ Node Ant::getMlastPosition() const
 {
     return mlastPosition;
 }
- int Ant::phermonon=5;
+

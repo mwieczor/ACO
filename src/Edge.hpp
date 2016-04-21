@@ -12,7 +12,9 @@ public :
         return this->mWeight==mW.mWeight;
     }
 
-    double weight() const;
+   operator double(){
+        return mWeight;
+    }
 
 private:
     double mWeight;
@@ -28,9 +30,10 @@ public:
         mStartNode(start), mEndNode(end), mWeight(mW), mlenght(lenght){}
     void setNodes(Node first, Node second);
     bool operator==(const Edge &other) const{
-        return other.mStartNode==this->mStartNode && other.mEndNode==this->mEndNode && other.mWeight==this->mWeight; ///NOTE zakladamy, ze moga byc rozne krawdzeie laczace dwa pkt
+        return other.mStartNode==this->mStartNode &&
+                other.mEndNode==this->mEndNode &&
+                other.mWeight==this->mWeight; ///NOTE zakladamy, ze moga byc rozne krawdzeie laczace dwa pkt
     }
-    bool chceckEdges(const Edge &mE) const;
 
     Node endNode() const;
 

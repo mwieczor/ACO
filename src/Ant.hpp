@@ -13,7 +13,7 @@ public:
 
 
 
-    void moveAnt(const std::vector<Edge> &neighbours); //krok 2. poruszam mrowka i zostawiam feromon
+    void moveAnt(const std::vector<Edge &> &neighbours); //krok 2. poruszam mrowka i zostawiam feromon
 
     Node position() const;
     void setPosition(const Node &position); // krok 1. Ustawiam mrowke na starcie
@@ -37,8 +37,6 @@ private:
     /// zrzutuj Coordinate antC na Node i to zapisz w mPosition
     Coordinate mCoordinate;
 
-    ///NOTE BW pamiętasz o klasie PheromonWeight ??
-    static int phermonon; //wartosc stala?
     Node mPosition;
     Node mlastPosition;
     double mProbability=0;

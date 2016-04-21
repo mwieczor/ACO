@@ -25,7 +25,7 @@ TEST_F(TestEdge, eqEdges){
 }
 
 TEST_F(TestEdge, checkingEdges){
-    EXPECT_TRUE(sut.chceckEdges(sut2));
+    EXPECT_TRUE(sut==sut2);
 }
 
 

@@ -6,11 +6,6 @@ void Edge::setNodes(Node first, Node second)
     mEndNode=second;
 }
 
-bool Edge::chceckEdges(const Edge &mE) const //po co skoro mam operator == ?
-{
-   return *this==mE;
-}
-
 Node Edge::endNode() const
 {
     return mEndNode;
@@ -28,7 +23,7 @@ void Edge::setWeight(const Weight &weight)
 
 void Edge::incrementWeight(const int &mW)
 {
-    this->setWeight(this->mWeight.weight()+mW);
+    this->setWeight(this->mWeight+mW);
 }
 
 Node Edge::getOtherNode(const Node &mN) const
@@ -40,7 +35,7 @@ Node Edge::getOtherNode(const Node &mN) const
 
 bool Edge::hasNode(const Node &mN) const
 {
-    (mN==this->endNode() || mN==this->startNode())? true : false;
+   return (mN==this->endNode() || mN==this->startNode())? true : false;
 }
 
 Weight Edge::getWeight() const
@@ -53,7 +48,3 @@ int Edge::getMlenght() const
     return mlenght;
 }
 
-double Weight::weight() const
-{
-    return mWeight;
-}

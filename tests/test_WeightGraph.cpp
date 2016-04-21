@@ -12,9 +12,9 @@ public:
 TEST_F(TestWeightGraph, appendEdges){
     edge1.setNodes(Node(Coordinate(5,6)), Node(Coordinate(7,8)));
     sut.append(edge1);
-    EXPECT_EQ(sut.edgeCollection().size(), 1);
+    EXPECT_EQ(sut.size(), 1);
     edge2.setNodes(Node(Coordinate(5,6)), Node(Coordinate(7,8)));
-    EXPECT_EQ(sut.edgeCollection().at(0), edge2);
+    EXPECT_EQ(sut.at(0), edge2);
 }
 TEST_F(TestWeightGraph, isEdgeInGraph){
     edge1.setNodes(Node(Coordinate(7,6)), Node(Coordinate(7,8)));
@@ -46,5 +46,5 @@ TEST_F(TestWeightGraph, searchEdge){
     edge1.setNodes(Node(Coordinate(5,6)), Node(Coordinate(7,8)));
     sut.append(edge1);
     edge2.setNodes(Node(Coordinate(5,6)), Node(Coordinate(7,8)));
-    EXPECT_EQ(sut.edge(edge2), sut.edgeCollection().at(0));
+    EXPECT_EQ(sut.edge(edge2), sut.at(0));
 }

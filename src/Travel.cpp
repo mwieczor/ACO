@@ -3,7 +3,8 @@
 void Travel::generateTravel(){
     do{
         for(auto &ant:mAntColony)
-        { ant.moveAnt(mGraph.searchNeighbours(ant.position()));
+        {
+            ant.moveAnt(mGraph.searchNeighbours(ant.position()));
             weight.leavePheromon(mGraph, ant.getBestPosition());
         }
         weight.evaporatePheromon(mGraph);
