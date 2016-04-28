@@ -26,8 +26,8 @@ public:
 //    //EXPECT_EQ(graph[0].getWeight(), 6); //need to work on access to edge
 //}
 
-TEST_F(TestPheromonWeight, vanishPheromon){
-    graph.append(edge1);
-    sut.evaporatePheromon(graph);
-    EXPECT_EQ(graph[0].getWeight(), 0.95);
-}
+//TEST_F(TestPheromonWeight, vanishPheromon){
+//    graph.append(edge1);
+//    sut.evaporatePheromon(graph);
+//    EXPECT_EQ(graph[0].getWeight(), 0.95);
+//}

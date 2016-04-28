@@ -43,7 +43,7 @@ int Ant::bestProbabilityPosition() const
     std::srand(time(NULL));
     double max=0;
     int bestPosition=0;
-    double random = 0.5; //poprawic
+    double random = 0.5;//std::rand(); //poprawic
 
     for (int i=0; i<nodeProbability.size(); i++){
         if(max<nodeProbability.at(i)) // what if there are two the same node's probability?
@@ -86,8 +86,8 @@ boost::optional<Edge> Ant::choosePath(std::vector<std::reference_wrapper<Edge>> 
         this->calculateProbability();
 
         if(chooseBestPosition(copyNeighbour)!=boost::none) ///it makes no sense,do it better
-            return boost::none;
-        else return chooseBestPosition(copyNeighbour);
+            return chooseBestPosition(copyNeighbour);
+        else return boost::none;
     }
 
     return boost::none;

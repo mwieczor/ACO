@@ -2,7 +2,7 @@
 
 #include "Ant.hpp"
 #include "WeightGraph.hpp"
-#include "PheromonWeight.hpp"
+#include "PheromonWeightEltist.hpp"
 
 class Travel{
 public:
@@ -34,6 +34,6 @@ private:
     WeightGraph mGraph;
     Node startCity;
     Node finalCity;
-    PheromonWeight weight;
+    PheromonWeightEltist weight;
     double routeLenght;
 };
