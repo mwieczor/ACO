@@ -21,22 +21,13 @@ bool WeightGraph::isEdgeInGraph(const Edge &mE) const
     mE.incrementWeight(mW);
 }
 
-//Edge &WeightGraph::edge(const Edge &mE)
-//{
-//    for(auto &edge:*this){
-//        if(edge==mE){
-//            return edge;
-//        }
-//    }
-//}
-
-std::vector<Edge &> WeightGraph::searchNeighbours(const Node &mN)
+std::vector<std::reference_wrapper<Edge>>  WeightGraph::searchNeighbours( Node mN)
 {
-    std::vector <Edge &> mNeighbours;
+    std::vector <std::reference_wrapper<Edge>> mNeighbours;
     mNeighbours.clear();
-    for(auto &edge:*this){
+    for(auto& edge:*this){
         if(edge.hasNode(mN)){
-            mNeighbours.push_back(edge);
+            mNeighbours.push_back(std::ref(edge));
         }
     }
     return mNeighbours; //warunek o braku sasiadow?

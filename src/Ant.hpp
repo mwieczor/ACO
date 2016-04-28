@@ -2,6 +2,8 @@
 
 #include "WeightGraph.hpp"
 #include <boost/optional.hpp>
+#include <cmath>
+#include <iostream>
 
 class Ant{
 public:
@@ -13,7 +15,7 @@ public:
 
 
 
-    void moveAnt(const std::vector<Edge &> &neighbours); //krok 2. poruszam mrowka i zostawiam feromon
+    void moveAnt(std::vector<std::reference_wrapper<Edge> > neighbours); //krok 2. poruszam mrowka i zostawiam feromon
 
     Node position() const;
     void setPosition(const Node &position); // krok 1. Ustawiam mrowke na starcie
@@ -24,10 +26,10 @@ public:
     Edge getBestPosition() const;
 
 private:
-    boost::optional <Edge> choosePath(const std::vector<Edge> &neighbour );
-    bool wasAntThere(const Edge &E) const;
+    boost::optional <Edge> choosePath(std::vector<std::reference_wrapper<Edge> > neighbour );
+    bool wasAntThere(const Edge& E) const;
     double probabilityNodeChosen(const Edge &E);
-    Edge chooseBestPosition(const std::vector<Edge> &neighbours) const;
+    boost::optional<Edge> chooseBestPosition(const std::vector<std::reference_wrapper<Edge>> &neighbours) const;
     void calculateProbability();
     void addEdgeToMemory (const Edge &edge);
     int bestProbabilityPosition() const;
@@ -44,5 +46,6 @@ private:
     std::vector<double> nodeProbability;
     std::vector<Edge> whereAntWas;
     boost::optional<Edge> bestPosition;
+
 
 };

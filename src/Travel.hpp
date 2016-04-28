@@ -8,7 +8,7 @@ class Travel{
 public:
     Travel(){}
     Travel(Node mStart, WeightGraph &mG):
-    startCity(mStart), mGraph(mG){
+    startCity(mStart), mGraph(mG){ //only for tests
         while(mAntColony.size()<10){
             mAntColony.push_back(Ant(startCity));
         }

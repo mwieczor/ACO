@@ -1,7 +1,6 @@
 #include "Ant.hpp"
 
-#include <cmath>
-#include <iostream>
+
 
 bool Ant::wasAntThere(const Edge &E) const
 {
@@ -17,9 +16,14 @@ double Ant::probabilityNodeChosen(const Edge &E)
 
 }
 
-Edge Ant::chooseBestPosition(const std::vector<Edge> &neighbours) const
-{ 
-    return neighbours.at(bestProbabilityPosition());
+boost::optional<Edge> Ant::chooseBestPosition(const std::vector<std::reference_wrapper<Edge>> &neighbours) const
+{
+    if(bestProbabilityPosition()!=-1)
+    {
+        int i= bestProbabilityPosition();
+        return neighbours.at(i).get();
+    }
+        else return boost::none;
 }
 
 void Ant::calculateProbability()
@@ -36,14 +40,20 @@ void Ant::addEdgeToMemory(const Edge &edge)// lista tabu
 
 int Ant::bestProbabilityPosition() const
 {
+    std::srand(time(NULL));
     double max=0;
     int bestPosition=0;
+    double random = 0.5; //poprawic
+
     for (int i=0; i<nodeProbability.size(); i++){
         if(max<nodeProbability.at(i)) // what if there are two the same node's probability?
             bestPosition=i;
         max=nodeProbability.at(i);
     }
-    return bestPosition;
+    if(max>=random){
+       return bestPosition;  //ant moves randomly
+    }
+    else return -1; //do it diffrent
 }
 
 Edge Ant::getBestPosition() const
@@ -60,12 +70,12 @@ void Ant::positionToString() const
     std::cout<< "Mrówka jest w pkt:"<<strX<< "i y"<<str;
 }
 
-boost::optional<Edge> Ant::choosePath(const std::vector<Edge> &neighbour)
+boost::optional<Edge> Ant::choosePath(std::vector<std::reference_wrapper<Edge>> neighbour)
 {
 
     mProbability=0; //czyscimy prawdopodobienstwo dla nowych sąsiadów
     nodeProbability.clear();
-    std::vector <Edge> copyNeighbour; //do it better?
+    std::vector <std::reference_wrapper<Edge>> copyNeighbour;
     for(auto edge:neighbour){
         if(!this->wasAntThere(edge)){
             nodeProbability.push_back(this->probabilityNodeChosen(edge));
@@ -74,7 +84,10 @@ boost::optional<Edge> Ant::choosePath(const std::vector<Edge> &neighbour)
     }
     if(nodeProbability.size()!=0){
         this->calculateProbability();
-        return chooseBestPosition(copyNeighbour);
+
+        if(chooseBestPosition(copyNeighbour)!=boost::none) ///it makes no sense,do it better
+            return boost::none;
+        else return chooseBestPosition(copyNeighbour);
     }
 
     return boost::none;
@@ -87,11 +100,12 @@ void Ant::changePosition(const Node &mN)
     this->setPosition(mN);
 }
 
-void Ant::moveAnt(const std::vector<Edge&> &neighbours)
+void Ant::moveAnt(std::vector<std::reference_wrapper<Edge>> neighbours)
 {
     if(neighbours.size()>0){
 
         bestPosition=this->choosePath(neighbours);
+
         if( bestPosition.is_initialized()){
             this->changePosition(bestPosition->endNode());
         }
@@ -113,4 +127,5 @@ Node Ant::getMlastPosition() const
 {
     return mlastPosition;
 }
+
 
