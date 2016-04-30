@@ -40,11 +40,13 @@ void Ant::addEdgeToMemory(const Edge &edge)// lista tabu
 
 int Ant::bestProbabilityPosition() const
 {
-    std::srand(time(NULL));
+    //std::srand(time(NULL));
     double max=0;
     int bestPosition=0;
-    double random = 0.5;//std::rand(); //poprawic
-
+    std::random_device rd;
+        std::mt19937 gen(rd());
+    std::uniform_real_distribution<double> randomGenerator(0,1); /// TODO  doesn't work when random i bigger than possibility
+    double random = randomGenerator(gen);
     for (int i=0; i<nodeProbability.size(); i++){
         if(max<nodeProbability.at(i)) // what if there are two the same node's probability?
             bestPosition=i;
