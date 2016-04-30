@@ -5,7 +5,7 @@ void Travel::generateTravel(){
         for(auto &ant:mAntColony)
         {
             ant.moveAnt(mGraph.searchNeighbours(ant.position()));
-            weight.leavePheromon(mGraph, ant.getBestPosition());
+            //weight.leavePheromon(mGraph, ant.getBestPosition());
         }
         weight.evaporatePheromon(mGraph);
     }
@@ -48,8 +48,8 @@ double Travel::getRouteLenght()
             test.setPosition(startCity);
             while(test.position()!=finalCity){
                 //test.positionToString();
-                test.moveAnt(mGraph.searchNeighbours(test.position()));
-                routeLenght=routeLenght+test.getBestPosition().getMlenght();
+                test.moveAnt(mGraph.searchNeighbours(test.position()));/// TODO do sth with getBest position from ANT
+                //routeLenght=routeLenght+test.getBestPosition().getMlenght();
 
             }
     return routeLenght;
