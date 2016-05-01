@@ -1,17 +1,13 @@
-#include "ProbabilityOfChoosingPath.hpp"
+#include "BestPosition.hpp"
 
 
-boost::optional<Edge> BestPosition::calc()
+Edge BestPosition::calc() // always return Edge, ant must move
 {
+    this->fillNodeProbability();
+    //if(nodeProbability.size()!=0){
+    this->calculateProbability();
+    return chooseBestPosition();
 
-        this->fillNodeProbability();
-        if(nodeProbability.size()!=0){
-            this->calculateProbability();
-            if(chooseBestPosition(neighbour)!=boost::none) ///it makes no sense,do it better
-                return chooseBestPosition(neighbour);
-            else return boost::none;
-        }
-        return boost::none;
 }
 
 double BestPosition::probabilityNodeChosen(const Edge &E) ///TODO wrong name not verb
@@ -25,45 +21,64 @@ double BestPosition::probabilityNodeChosen(const Edge &E) ///TODO wrong name not
 
 void BestPosition::calculateProbability()
 {
-    for (int i=0; i<nodeProbability.size(); i++){
-        nodeProbability.at(i)=nodeProbability.at(i)/mProbability;
+    for (auto p:nodeProbability){
+        p.second=p.second/mProbability;
     }
 }
 
-int BestPosition::bestProbabilityPosition() const ///TODO refactor
+int BestPosition::bestProbabilityPosition()  ///TODO refactor
 {
+    double highestProbability=0;
+    std::pair<int, double> bestPosition;
+    if(nodeProbability.size()>1)
+    {
+        for (auto p:nodeProbability)
+        {
+            if(highestProbability<p.second)
+            {
+                highestProbability=p.second;
+                bestPosition=p;
+            }
+        }
+        generateRandom();
+        if(isProbabilityEnoughtToMove(highestProbability)){
+            return bestPosition.first;  //ant moves randomly
+        }
+        else
+        {
+            nodeProbability.remove(bestPosition);
+            return bestProbabilityPosition();
+        }
+    }
+    else return bestPosition.first;
 
-    double max=0;
-    int bestPosition=0;
-    std::random_device rd;
-        std::mt19937 gen(rd());
-    std::uniform_real_distribution<double> randomGenerator(0,1); /// TODO  doesn't work when random is bigger than possibility
-    double random = randomGenerator(gen);
-    for (int i=0; i<nodeProbability.size(); i++){
-        if(max<nodeProbability.at(i)) // what if there are two the same node's probability?
-            bestPosition=i;
-        max=nodeProbability.at(i);
-    }
-    if(max>=random){
-       return bestPosition;  //ant moves randomly
-    }
-    else return -1; //do it diffrent
+
 }
 
 void BestPosition::fillNodeProbability()
 {
     mProbability=0;
-    nodeProbability.clear();
-    for(auto e:neighbour)
-       nodeProbability.push_back(this->probabilityNodeChosen(e));
+    for(int i=0; i<neighbour.size(); i++)
+        nodeProbability.push_back(std::make_pair(i, this->probabilityNodeChosen(neighbour[i])));
 }
 
-boost::optional<Edge> BestPosition::chooseBestPosition(const std::vector<std::reference_wrapper<Edge>> &neighbours) const
+bool BestPosition::isProbabilityEnoughtToMove(double probability) const
 {
-    if(bestProbabilityPosition()!=-1)
-    {
-        int i= bestProbabilityPosition();
-        return neighbours.at(i).get();
-    }
-        else return boost::none;
+    return (random<=probability);
+}
+
+void BestPosition::generateRandom()
+{
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_real_distribution<double> randomGenerator(0,1); /// TODO  doesn't work when random is bigger than possibility
+    random = randomGenerator(gen);
+
+}
+
+
+Edge BestPosition::chooseBestPosition()
+{
+    return neighbour.at(bestProbabilityPosition()).get();
+
 }

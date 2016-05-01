@@ -24,7 +24,6 @@ bool WeightGraph::isEdgeInGraph(const Edge &mE) const
 std::vector<std::reference_wrapper<Edge>>  WeightGraph::searchNeighbours( Node mN)
 {
     std::vector <std::reference_wrapper<Edge>> mNeighbours;
-    mNeighbours.clear();
     for(auto& edge:*this){
         if(edge.hasNode(mN)){
             mNeighbours.push_back(std::ref(edge));

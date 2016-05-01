@@ -51,10 +51,7 @@ TEST_F(TestAnt, moveAntSameEdges){ //czy zakladamy ze taka sytuacji nie wystapi?
     sut.setPosition(Node(Coordinate(5,6)));
     sut.moveAnt(graph.searchNeighbours(sut.position()));
     EXPECT_EQ(sut.position(),Node(Coordinate(7,8)));
-
-
 }
-
 
 TEST_F(TestAnt, moveAnt){
     graph.append(edge1);
@@ -64,9 +61,8 @@ TEST_F(TestAnt, moveAnt){
     graph.append(edge5);
     sut.setPosition(Node(Coordinate(5,6)));
     ///TODO FIRST! sth wrong with search neighbours!
-  //  sut.moveAnt(graph.searchNeighbours(sut.position()));
-//    EXPECT_EQ(sut.position(),Node(Coordinate(7,9)));
-
+    sut.moveAnt(graph.searchNeighbours(sut.position()));
+   EXPECT_EQ(sut.position(),Node({7,9}));
 }
 
 //TEST_F(TestAnt, increaseWeight){ //czy zakladamy ze taka sytuacji nie wystapi?

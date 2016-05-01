@@ -26,12 +26,13 @@ void Ant::changePosition(const Node &mN)
 
 void Ant::moveAnt(std::vector<std::reference_wrapper<Edge>> neighbours)
 {
-    if(neighbours.size()>0){
-        bestPosition=std::make_shared<BestPosition> (BestPosition(this->getUnvisitedNeighbours(neighbours)));
-        if(bestPosition->calc().is_initialized())
-            this->changePosition(bestPosition->calc()->endNode());
-        else;
+    auto cN=this->getUnvisitedNeighbours(neighbours);
+    if(cN.size()>0)
+    {
+        const auto& bP=BestPosition(cN).calc();
+        this->changePosition(bP.endNode());
     }
+    else ;///TODO what if ant has no edge to go
 
 }
 
