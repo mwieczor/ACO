@@ -40,7 +40,7 @@ public:
     Node startNode() const;
 
     void setWeight(const Weight &weight);
-    void incrementWeight(const int &mW);
+    void incrementWeight(const double &mW);
 
     Node getOtherNode(const Node &mN) const;
     bool hasNode(const Node &mN) const;

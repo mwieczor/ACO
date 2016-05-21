@@ -1,7 +1,10 @@
 #include "PheromonWeightEltist.hpp"
 
 
-void PheromonWeightEltist::leaveAdditionalPheromon(WeightGraph &g, Edge &e)
-{
-    g.changeEdgeWeight(e, 5); ///TODO value of pheromon
+void PheromonWeightEltist::leaveAdditionalPheromon(WeightGraph &mGraph, Node lastNode, Node mN2){
+    mGraph.changeEdgeWeight(lastNode, mN2);
+}
+
+void PheromonWeightEltist::leavePheromon(WeightGraph &mGraph, Node lastNode, Node position){
+    mGraph.changeEdgeWeight(lastNode, position); ///TODO  initial pheromon weight
 }

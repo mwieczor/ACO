@@ -16,7 +16,7 @@ public:
         mCoordinate(antC){} // czy potrzebne? ///NOTE BW, tak
     Ant(Node mN):
         mPosition(mN){}
-    void moveAnt(std::vector<std::reference_wrapper<Edge> > neighbours);
+    double moveAnt(std::vector<std::reference_wrapper<Edge> > neighbours);
     Node position() const;
     void setPosition(const Node &position);
     Node getMlastPosition() const;

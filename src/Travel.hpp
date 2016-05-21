@@ -6,16 +6,12 @@
 
 class Travel{
 public:
-    Travel(){}
+    //bossTravel(){}
     Travel(Node mStart, WeightGraph &mG):
-    startCity(mStart), mGraph(mG){ //only for tests
-        while(mAntColony.size()<10){
-            mAntColony.push_back(Ant(startCity));
-        }
-    }
+    startCity(mStart), mGraph(mG){}
     Travel(const WeightGraph &mG):
         mGraph(mG){}
-    void travelToString(); // display the best route
+    virtual void travelToString(); // display the best route
     void generateTravel();
 
     Node getFinalCity() const;
@@ -24,11 +20,12 @@ public:
     Node getStartCity() const;
     void setStartCity(const Node &value);
 
-    double getRouteLenght();
+    virtual double getRouteLenght();
+    virtual bool isFinalCity();
 
 private:
     void createGraph();
-    bool isFinalCity();
+
 
     std::vector <Ant> mAntColony;
     WeightGraph mGraph;

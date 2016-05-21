@@ -5,6 +5,7 @@
 class PheromonWeightEltist: public PheromonWeight{
 public:
     PheromonWeightEltist(){}
-    void leaveAdditionalPheromon(WeightGraph &g, Edge &e);
+    void leaveAdditionalPheromon(WeightGraph &g, Node mN1, Node mN2);
+    void leavePheromon(WeightGraph &mGraph, Node lastNode, Node position);
 
 };

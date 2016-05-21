@@ -27,7 +27,7 @@ private:
     double mProbability=0;
     double mNodeProbability=0;
     std::list<std::pair<int,double>> nodeProbability;
-    boost::optional<Edge> bestPosition;
+//    boost::optional<Edge> bestPosition;
     double random;
 
 };

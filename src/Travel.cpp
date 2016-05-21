@@ -5,19 +5,11 @@ void Travel::generateTravel(){
         for(auto &ant:mAntColony)
         {
             ant.moveAnt(mGraph.searchNeighbours(ant.position()));
-            //weight.leavePheromon(mGraph, ant.getBestPosition());
+            weight.leavePheromon(mGraph, ant.getMlastPosition(), ant.position());
         }
-        weight.evaporatePheromon(mGraph);
+       weight.evaporatePheromon(mGraph);
     }
     while(!isFinalCity());
-
-    //    Ant test;
-    //    test.setPosition(startCity);
-    //    while(test.position()!=finalCity){
-    //        test.positionToString();
-    //        test.moveAnt(mGraph.searchNeighbours(test.position()));
-
-    //    }
 }
 
 
@@ -45,11 +37,12 @@ void Travel::setStartCity(const Node &value)
 double Travel::getRouteLenght()
 {
     Ant test;
+    routeLenght=0;
             test.setPosition(startCity);
             while(test.position()!=finalCity){
-                //test.positionToString();
+                test.positionToString();
                 test.moveAnt(mGraph.searchNeighbours(test.position()));/// TODO do sth with getBest position from ANT
-                //routeLenght=routeLenght+test.getBestPosition().getMlenght();
+                routeLenght+=mGraph.edge(test.getMlastPosition(), test.position()).getMlenght();
 
             }
     return routeLenght;

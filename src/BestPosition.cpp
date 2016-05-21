@@ -71,8 +71,8 @@ void BestPosition::generateRandom()
 {
     std::random_device rd;
     std::mt19937 gen(rd());
-    std::uniform_real_distribution<double> randomGenerator(0,1); /// TODO  doesn't work when random is bigger than possibility
-    random = randomGenerator(gen);
+    std::uniform_real_distribution<double> dist(0.0, 1.0); /// TODO  doesn't work when random is bigger than possibility
+    random = dist(gen);
 
 }
 

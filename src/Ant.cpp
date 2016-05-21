@@ -15,7 +15,7 @@ void Ant::positionToString() const
 
     std::string str =  std::to_string(this->position().coordinate().y());
     std::string strX =  std::to_string(this->position().coordinate().x());
-    std::cout<< "Mrówka jest w pkt:"<<strX<< "i y"<<str;
+    std::cout<< "Mrówka jest w pkt:"<<strX<< "i y"<<str<< std::endl;
 }
 
 void Ant::changePosition(const Node &mN)
@@ -24,13 +24,14 @@ void Ant::changePosition(const Node &mN)
     this->setPosition(mN);
 }
 
-void Ant::moveAnt(std::vector<std::reference_wrapper<Edge>> neighbours)
+double Ant::moveAnt(std::vector<std::reference_wrapper<Edge>> neighbours)
 {
     auto cN=this->getUnvisitedNeighbours(neighbours);
     if(cN.size()>0)
     {
         const auto& bP=BestPosition(cN).calc();
         this->changePosition(bP.endNode());
+        return bP.getMlenght();
     }
     else ;///TODO what if ant has no edge to go
 

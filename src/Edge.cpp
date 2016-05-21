@@ -21,9 +21,9 @@ void Edge::setWeight(const Weight &weight)
     mWeight = weight;
 }
 
-void Edge::incrementWeight(const int &mW)
+void Edge::incrementWeight(const double &mW)
 {
-    this->setWeight(this->mWeight+mW);
+    this->setWeight(this->mWeight+(1/mW));
 }
 
 Node Edge::getOtherNode(const Node &mN) const
