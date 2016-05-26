@@ -14,7 +14,7 @@ public:
         graph.append(edge3);
         graph.append(edge4);
     }
-    Travel sut;
+    EltistAntSystem sut;
     WeightGraph graph;
     Ant ant;
 
@@ -27,8 +27,9 @@ public:
 
 
 TEST_F(testTravel, generateRoute){
+    sut.createAntColony();
     sut= EltistAntSystem(Node(Coordinate(5,6)), graph);
     sut.setFinalCity(Node(Coordinate(8,10)));
-    sut.generateTravel();
+    sut.generateRoute();
    EXPECT_EQ(sut.getRouteLenght(), 8);
 }

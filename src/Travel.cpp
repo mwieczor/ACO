@@ -1,15 +1,21 @@
 #include "Travel.hpp"
 
-void Travel::generateTravel(){
-    do{
-        for(auto &ant:mAntColony)
-        {
-            ant.moveAnt(mGraph.searchNeighbours(ant.position()));
-            weight.leavePheromon(mGraph, ant.getMlastPosition(), ant.position());
-        }
-       weight.evaporatePheromon(mGraph);
-    }
-    while(!isFinalCity());
+void Travel::setStartGraphWeight()
+{
+    for(auto &edge:mGraph)
+        edge.incrementWeight(defaultWeight);
+}
+
+void Travel::createAntColony()
+{
+    while(mAntColony.size()<colonySize)
+        mAntColony.push_back(std::make_pair(Ant(startCity),0));
+
+}
+
+void Travel::travelToString()
+{
+
 }
 
 
@@ -28,12 +34,6 @@ Node Travel::getStartCity() const
     return startCity;
 }
 
-void Travel::setStartCity(const Node &value)
-{
-    startCity = value;
-}
-
-
 double Travel::getRouteLenght()
 {
     Ant test;
@@ -51,7 +51,7 @@ double Travel::getRouteLenght()
 bool Travel::isFinalCity()
 {
     for(auto ant:mAntColony)
-    {  if(ant.position()!=getFinalCity())
+    {  if(ant.first.position()!=getFinalCity())
             return false;
 
     }

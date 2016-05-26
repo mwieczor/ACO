@@ -3,7 +3,7 @@
 
 
 void PheromonWeight::leavePheromon(WeightGraph &mGraph, Node lastNode, Node position){
-    mGraph.changeEdgeWeight(lastNode, position); ///TODO  initial pheromon weight
+    mGraph.changeEdgeWeight(lastNode, position, weight); ///TODO  initial pheromon weight
 }
 
 void PheromonWeight::evaporatePheromon(WeightGraph &mGraph)
