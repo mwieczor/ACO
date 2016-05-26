@@ -16,11 +16,11 @@ bool WeightGraph::isEdgeInGraph(const Edge &mE) const
     }
     return false;
 }
- void WeightGraph::changeEdgeWeight(Node mN1, Node mN2) ///SO WRONG
+ void WeightGraph::changeEdgeWeight(Node mN1, Node mN2, double weight) ///SO WRONG
 {
      for(auto& edge:*this){
          if(edge.hasNode(mN1) && edge.hasNode(mN2)){
-              edge.incrementWeight(edge.getMlenght());
+              edge.incrementWeight(weight);
          }
      }
 

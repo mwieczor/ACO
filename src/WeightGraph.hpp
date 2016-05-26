@@ -12,7 +12,7 @@ public:
     } ///NOTE reprezentacja grafu doczytac
     void append(const Edge &mE);
     bool isEdgeInGraph(const Edge &mE) const;
-    void changeEdgeWeight(Node mN1, Node mN2);
+    void changeEdgeWeight(Node mN1, Node mN2, double weight);
     Edge& edge(Node mN1, Node mN2);
 
     std::vector<std::reference_wrapper<Edge> > searchNeighbours(Node mN);

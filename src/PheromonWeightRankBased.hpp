@@ -4,5 +4,10 @@
 
 class PheromonWeightRankBased: public PheromonWeight{
 public:
-    void leavePheromon(WeightGraph &mGraph, Edge mE);
+    // PheromonWeight interface
+    void leavePheromon(WeightGraph &mGraph, Node lastNode, Node position ) override;
+private:
+    double maxWeight;
+
+
 };

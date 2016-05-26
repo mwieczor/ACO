@@ -1,7 +1,7 @@
 #include "PheromonWeightRankBased.hpp"
 
 
-
-void PheromonWeightRankBased::leavePheromon(WeightGraph &mGraph, Edge mE){
-   // mGraph.changeEdgeWeight(mGraph.edge(mE), 5); ///TODO  initial pheromon weight
+void PheromonWeightRankBased::leavePheromon(WeightGraph &mGraph, Node lastNode, Node position)
+{
+    mGraph.changeEdgeWeight(lastNode, position,1/mGraph.edge(lastNode, position).getMlenght());
 }
