@@ -1,9 +1,9 @@
 #pragma once
 #include "Travel.hpp"
 #include <algorithm>
-#include "PheromonWeightEltist.hpp"
+#include "PheromonWeight.hpp"
 
-class EltistAntSystem: public Travel
+class EltistAntSystem: public Travel, PheromonWeight
 {
 public:
     EltistAntSystem(){}
@@ -16,5 +16,6 @@ private:
     WeightGraph mGraph;
     Node startCity;
     Node finalCity;
-    PheromonWeightEltist weight;
+    double weight;
+    void leaveAdditionalPheromon(Node lastNode, Node mN2);
 };

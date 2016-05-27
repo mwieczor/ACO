@@ -5,13 +5,18 @@ void EltistAntSystem::generateRoute(){
         for(auto &ant:mAntColony)
         {
             ant.second=ant.first.moveAnt(mGraph.searchNeighbours(ant.first.position()));
-            weight.leavePheromon(mGraph, ant.first.getMlastPosition(), ant.first.position());
+            leavePheromon(mGraph, ant.first.getMlastPosition(), ant.first.position(), weight);
         }
         sort(mAntColony.begin(), mAntColony.end(),
              [](const std::pair<Ant, double>&firstAnt, const std::pair<Ant, double>&secondAnt)
                                                     {return firstAnt.second>secondAnt.second;});
-        weight.leaveAdditionalPheromon(mGraph, mAntColony[0].first.getMlastPosition(), mAntColony[0].first.position());
-        weight.evaporatePheromon(mGraph);
+        leaveAdditionalPheromon(mAntColony[0].first.getMlastPosition(), mAntColony[0].first.position());
+        evaporatePheromon(mGraph);
     }
     while(!isFinalCity());
 }
+
+void EltistAntSystem::leaveAdditionalPheromon(Node lastNode, Node mN2){
+    mGraph.changeEdgeWeight(lastNode, mN2, weight);
+}
+

@@ -13,10 +13,17 @@ void RankBasedAntSystem::generateRoute()
         for(auto &ant:mAntColony)
         {
             ant.second=ant.first.moveAnt(mGraph.searchNeighbours(ant.first.position()));
-            weight.leavePheromon(mGraph, ant.first.getMlastPosition(), ant.first.position());
+            leavePheromon(mGraph, ant.first.getMlastPosition(), ant.first.position());
         }
 
-        weight.evaporatePheromon(mGraph);
+        evaporatePheromon(mGraph);
     }
     while(!isFinalCity());
 }
+
+void RankBasedAntSystem::leavePheromon(WeightGraph &mGraph, Node lastNode, Node position)
+{
+      double weight= 1/mGraph.edge(lastNode, position).getMlenght();
+      mGraph.changeEdgeWeight(lastNode, position, weight);
+}
+

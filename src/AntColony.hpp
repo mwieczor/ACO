@@ -3,12 +3,21 @@
 #include "Travel.hpp"
 #include "PheromonWeight.hpp"
 
-class AntColony: public Travel{
-
+class AntColony: public Travel, PheromonWeight{
+public:
+    AntColony(Node mStart,Node finalCity, WeightGraph &mG):
+        mGraph(mG),  startCity(mStart), finalCity(finalCity){}
 
     // Travel interface
-public:
     void generateRoute() override;
+
 private:
-    PheromonWeight weight;
+    void createGraph();
+    std::vector <std::pair<Ant, double>> mAntColony;
+    WeightGraph mGraph;
+    Node startCity;
+    Node finalCity;
+    double routeLenght;
+    double weight;
+    size_t colonySize;
 };

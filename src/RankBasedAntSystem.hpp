@@ -1,14 +1,18 @@
 #pragma once
 
 #include "Travel.hpp"
-#include "PheromonWeightRankBased.hpp"
+#include "PheromonWeight.hpp"
 
-class RankBasedAntSystem: public Travel{
+class RankBasedAntSystem: public Travel, PheromonWeight{
     // Travel interface
 public:
     void setStartGraphWeight() override;
     void generateRoute() override;
 
+    // PheromonWeight interface
+
+
 private:
-    PheromonWeightRankBased weight;
+     void leavePheromon(WeightGraph &mGraph, Node lastNode, Node position) override;
+
 };
