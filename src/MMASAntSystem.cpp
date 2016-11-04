@@ -19,13 +19,13 @@ void MMASAntSystem::generateRoute()
         sort(mAntColony.begin(), mAntColony.end(),
              [](const std::pair<Ant, double>&firstAnt, const std::pair<Ant, double>&secondAnt)
                                                     {return firstAnt.second>secondAnt.second;});
-        leavePheromon(mGraph, mAntColony[0].first.getMlastPosition(), mAntColony[0].first.position());
+        leavePheromon(mGraph, mAntColony[0].first.getLastPosition(), mAntColony[0].first.position(), 5); //to do
         evaporatePheromon(mGraph);
     }
     while(!isFinalCity());
 }
 
-void MMASAntSystem::leavePheromon(WeightGraph &mGraph, Node lastNode, Node position)
+void MMASAntSystem::leavePheromon(WeightGraph &mGraph, Node lastNode, Node position, double w)
 {
     static double maxWeight=0.1;/// TODO search initial level of weight
     mGraph.changeEdgeWeight(lastNode, position, maxWeight);

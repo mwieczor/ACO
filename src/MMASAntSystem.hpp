@@ -13,7 +13,7 @@ private:
     double minWeight;
     // PheromonWeight interface
 protected:
-    void leavePheromon(WeightGraph &mGraph, Node lastNode, Node position) override;
+    void leavePheromon(WeightGraph &mGraph, Node lastNode, Node position, double w) override;
     void evaporatePheromon(WeightGraph &mGraph) override;
 
 };

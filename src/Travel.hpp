@@ -12,21 +12,26 @@ public:
     virtual void createAntColony();
     virtual void generateRoute()=0;
     void travelToString(); // display the best route
+    void generateTravel();
+    double getRouteLenght();
+
     Node getFinalCity() const;
-    void setFinalCity(const Node &value);
 
-    Node getStartCity() const;
-    //void setStartCity(const Node &value);
-
-    virtual double getRouteLenght();
     bool isFinalCity();
 
     virtual ~Travel()= default;
 
+    void setFinalCity(const Node &value);
+
+    void setStartCity(const Node &value);
+
 protected:
     void createGraph();
     std::vector <std::pair<Ant, double>> mAntColony;
-    WeightGraph mGraph;
+     WeightGraph mGraph;
+
+private:
+
     Node startCity;
     Node finalCity;
     double routeLenght;

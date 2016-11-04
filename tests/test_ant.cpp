@@ -12,7 +12,7 @@ public:
         edge4= Edge(Node(Coordinate(7,9)), Node(Coordinate(8,10)), 5, Weight(15));
     }
 
-    Ant sut;
+    std::unique_ptr<Ant> sut = std::make_unique<Ant>(Node(Coordinate(5,6)));
     WeightGraph graph;
 
     ///NOTE BW może lepiej vector<Edge> ?
@@ -26,31 +26,28 @@ public:
 
 TEST_F(TestAnt, moveAntOneNode){
     graph.append(edge1);
-    sut.setPosition(Node(Coordinate(5,6)));
-    sut.moveAnt(graph.searchNeighbours(sut.position()));
-    EXPECT_EQ(sut.position(),Node(Coordinate(7,8)));
-    sut.moveAnt(graph.searchNeighbours(Node(Coordinate(7,8))));
-    EXPECT_EQ(sut.position(),Node(Coordinate(7,8)));
+    sut->moveAnt(graph.searchNeighbours(sut->position()));
+    EXPECT_EQ(sut->position(),Node(Coordinate(7,8)));
+    sut->moveAnt(graph.searchNeighbours(Node(Coordinate(7,8))));
+    EXPECT_EQ(sut->position(),Node(Coordinate(7,8)));
 }
 
 
 TEST_F(TestAnt, moveAntTwoEdges){
     graph.append(edge1);
     graph.append(edge3);
-    sut.setPosition(Node(Coordinate(5,6)));
-    sut.moveAnt(graph.searchNeighbours(sut.position()));
-    EXPECT_EQ(sut.position(),Node(Coordinate(7,8)));
-    sut.moveAnt(graph.searchNeighbours(sut.position()));
-    EXPECT_EQ(sut.position(),Node(Coordinate(8,10)));
+    sut->moveAnt(graph.searchNeighbours(sut->position()));
+    EXPECT_EQ(sut->position(),Node(Coordinate(7,8)));
+    sut->moveAnt(graph.searchNeighbours(sut->position()));
+    EXPECT_EQ(sut->position(),Node(Coordinate(8,10)));
 }
 
 TEST_F(TestAnt, moveAntSameEdges){ //czy zakladamy ze taka sytuacji nie wystapi?
     graph.append(edge1);
     edge3.setNodes(Node(Coordinate(5,6)), Node(Coordinate(7,8)));
     graph.append(edge3);
-    sut.setPosition(Node(Coordinate(5,6)));
-    sut.moveAnt(graph.searchNeighbours(sut.position()));
-    EXPECT_EQ(sut.position(),Node(Coordinate(7,8)));
+    sut->moveAnt(graph.searchNeighbours(sut->position()));
+    EXPECT_EQ(sut->position(),Node(Coordinate(7,8)));
 }
 
 TEST_F(TestAnt, moveAnt){
@@ -59,17 +56,16 @@ TEST_F(TestAnt, moveAnt){
     graph.append(edge3);
     graph.append(edge4);
     graph.append(edge5);
-    sut.setPosition(Node(Coordinate(5,6)));
     ///TODO FIRST! sth wrong with search neighbours!
-    sut.moveAnt(graph.searchNeighbours(sut.position()));
-   EXPECT_EQ(sut.position(),Node({7,9}));
+    sut->moveAnt(graph.searchNeighbours(sut->position()));
+   EXPECT_EQ(sut->position(),Node({7,9}));
 }
 
 //TEST_F(TestAnt, increaseWeight){ //czy zakladamy ze taka sytuacji nie wystapi?
 //    graph.append(edge1);
-//    sut.setPosition(Node(Coordinate(5,6)));
+//    sut->setPosition(Node(Coordinate(5,6)));
 //    edge1.setWeight(Weight(1));
-//    sut.moveAnt(graph.searchNeighbours(sut.position()));
+//    sut->moveAnt(graph.searchNeighbours(sut->position()));
 //    EXPECT_EQ(edge1.getWeight().weight(),6);
 
 

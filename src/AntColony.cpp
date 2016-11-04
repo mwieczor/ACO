@@ -7,7 +7,7 @@ void AntColony::generateRoute()
         for(auto &ant:mAntColony)
         {
             ant.second=ant.first.moveAnt(mGraph.searchNeighbours(ant.first.position()));
-            leavePheromon(mGraph, ant.first.getMlastPosition(), ant.first.position(), weight);
+            leavePheromon(mGraph, ant.first.getLastPosition(), ant.first.position(), weight);
         }
         evaporatePheromon(mGraph);
     }

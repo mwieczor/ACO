@@ -12,7 +12,7 @@ public:
     // PheromonWeight interface
 
 
-private:
-     void leavePheromon(WeightGraph &mGraph, Node lastNode, Node position) override;
-
+     // PheromonWeight interface
+protected:
+     void leavePheromon(WeightGraph &mGraph, Node lastNode, Node position, double weight) override;
 };

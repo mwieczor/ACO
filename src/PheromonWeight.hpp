@@ -10,7 +10,7 @@ public:
     virtual ~PheromonWeight()=default;
 protected:
     virtual void leavePheromon(WeightGraph &mGraph, Node lastNode, Node position, double weight);
-    virtual void leavePheromon(WeightGraph &mGraph, Node lastNode, Node position);
+//    virtual void leavePheromon(WeightGraph &mGraph, Node lastNode, Node position);
     virtual void evaporatePheromon(WeightGraph &mGraph);
 };
 

@@ -2,7 +2,7 @@
 
 bool Ant::wasAntThere(const Edge &E) const
 {
-    return (E.endNode()==this->getMlastPosition() || E.startNode()==this->getMlastPosition())?  true: false;
+    return (E.endNode()==this->getLastPosition() || E.startNode()==this->getLastPosition())?  true: false;
 }
 
 void Ant::addEdgeToMemory(const Edge &edge)// lista tabu
@@ -20,8 +20,8 @@ void Ant::positionToString() const
 
 void Ant::changePosition(const Node &mN)
 {
-    mlastPosition=mPosition;
-    this->setPosition(mN);
+    mlastPosition = mPosition;
+    mPosition = mN;
 }
 
 double Ant::moveAnt(std::vector<std::reference_wrapper<Edge>> neighbours)
@@ -42,12 +42,8 @@ Node Ant::position() const
     return mPosition;
 }
 
-void Ant::setPosition(const Node &position)
-{
-    mPosition = position;
-}
 
-Node Ant::getMlastPosition() const
+Node Ant::getLastPosition() const
 {
     return mlastPosition;
 }
