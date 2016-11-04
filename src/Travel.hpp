@@ -13,7 +13,7 @@ public:
     virtual void generateRoute()=0;
     void travelToString(); // display the best route
     void generateTravel();
-    double getRouteLenght();
+   // double getRouteLenght();
 
     Node getFinalCity() const;
 
@@ -30,11 +30,9 @@ protected:
     std::vector <std::pair<Ant, double>> mAntColony;
      WeightGraph mGraph;
 
-private:
-
     Node startCity;
     Node finalCity;
     double routeLenght;
     double defaultWeight;
-    size_t colonySize;
+    size_t colonySize =10;
 };

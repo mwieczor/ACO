@@ -20,3 +20,45 @@ void EltistAntSystem::leaveAdditionalPheromon(Node lastNode, Node mN2){
     mGraph.changeEdgeWeight(lastNode, mN2, weight);
 }
 
+
+double  EltistAntSystem::getRouteLenght()
+{
+    std::unique_ptr<Ant> test =  std::make_unique<Ant> (startCity);
+    routeLenght=0;
+            while(test->position()!=finalCity){
+                test->positionToString();
+                test->moveAnt(mGraph.searchNeighbours(test->position()));/// TODO do sth with getBest position from ANT
+                if(test->getLastPosition() != test->position())
+                    routeLenght+=mGraph.edge(test->getLastPosition(), test->position()).getMlenght();
+
+            }
+    return routeLenght;
+}
+
+void EltistAntSystem::createAntColony()
+{
+    while(mAntColony.size()<colonySize)
+        mAntColony.push_back(std::make_pair(Ant(startCity),0));
+
+}
+
+bool EltistAntSystem::isFinalCity()
+{
+    for(auto ant:mAntColony)
+    {  if(ant.first.position()!=getFinalCity())
+            return false;
+
+    }
+    return true;
+
+}
+
+void EltistAntSystem::setFinalCity(const Node &value)
+{
+    finalCity = value;
+}
+
+Node EltistAntSystem::getFinalCity() const
+{
+    return finalCity;
+}

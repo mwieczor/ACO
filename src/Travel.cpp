@@ -25,19 +25,19 @@ Node Travel::getFinalCity() const
 }
 
 
-double Travel::getRouteLenght()
-{
-    std::unique_ptr<Ant> test =  std::make_unique<Ant> (startCity);
-    routeLenght=0;
-            while(test->position()!=finalCity){
-                test->positionToString();
-                test->moveAnt(mGraph.searchNeighbours(test->position()));/// TODO do sth with getBest position from ANT
-                if(test->getLastPosition() != test->position())
-                    routeLenght+=mGraph.edge(test->getLastPosition(), test->position()).getMlenght();
+//double Travel::getRouteLenght()
+//{
+//    std::unique_ptr<Ant> test =  std::make_unique<Ant> (startCity);
+//    routeLenght=0;
+//            while(test->position()!=finalCity){
+//                test->positionToString();
+//                test->moveAnt(mGraph.searchNeighbours(test->position()));/// TODO do sth with getBest position from ANT
+//                if(test->getLastPosition() != test->position())
+//                    routeLenght+=mGraph.edge(test->getLastPosition(), test->position()).getMlenght();
 
-            }
-    return routeLenght;
-}
+//            }
+//    return routeLenght;
+//}
 
 bool Travel::isFinalCity()
 {

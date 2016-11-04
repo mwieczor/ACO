@@ -7,7 +7,7 @@ public:
     testTravel(){
 
     }
-    std::shared_ptr<Travel> sut;
+    std::shared_ptr<EltistAntSystem> sut;
     std::unique_ptr<WeightGraph> graph;
 
     Ant ant;
@@ -32,9 +32,9 @@ public:
 
 
 TEST_F(testTravel, generateRoute){
-//    sut->createAntColony();
-//    buildTest();
-//    sut->setFinalCity(Node(Coordinate(8,10)));
-//    sut->generateRoute();
-//   EXPECT_EQ(sut->getRouteLenght(), 8);
+    buildTest();
+    sut->createAntColony();
+    sut->setFinalCity(Node(Coordinate(8,10)));
+    sut->generateRoute();
+    EXPECT_EQ(sut->getRouteLenght(), 15);
 }
