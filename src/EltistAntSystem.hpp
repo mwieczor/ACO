@@ -23,7 +23,7 @@ private:
     WeightGraph mGraph;
     Node startCity;
     Node finalCity;
-    double weight;
+    double weight =0.1;
     void leaveAdditionalPheromon(Node lastNode, Node mN2);
     std::vector <std::pair<Ant, double>> mAntColony;
      size_t colonySize =10;
