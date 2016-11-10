@@ -1,5 +1,6 @@
 #include "Ant.hpp"
 
+
 bool Ant::wasAntThere(const Edge &E) const
 {
     return (E.endNode()==this->getLastPosition() || E.startNode()==this->getLastPosition())?  true: false;

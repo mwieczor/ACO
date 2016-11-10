@@ -1,4 +1,5 @@
 #include "Travel.hpp"
+#include "Edge.hpp"
 
 void Travel::setStartGraphWeight()
 {

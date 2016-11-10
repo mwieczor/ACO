@@ -3,6 +3,8 @@
 #include <algorithm>
 #include "PheromonWeight.hpp"
 
+class Node;
+
 class EltistAntSystem: public PheromonWeight
 {
 public:

@@ -7,8 +7,10 @@
 #include <cmath>
 #include <iostream>
 #include <memory>
+#include "Edge.hpp"
 
 class BestPosition;
+
 
 class Ant: public IAnt
 {

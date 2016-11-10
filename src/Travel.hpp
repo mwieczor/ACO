@@ -3,6 +3,8 @@
 #include "Ant.hpp"
 #include "WeightGraph.hpp"
 
+class Node;
+
 class Travel{
 public:
     Travel()=default;

@@ -1,4 +1,5 @@
 #include "MMASAntSystem.hpp"
+#include "Edge.hpp"
 
 
 void MMASAntSystem::setStartGraphWeight()

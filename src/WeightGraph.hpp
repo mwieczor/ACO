@@ -1,11 +1,10 @@
 #pragma once
 
-#include <vector>
-#include <functional>
 
-#include "Edge.hpp"
+#include "IWeightGraph.hpp"
 
-class WeightGraph: public std::vector<Edge>{
+class WeightGraph: public IWeightGraph
+{
 public:
     WeightGraph(){
 

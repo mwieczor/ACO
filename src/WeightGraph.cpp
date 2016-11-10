@@ -1,4 +1,7 @@
 #include "WeightGraph.hpp"
+#include "Edge.hpp"
+#include <functional>
+
 
 void WeightGraph::append(const Edge &mE)
 {

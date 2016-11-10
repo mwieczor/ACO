@@ -1,4 +1,5 @@
 #include "PheromonWeight.hpp"
+#include "Node.hpp"
 
 void PheromonWeight::leavePheromon(WeightGraph &mGraph, Node lastNode, Node position, double weight){
     mGraph.changeEdgeWeight(lastNode, position, weight); ///TODO  initial pheromon weight

@@ -1,4 +1,5 @@
 #include "EltistAntSystem.hpp"
+#include "Edge.hpp"
 
 void EltistAntSystem::generateRoute(){
     do{

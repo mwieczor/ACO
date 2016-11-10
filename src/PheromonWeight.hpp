@@ -3,6 +3,7 @@
 #include  "Ant.hpp"
 
 class WeightGraph;
+class Node;
 
 class PheromonWeight{
 public:
