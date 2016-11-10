@@ -1,5 +1,6 @@
 #pragma once
 
+#include "IAnt.hpp"
 #include "WeightGraph.hpp"
 #include "BestPosition.hpp"
 #include <boost/optional.hpp>
@@ -9,17 +10,17 @@
 
 class BestPosition;
 
-class Ant{
+class Ant: public IAnt
+{
 public:
     Ant(){}
     Ant(Node mN):
         mPosition(mN){}
-    double moveAnt(std::vector<std::reference_wrapper<Edge> > neighbours);
+    double moveAnt(std::vector<std::reference_wrapper<Edge> > neighbours) override;
     Node position() const;
-    Node getLastPosition() const;
-    void positionToString() const;
-    Edge getBestPosition() const;
-
+    Node getLastPosition() const override ;
+    void positionToString() const override;
+	
 private:
     bool wasAntThere(const Edge& E) const;
     void addEdgeToMemory (const Edge &edge);
