@@ -32,7 +32,7 @@ double Ant::moveAnt(std::vector<std::reference_wrapper<Edge>> neighbours)
     {
         const auto& bP=BestPosition(cN).calc();
         this->changePosition(bP.endNode());
-        return bP.getMlenght();
+        return bP.getLenght();
     }
     else ;///TODO what if ant has no edge to go
 

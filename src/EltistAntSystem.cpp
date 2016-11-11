@@ -30,7 +30,7 @@ double  EltistAntSystem::getRouteLenght()
                 test->positionToString();
                 test->moveAnt(mGraph.searchNeighbours(test->position()));/// TODO do sth with getBest position from ANT
                 if(test->getLastPosition() != test->position())
-                    routeLenght+=mGraph.edge(test->getLastPosition(), test->position()).getMlenght();
+                    routeLenght+=mGraph.edge(test->getLastPosition(), test->position()).getLenght();
 
             }
     return routeLenght;

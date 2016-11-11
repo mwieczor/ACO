@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Node.hpp"
+#include "IEdge.hpp"
 
 class Weight{
 public :
@@ -20,7 +21,7 @@ private:
     double mWeight;
 };
 
-class Edge{
+class Edge: public IEdge{
 public:
     Edge():
         mWeight(){}///NOTE jaka wartosc poczatkowa feromonu?
@@ -47,7 +48,7 @@ public:
 
     Weight getWeight() const;
 
-    int getMlenght() const;
+    int getLenght() const;
 
 private:
     Node mStartNode;

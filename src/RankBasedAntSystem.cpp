@@ -3,7 +3,7 @@
 void RankBasedAntSystem::setStartGraphWeight()
 {
     for(auto &edge:mGraph)
-        edge.incrementWeight(1/edge.getMlenght());
+        edge.incrementWeight(1/edge.getLenght());
 
 }
 
@@ -23,7 +23,7 @@ void RankBasedAntSystem::generateRoute()
 
 void RankBasedAntSystem::leavePheromon(WeightGraph &mGraph, Node lastNode, Node position, double weight)
 {
-      weight= 1/mGraph.edge(lastNode, position).getMlenght();
+      weight= 1/mGraph.edge(lastNode, position).getLenght();
       mGraph.changeEdgeWeight(lastNode, position, weight);
 }
 

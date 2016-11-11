@@ -43,7 +43,7 @@ Weight Edge::getWeight() const
     return mWeight;
 }
 
-int Edge::getMlenght() const
+int Edge::getLenght() const
 {
     return mlenght;
 }

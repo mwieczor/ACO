@@ -13,7 +13,7 @@ Edge BestPosition::calc() // always return Edge, ant must move
 double BestPosition::probabilityNodeChosen(const Edge &E) ///TODO wrong name not verb
 {
     mNodeProbability=0;
-    mNodeProbability=std::pow(E.getWeight(), 0.5) * std::pow(std::pow(E.getMlenght(),-1),0.5);
+    mNodeProbability=std::pow(E.getWeight(), 0.5) * std::pow(std::pow(E.getLenght(),-1),0.5);
     mProbability=mProbability+mNodeProbability;
     return mNodeProbability;
 

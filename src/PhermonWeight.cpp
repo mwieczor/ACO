@@ -8,7 +8,7 @@ void PheromonWeight::leavePheromon(WeightGraph &mGraph, Node lastNode, Node posi
 void PheromonWeight::evaporatePheromon(WeightGraph &mGraph)
 {
     for(auto& edge:mGraph){
-       edge.setWeight(edge.getWeight()-edge.getWeight()*(edge.getMlenght()/static_cast<double>(100)));
+       edge.setWeight(edge.getWeight()-edge.getWeight()*(edge.getLenght()/static_cast<double>(100)));
 
     }
 }

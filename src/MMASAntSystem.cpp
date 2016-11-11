@@ -36,7 +36,7 @@ void MMASAntSystem::evaporatePheromon(WeightGraph &mGraph)
 {
     for(auto& edge:mGraph){
         if(edge.getWeight()>minWeight)
-            edge.setWeight(edge.getWeight()-edge.getWeight()*(edge.getMlenght()/static_cast<double>(100)));
+            edge.setWeight(edge.getWeight()-edge.getWeight()*(edge.getLenght()/static_cast<double>(100)));
 
     }
 }
