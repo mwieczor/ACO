@@ -38,3 +38,8 @@ TEST_F(testBus,increaseNbOfPassangersWhenAreNoFreeSeats){
 	sut->increasePassangersNumber(3);
 	EXPECT_EQ(5, sut->getNbOfPassangers());
 }
+TEST_F(testBus, increaseNbOfPassangersWhenAreSingleFreeSeats){
+	sut->increasePassangersNumber(4);
+	sut->increasePassangersNumber(3);
+	EXPECT_EQ(5, sut->getNbOfPassangers());
+}

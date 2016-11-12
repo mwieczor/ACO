@@ -23,11 +23,13 @@ int Bus::getNbOfPassangers() const
 
 void Bus::increasePassangersNumber(int pPassangers)
 {
-	if(areFreeSeatsInBus())
-		mPassangers +=pPassangers;
+  if (areFreeSeatsInBus() && mPassangers + pPassangers <= mCapacity)
+    mPassangers += pPassangers;
+  else
+    mPassangers = mCapacity;
 }
 
 bool Bus::areFreeSeatsInBus()
 {
-	return mPassangers<mCapacity;
+	return mPassangers < mCapacity;
 }
