@@ -10,12 +10,13 @@ public:
 	mPosition(pPosition), mCapacity(pCapacity), mPassangers() {}
 	void ride(Coordinate) override;
 	Coordinate getPosition() const override;
-	void releaseSeat(int );
-	int getNbOfPassangers() const;
-	void increasePassangersNumber(int );
-	bool areFreeSeatsInBus();
+	void releaseSeat(int ) override;
+	int getNbOfPassangers() const override; //Is it nessesary?
+	void increasePassangersNumber(int ) override ;
+
 	
 private:
+	bool areFreeSeatsInBus();
 	Coordinate mPosition;
 	int mCapacity;
 	int mPassangers;
