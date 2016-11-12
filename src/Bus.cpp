@@ -1,9 +1,9 @@
 #include "Bus.hpp"
 #include "Coordinate.hpp"
 
-void Bus::ride()
+void Bus::ride(Coordinate pPosition)
 {
-	
+	mPosition = pPosition;
 }
 
 Coordinate Bus::getPosition() const

@@ -8,7 +8,7 @@ class Bus: public IBus
 public:
 	Bus(Coordinate pPosition, int pCapacity):
 	mPosition(pPosition), mCapacity(pCapacity), mPassangers() {}
-	void ride() override;
+	void ride(Coordinate) override;
 	Coordinate getPosition() const override;
 	void releaseSeat(int );
 	int getNbOfPassangers() const;
