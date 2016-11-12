@@ -10,7 +10,7 @@ public:
 	mPosition(pPosition), mCapacity(pCapacity){}
 	void ride() override;
 	Coordinate getPosition() const override;
-	
+	void releaseSeat(int );
 	int getCapacity() const;
 	
 private:

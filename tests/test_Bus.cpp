@@ -23,3 +23,7 @@ TEST_F(testBus, checkBusCapacity)
 {
 	EXPECT_EQ(5, sut->getCapacity());
 }
+TEST_F(testBus, releaseSeat){
+	sut->releaseSeat(3);
+	EXPECT_EQ(2, sut->getCapacity());
+}

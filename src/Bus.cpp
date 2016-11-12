@@ -11,6 +11,11 @@ Coordinate Bus::getPosition() const
 	return mPosition;
 }
 
+void Bus::releaseSeat(int pPassangers)
+{
+	mCapacity -= pPassangers;
+}
+
 int Bus::getCapacity() const
 {
 	return mCapacity;
