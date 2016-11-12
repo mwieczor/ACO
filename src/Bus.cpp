@@ -13,15 +13,21 @@ Coordinate Bus::getPosition() const
 
 void Bus::releaseSeat(int pPassangers)
 {
-	mCapacity -= pPassangers;
+	mPassangers -= pPassangers;
 }
 
-int Bus::getCapacity() const
+int Bus::getNbOfPassangers() const
 {
-	return mCapacity;
+	return mPassangers;
 }
 
 void Bus::increasePassangersNumber(int pPassangers)
 {
-	mCapacity +=pPassangers;
+	if(areFreeSeatsInBus())
+		mPassangers +=pPassangers;
+}
+
+bool Bus::areFreeSeatsInBus()
+{
+	return mPassangers<mCapacity;
 }

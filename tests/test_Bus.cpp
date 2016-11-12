@@ -21,17 +21,20 @@ TEST_F(testBus, checkBusPosition){
 
 TEST_F(testBus, checkBusCapacity)
 {
-	EXPECT_EQ(5, sut->getCapacity());
+	EXPECT_EQ(0, sut->getNbOfPassangers());
+}
+
+TEST_F(testBus, increaseNbOfPassangersWhenAreFreeSeats){
+	sut->increasePassangersNumber(3);
+	EXPECT_EQ(3, sut->getNbOfPassangers());
 }
 TEST_F(testBus, releaseSeat){
-	sut->releaseSeat(3);
-	EXPECT_EQ(2, sut->getCapacity());
-}
-
-TEST_F(testBus, increaseNbOfPassangers){
-	sut->releaseSeat(3);
 	sut->increasePassangersNumber(3);
-	EXPECT_EQ(5, sut->getCapacity());
+	sut->releaseSeat(1);
+	EXPECT_EQ(2, sut->getNbOfPassangers());
 }
-
-
+TEST_F(testBus,increaseNbOfPassangersWhenAreNoFreeSeats){
+	sut->increasePassangersNumber(5);
+	sut->increasePassangersNumber(3);
+	EXPECT_EQ(5, sut->getNbOfPassangers());
+}
