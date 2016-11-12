@@ -2,10 +2,12 @@
 #include "Travel.hpp"
 #include <algorithm>
 #include "PheromonWeight.hpp"
+#include "IEltistAntSystem.hpp"
 
 class Node;
 
-class EltistAntSystem: public PheromonWeight
+class EltistAntSystem: public PheromonWeight, 
+					   public IEltistAntSystem
 {
 public:
     EltistAntSystem(){}
