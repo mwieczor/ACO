@@ -20,3 +20,8 @@ int Bus::getCapacity() const
 {
 	return mCapacity;
 }
+
+void Bus::increasePassangersNumber(int pPassangers)
+{
+	mCapacity +=pPassangers;
+}

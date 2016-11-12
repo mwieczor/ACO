@@ -12,6 +12,7 @@ public:
 	Coordinate getPosition() const override;
 	void releaseSeat(int );
 	int getCapacity() const;
+	void increasePassangersNumber(int );
 	
 private:
 	Coordinate mPosition;
