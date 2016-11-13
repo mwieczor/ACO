@@ -2,6 +2,8 @@
 
 #include <map>
 #include <string>
+#include <vector>
+#include <queue>
 
 struct Time
 {
@@ -24,12 +26,30 @@ struct Time
 	
 };
 
+struct Passanger{
+	Passanger(Time pTime, int pTimeWindow, std::string pStartStop, std::string pFinalStop):
+		mTime(pTime), mTimeWindow(pTimeWindow), mStartStop(pStartStop), mFinalStop(pFinalStop){}
+	
+	Time mTime;
+	int mTimeWindow;
+	std::string mStartStop;
+	std::string mFinalStop;
+	
+};
+	auto cmp = [](Passanger p1, Passanger p2){ return p1.mTime > p2.mTime ;};
+
 class Scheduler{
 public:
-	Scheduler(){}
+	Scheduler():
+	mPassangersList(cmp){}
 	void schedule(Time x, std::string y);
 	std::string getSchedule();
+	void addPassanger(Time, int, std::string, std::string);
+	std::string getPassanger();
+	
 	
 private:
 	std::map<Time, std::string> mSchedule;
+	std::vector<Passanger> mPassangers;
+	std::priority_queue<Passanger, std::vector<Passanger>, decltype (cmp)> mPassangersList;
 };
