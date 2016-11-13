@@ -27,3 +27,9 @@ TEST_F(TestScheduler, addPassagersToSchedule){
 
 	EXPECT_EQ("Second Stop", sut->getPassanger());
 }
+
+TEST_F(TestScheduler, addTwoPassagersAtTheSameTimeToSchedule){
+	sut->addPassanger(Time(3,12), 30, "First stop", "Second Stop");
+	sut->addPassanger(Time(3,12), 15, "First stop", "Third Stop");
+	EXPECT_EQ("Third Stop", sut->getPassanger());
+}

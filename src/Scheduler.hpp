@@ -36,7 +36,7 @@ struct Passanger{
 	std::string mFinalStop;
 	
 };
-	auto cmp = [](Passanger p1, Passanger p2){ return p1.mTime > p2.mTime ;};
+	auto cmp = [](Passanger p1, Passanger p2){ return p1.mTime > p2.mTime ||(p1.mTime ==p2.mTime && p1.mTimeWindow > p2.mTimeWindow);};
 
 class Scheduler{
 public:
