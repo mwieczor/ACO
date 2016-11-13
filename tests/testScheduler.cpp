@@ -11,5 +11,7 @@ public:
 };
 
 TEST_F(TestScheduler, createSchedule){
-	sut->schedule();
+	sut->schedule(Time(3,12), "First Stop");
+	sut->schedule(Time(3,11), "Second Stop");
+	EXPECT_EQ("Second Stop", sut->getSchedule());
 }
