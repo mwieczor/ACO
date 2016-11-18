@@ -20,9 +20,9 @@ std::string Scheduler::getPassanger()
 	return mPassangersList.top().mFinalStop;
 }
 
-std::string Scheduler::getPassangers()
+std::string Scheduler::getBusStop()
 {
-    return mPassangers[0].mFinalStop;
+    return mBusStop[0].mName;
 }
 void Scheduler::prepareDataForGraph()
 {

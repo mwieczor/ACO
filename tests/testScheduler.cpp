@@ -10,7 +10,8 @@ class TestScheduler: public testing::Test{
 public:
 	TestScheduler(){
         mBusMock = std::make_unique<::testing::NiceMock<MockBus>>();
-        sut = std::make_shared<Scheduler>(*mBusMock);
+        const std::vector<BusStop>& pBusStop = {{{5,6}, "FirstStop"}, {{7,8}, "Second Stop"}, {{7,9}, "Third Stop"}};
+        sut = std::make_shared<Scheduler>(*mBusMock, pBusStop);
 	}
     std::unique_ptr<::testing::NiceMock<MockBus>> mBusMock;
 	std::shared_ptr<Scheduler> sut;
@@ -21,6 +22,14 @@ TEST_F(TestScheduler, sortDataInSchedule){
 	sut->schedule(Time(3,12), "First Stop");
 	sut->schedule(Time(3,11), "Second Stop");
 	EXPECT_EQ("Second Stop", sut->getSchedule());
+}
+
+TEST_F(TestScheduler, findLastStopInTimeWindow)
+{
+    sut->schedule(Time(3,12), "First Stop");
+    sut->schedule(Time(3,11), "Second Stop");
+    sut->schedule(Time(3,41), "Third Stop");
+    EXPECT_EQ("Second Stop", sut->getSchedule());
 }
 
 TEST_F(TestScheduler, addPassagersToSchedule){

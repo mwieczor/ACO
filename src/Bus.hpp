@@ -38,7 +38,8 @@ struct Passenger{
 
 struct BusStop
 {
-  BusStop(){}
+  BusStop(Coordinate pStop, std::string pName):
+  mStop(pStop), mName(pName){}
   Coordinate mStop;
   std::string mName;
   bool isDamand =false;
