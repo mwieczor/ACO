@@ -42,7 +42,7 @@ struct BusStop
   mStop(pStop), mName(pName){}
   Coordinate mStop;
   std::string mName;
-  bool isDamand =false;
+  bool isDemand =false;
   std::vector<Passenger> mPassangersList;
 
 };

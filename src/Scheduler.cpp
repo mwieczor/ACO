@@ -1,23 +1,25 @@
 #include "Scheduler.hpp"
 
-void Scheduler::schedule(Time x, std::string y)
+void Scheduler::schedule()
 {
-	mSchedule.emplace(x,y);
+    prepareDataForGraph();
+//	mSchedule.emplace(x,y);
 }
 
 std::string Scheduler::getSchedule()
 {
-	return mSchedule.begin()->second;
+    auto temp = mBusStop[0];
+    return (temp.isDemand)? temp.mName: "None";
 }
 
 void Scheduler::addPassanger(Time pTime, int timeWindow, std::string pStartStop, std::string pFinalStop)
 {
-    mPassangersList.push(Passenger(pTime, timeWindow, pStartStop, pFinalStop));
+    mPassengersList.push_back(Passenger(pTime, timeWindow, pStartStop, pFinalStop));
 }
 
 std::string Scheduler::getPassanger()
 {
-	return mPassangersList.top().mFinalStop;
+    return mPassengersList[0].mFinalStop;
 }
 
 std::string Scheduler::getBusStop()
@@ -27,9 +29,10 @@ std::string Scheduler::getBusStop()
 void Scheduler::prepareDataForGraph()
 {
     auto lStartStop =mBus.getPosition();
-    //mPassangers.push_back(Passanger(mStartTime, 0, lStartStop, lStartStop));
-    auto lPass = mPassangersList.top();
+    //auto lFirstPassenger = mPassengersList.top();
     mStartTime.hour +=1;
+    findDemandStops();
+    signPassengerToStop();
 //    if(lPass.mTime >mStartTime){
 //    while (lPass.mTime < mStartTime) {
 //        mPassangersList.pop();
@@ -38,5 +41,22 @@ void Scheduler::prepareDataForGraph()
 //    }
 //    }
 //    else mStartTime.hour +=1;
+      mAntColony = std::make_unique<EltistAntSystem>(lStartStop, *mGraph);
+
+}
+
+void Scheduler::findDemandStops()
+{
+
+    for(auto p: mPassengersList)
+    {
+        auto searchStop = p.mStartStop;
+        auto it =std::find_if(std::begin(mBusStop), std::end(mBusStop), [&](BusStop s){return s.mName==searchStop;});
+        it->isDemand = true;
+    }
+}
+
+void Scheduler::signPassengerToStop()
+{
 
 }
