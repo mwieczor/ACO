@@ -51,8 +51,15 @@ void Scheduler::findDemandStops()
     for(auto p: mPassengersList)
     {
         auto searchStop = p.mStartStop;
-        auto it =std::find_if(std::begin(mBusStop), std::end(mBusStop), [&](BusStop s){return s.mName==searchStop;});
-        it->isDemand = true;
+        auto it =std::find_if(mBusStop.begin(), mBusStop.end(), [&](auto&& s){
+            return s.mName == searchStop;
+        });
+        if(it != mBusStop.end() )
+            it->isDemand = true;
+        //        for (auto k :mBusStop){
+        //            if(k.mName.compare(searchStop))
+        //                k.isDemand = true;
+        //        }
     }
 }
 

@@ -10,15 +10,15 @@ class TestScheduler: public testing::Test{
 public:
 	TestScheduler(){
         mBusMock = std::make_unique<::testing::NiceMock<MockBus>>();
-        const std::vector<BusStop>& pBusStop = {{{5,6}, "FirstStop"}, {{7,8}, "Second Stop"}, {{7,9}, "Third Stop"}};
+        const std::vector<BusStop>& pBusStop = {{{5,6}, "First Stop"}, {{7,8}, "Second Stop"}, {{7,9}, "Third Stop"}};
         sut = std::make_shared<Scheduler>(*mBusMock, pBusStop);
 	}
 
 
     void addPassangers(){
-        sut->addPassanger(Time(6,12), 30, "First stop", "Second Stop");
-        sut->addPassanger(Time(6,14), 30, "Second stop", "Third Stop");
-        sut->addPassanger(Time(6,15), 30, "First stop", "Second Stop");
+        sut->addPassanger(Time(6,12), 30, "First Stop", "Second Stop");
+        sut->addPassanger(Time(6,14), 30, "Second Stop", "Third Stop");
+        sut->addPassanger(Time(6,15), 30, "First Stop", "Second Stop");
     }
 
     std::unique_ptr<::testing::NiceMock<MockBus>> mBusMock;
