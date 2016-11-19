@@ -16,12 +16,12 @@ void Bus::releaseSeat(int pPassangers)
 	mPassangers -= pPassangers;
 }
 
-int Bus::getNbOfPassangers() const
+int Bus::getNbOfPassengers() const
 {
 	return mPassangers;
 }
 
-void Bus::increasePassangersNumber(int pPassangers)
+void Bus::increasePassengersNumber(int pPassangers)
 {
   if (areFreeSeatsInBus() && mPassangers + pPassangers <= mCapacity)
     mPassangers += pPassangers;

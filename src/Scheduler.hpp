@@ -24,10 +24,12 @@ public:
     std::string getBusStop();
 	
 	
+    void setStartTime(const Time &startTime);
+
 private:
     void prepareDataForGraph();
     void findDemandStops();
-    void signPassengerToStop();
+    void signPassengerToStop(std::vector<BusStop>::iterator it, Passenger&);
     std::unique_ptr<EltistAntSystem> mAntColony;
     std::shared_ptr<WeightGraph> mGraph;
     const IBus& mBus;

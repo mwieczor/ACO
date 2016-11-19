@@ -3,7 +3,7 @@
 #include "IBus.hpp"
 #include <vector>
 #include <string>
-#include <chrono>
+#include <ctime>
 
 struct Time
 {
@@ -19,10 +19,23 @@ struct Time
     {
         return hour>c1.hour || (hour==c1.hour && minute > c1.minute);
     }
+    bool operator>=(const Time& c1) const
+    {
+        return hour>=c1.hour || (hour==c1.hour && minute >= c1.minute);
+    }
+    bool operator<=(const Time& c1) const
+    {
+        return hour<=c1.hour || (hour==c1.hour && minute <= c1.minute);
+    }
     bool operator<(const Time& c1) const
     {
         return hour<c1.hour || (hour==c1.hour && minute < c1.minute);
     }
+    Time operator+(const Time& c1) const
+    {
+         return Time(hour +c1.hour, minute + c1.minute);
+    }
+
 
 };
 struct Passenger{
@@ -43,7 +56,10 @@ struct BusStop
   Coordinate mStop;
   std::string mName;
   bool isDemand =false;
-  std::vector<Passenger> mPassangersList;
+  std::vector<Passenger> mPassengersList;
+  void addPassengerToStop(Passenger p){
+      mPassengersList.push_back(p);
+  }
 
 };
 
@@ -55,8 +71,8 @@ public:
 	void ride(Coordinate) override;
 	Coordinate getPosition() const override;
 	void releaseSeat(int ) override;
-	int getNbOfPassangers() const override; //Is it nessesary?
-	void increasePassangersNumber(int ) override ;
+    int getNbOfPassengers() const override; //Is it nessesary?
+    void increasePassengersNumber(int ) override ;
 
 	
 private:

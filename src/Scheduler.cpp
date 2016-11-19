@@ -30,9 +30,8 @@ void Scheduler::prepareDataForGraph()
 {
     auto lStartStop =mBus.getPosition();
     //auto lFirstPassenger = mPassengersList.top();
-    mStartTime.hour +=1;
     findDemandStops();
-    signPassengerToStop();
+
 //    if(lPass.mTime >mStartTime){
 //    while (lPass.mTime < mStartTime) {
 //        mPassangersList.pop();
@@ -47,23 +46,26 @@ void Scheduler::prepareDataForGraph()
 
 void Scheduler::findDemandStops()
 {
-
     for(auto p: mPassengersList)
     {
         auto searchStop = p.mStartStop;
         auto it =std::find_if(mBusStop.begin(), mBusStop.end(), [&](auto&& s){
             return s.mName == searchStop;
         });
-        if(it != mBusStop.end() )
+        if(it != mBusStop.end() ){
             it->isDemand = true;
-        //        for (auto k :mBusStop){
-        //            if(k.mName.compare(searchStop))
-        //                k.isDemand = true;
-        //        }
+            signPassengerToStop(it, p);
+        }
     }
 }
 
-void Scheduler::signPassengerToStop()
+void Scheduler::signPassengerToStop(std::vector<BusStop>::iterator it, Passenger& p )
 {
+    if(p.mTime <= mStartTime && p.mTime+ Time(0,p.mTimeWindow) >= mStartTime )
+        it->addPassengerToStop(p);
+}
 
+void Scheduler::setStartTime(const Time &startTime)
+{
+    mStartTime = startTime;
 }

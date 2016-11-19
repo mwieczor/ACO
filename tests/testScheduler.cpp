@@ -39,9 +39,9 @@ TEST_F(TestScheduler, getBusStopForAddedPassangers){
 
 TEST_F(TestScheduler, findLastStopInTimeWindow)
 {
-//    sut->schedule(Time(3,12), "First Stop");
-//    sut->schedule(Time(3,11), "Second Stop");
-//    sut->schedule(Time(3,41), "Third Stop");
+    addPassangers();
+    sut->setStartTime(Time(6,13));
+    sut->schedule();
     EXPECT_EQ("Second Stop", sut->getSchedule());
 }
 

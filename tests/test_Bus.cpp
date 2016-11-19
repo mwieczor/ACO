@@ -21,27 +21,27 @@ TEST_F(testBus, checkBusPosition){
 
 TEST_F(testBus, checkBusCapacity)
 {
-	EXPECT_EQ(0, sut->getNbOfPassangers());
+    EXPECT_EQ(0, sut->getNbOfPassengers());
 }
 
 TEST_F(testBus, increaseNbOfPassangersWhenAreFreeSeats){
-	sut->increasePassangersNumber(3);
-	EXPECT_EQ(3, sut->getNbOfPassangers());
+    sut->increasePassengersNumber(3);
+    EXPECT_EQ(3, sut->getNbOfPassengers());
 }
 TEST_F(testBus, releaseSeat){
-	sut->increasePassangersNumber(3);
+    sut->increasePassengersNumber(3);
 	sut->releaseSeat(1);
-	EXPECT_EQ(2, sut->getNbOfPassangers());
+    EXPECT_EQ(2, sut->getNbOfPassengers());
 }
 TEST_F(testBus,increaseNbOfPassangersWhenAreNoFreeSeats){
-	sut->increasePassangersNumber(5);
-	sut->increasePassangersNumber(3);
-	EXPECT_EQ(5, sut->getNbOfPassangers());
+    sut->increasePassengersNumber(5);
+    sut->increasePassengersNumber(3);
+    EXPECT_EQ(5, sut->getNbOfPassengers());
 }
 TEST_F(testBus, increaseNbOfPassangersWhenIsSingleFreeSeat){
-	sut->increasePassangersNumber(4);
-	sut->increasePassangersNumber(3);
-	EXPECT_EQ(5, sut->getNbOfPassangers());
+    sut->increasePassengersNumber(4);
+    sut->increasePassengersNumber(3);
+    EXPECT_EQ(5, sut->getNbOfPassengers());
 }
 
 TEST_F(testBus, changeBusPosition){

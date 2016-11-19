@@ -10,6 +10,6 @@ public:
 	virtual void ride(Coordinate) =0;
 	virtual Coordinate getPosition() const =0;
 	virtual void releaseSeat(int) =0;
-	virtual int getNbOfPassangers() const =0; //Is it nessesary?
-	virtual void increasePassangersNumber(int) =0;
+	virtual int getNbOfPassengers() const =0; //Is it nessesary?
+	virtual void increasePassengersNumber(int) =0;
 };
