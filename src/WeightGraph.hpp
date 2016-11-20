@@ -24,4 +24,8 @@ private:
     int mNodesNumber;
 
 
+	
+	// IWeightGraph interface
+public:
+	void createGraph(std::vector<BusStop> &);
 };

@@ -1,6 +1,7 @@
 #include "WeightGraph.hpp"
 #include "Edge.hpp"
 #include <functional>
+#include "Bus.hpp"
 
 
 void WeightGraph::append(const Edge &mE)
@@ -46,7 +47,9 @@ std::vector<std::reference_wrapper<Edge>>  WeightGraph::searchNeighbours( Node m
             mNeighbours.push_back(std::ref(edge));
         }
     }
-    return mNeighbours; //warunek o braku sasiadow?
+	return mNeighbours; //warunek o braku sasiadow?
 }
 
-
+void WeightGraph::createGraph(std::vector<BusStop> &)
+{
+}

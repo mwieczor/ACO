@@ -2,13 +2,21 @@
 
 #include "WeightGraph.hpp"
 #include "Edge.hpp"
+#include "Bus.hpp"
 #include <memory>
 
 
 class TestWeightGraph: public testing::Test {
 public:
-    TestWeightGraph(){}
-    std::unique_ptr<IWeightGraph> sut = std::make_unique<WeightGraph>();
+    TestWeightGraph()
+	{
+		mBusStop =  {{{5, 6}, "First Stop"},
+					 {{7, 8}, "Second Stop"},
+					 {{7, 9}, "Third Stop"},
+					 {{9, 10}, "Fifth Stop"}};
+	}
+    std::unique_ptr<WeightGraph> sut = std::make_unique<WeightGraph>();
+	std::vector<BusStop> mBusStop;
     Edge edge1;
     Edge edge2;
 };
@@ -50,4 +58,8 @@ TEST_F(TestWeightGraph, searchEdge){
     sut->append(edge1);
     edge2.setNodes(Node(Coordinate(5,6)), Node(Coordinate(7,8)));
    // EXPECT_EQ(sut->edge(edge2), sut->at(0));
+}
+
+TEST_F(TestWeightGraph, createGraph){
+	sut->createGraph(mBusStop);
 }
