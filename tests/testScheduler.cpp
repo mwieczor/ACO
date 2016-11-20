@@ -9,10 +9,13 @@ using ::testing::Return;
 class TestScheduler: public testing::Test{
 public:
 	TestScheduler(){
-        mBusMock = std::make_unique<::testing::NiceMock<MockBus>>();
-        const std::vector<BusStop>& pBusStop = {{{5,6}, "First Stop"}, {{7,8}, "Second Stop"}, {{7,9}, "Third Stop"}};
-        sut = std::make_shared<Scheduler>(*mBusMock, pBusStop);
-	}
+          mBusMock = std::make_unique<::testing::NiceMock<MockBus>>();
+          const std::vector<BusStop> &pBusStop = {{{5, 6}, "First Stop"},
+                                                  {{7, 8}, "Second Stop"},
+                                                  {{7, 9}, "Third Stop"},
+                                                  {{9, 10}, "Fifth Stop"}};
+          sut = std::make_shared<Scheduler>(*mBusMock, pBusStop);
+        }
 
 
     void addPassangers(){
@@ -54,10 +57,18 @@ TEST_F(TestScheduler, noPassengersInParticularTimeWindow){
 
 }
 
+TEST_F(TestScheduler, passengersInParticularTimeWindow)
+{
+    addPassangers();
+    sut->setStartTime(Time(7,13));
+    sut->addPassanger(Time(7,20), 30, "Fifth Stop", "Second Stop");
+    sut->schedule();
+    EXPECT_EQ("Fifth Stop", sut->getSchedule());
+}
 TEST_F(TestScheduler, setStartStopAsADepot){
-    sut->addPassanger(Time(6,12), 30, "First stop", "Second Stop");
-    sut->addPassanger(Time(6,15), 15, "First stop", "Third Stop");
-   ON_CALL(*mBusMock, getPosition()).WillByDefault(Return(Coordinate(5,6)));
-   sut->schedule();
-   //EXPECT_EQ(sut->getPassangers(), "Second Stop");
+  addPassangers();
+  sut->setStartTime(Time(6, 0));
+  ON_CALL(*mBusMock, getPosition()).WillByDefault(Return(Coordinate(5, 6)));
+  sut->schedule();
+ // EXPECT_EQ(sut->getSchedule(), "Second Stop");
 }

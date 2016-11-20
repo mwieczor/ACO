@@ -3,6 +3,7 @@
 #include <boost/optional.hpp>
 #include <list>
 #include <utility>
+#include <random>
 
 class BestPosition{
 public:

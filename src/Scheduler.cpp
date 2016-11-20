@@ -8,8 +8,8 @@ void Scheduler::schedule()
 
 std::string Scheduler::getSchedule()
 {
-    auto temp = mBusStop[0];
-    return (temp.isDemand)? temp.mName: "No passengers in this time";
+	auto temp = std::find_if(mBusStop.begin(), mBusStop.end(), [](auto s) {return s.isDemand;});
+    return (temp!= mBusStop.end())? temp->mName: "No passengers in this time";
 }
 
 void Scheduler::addPassanger(Time pTime, int timeWindow, std::string pStartStop, std::string pFinalStop)
@@ -29,18 +29,8 @@ std::string Scheduler::getBusStop()
 void Scheduler::prepareDataForGraph()
 {
     auto lStartStop =mBus.getPosition();
-    //auto lFirstPassenger = mPassengersList.top();
     findDemandStops();
-
-//    if(lPass.mTime >mStartTime){
-//    while (lPass.mTime < mStartTime) {
-//        mPassangersList.pop();
-//        mPassangers.push_back(lPass);
-//        lPass = mPassangersList.top();
-//    }
-//    }
-//    else mStartTime.hour +=1;
-      mAntColony = std::make_unique<EltistAntSystem>(lStartStop, *mGraph);
+    mAntColony = std::make_unique<EltistAntSystem>(lStartStop, *mGraph);
 
 }
 
@@ -48,7 +38,7 @@ void Scheduler::findDemandStops()
 {
     for(auto p: mPassengersList)
     {
-        auto searchStop = p.mStartStop; //tu jest blad
+        auto searchStop = p.mStartStop; 
         auto it =std::find_if(mBusStop.begin(), mBusStop.end(), [&](auto&& s){
             return s.mName == searchStop;
         });
