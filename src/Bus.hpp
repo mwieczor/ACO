@@ -60,6 +60,10 @@ struct BusStop
   void addPassengerToStop(Passenger p){
       mPassengersList.push_back(p);
   }
+  bool operator==(const BusStop& c1) const
+  {
+	  return mStop==c1.mStop;
+  }
 
 };
 

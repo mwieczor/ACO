@@ -30,6 +30,7 @@ void Scheduler::prepareDataForGraph()
 {
     auto lStartStop =mBus.getPosition();
     findDemandStops();
+	mGraph->createGraph(mBusStop);
     mAntColony = std::make_unique<EltistAntSystem>(lStartStop, *mGraph);
 
 }

@@ -13,7 +13,7 @@
 
 class Scheduler{
 public:
-    Scheduler(const IBus& pBus, auto pBusStop):
+    Scheduler(const IBus& pBus, auto& pBusStop):
     mBus(pBus), mStartTime(0,0),mBusStop(pBusStop) {
         mGraph = std::make_shared<WeightGraph>();
     }
@@ -34,7 +34,7 @@ private:
     std::shared_ptr<WeightGraph> mGraph;
     const IBus& mBus;
 	std::map<Time, std::string> mSchedule;
-    std::vector<BusStop> mBusStop;
+    std::vector<BusStop>& mBusStop;
     std::vector<Passenger>  mPassengersList;
     int mTimePeriod;
     Time mStartTime;
