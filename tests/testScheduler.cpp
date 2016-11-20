@@ -18,7 +18,7 @@ public:
     void addPassangers(){
         sut->addPassanger(Time(6,12), 30, "First Stop", "Second Stop");
         sut->addPassanger(Time(6,14), 30, "Second Stop", "Third Stop");
-        sut->addPassanger(Time(6,15), 30, "First Stop", "Second Stop");
+        sut->addPassanger(Time(6,15), 30, "Third Stop", "Second Stop");
     }
 
     std::unique_ptr<::testing::NiceMock<MockBus>> mBusMock;
@@ -28,29 +28,29 @@ public:
 
 TEST_F(TestScheduler, addPassagersToSchedule){
     addPassangers();
+        sut->setStartTime(Time(6,00));
     EXPECT_EQ("Second Stop", sut->getPassanger());
 }
 
 TEST_F(TestScheduler, getBusStopForAddedPassangers){
     addPassangers();
+    sut->setStartTime(Time(6,00));
     sut->schedule();
     EXPECT_EQ("First Stop", sut->getSchedule());
 }
 
-TEST_F(TestScheduler, findLastStopInTimeWindow)
+TEST_F(TestScheduler, addPassengersWithWrongBusStop)
 {
     addPassangers();
-    sut->setStartTime(Time(6,13));
+    sut->setStartTime(Time(7,13));
+    sut->addPassanger(Time(7,20), 30, "Fourth Stop", "Second Stop");
     sut->schedule();
-    EXPECT_EQ("Second Stop", sut->getSchedule());
+    EXPECT_EQ("No passengers in this time", sut->getSchedule());
 }
 
-
-
-TEST_F(TestScheduler, addTwoPassagersAtTheSameTimeToSchedule){
-	sut->addPassanger(Time(3,12), 30, "First stop", "Second Stop");
-	sut->addPassanger(Time(3,12), 15, "First stop", "Third Stop");
-	EXPECT_EQ("Third Stop", sut->getPassanger());
+TEST_F(TestScheduler, noPassengersInParticularTimeWindow){
+    sut->schedule();
+    EXPECT_EQ("No passengers in this time", sut->getSchedule());
 
 }
 

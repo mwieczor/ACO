@@ -9,7 +9,7 @@ void Scheduler::schedule()
 std::string Scheduler::getSchedule()
 {
     auto temp = mBusStop[0];
-    return (temp.isDemand)? temp.mName: "None";
+    return (temp.isDemand)? temp.mName: "No passengers in this time";
 }
 
 void Scheduler::addPassanger(Time pTime, int timeWindow, std::string pStartStop, std::string pFinalStop)
@@ -48,21 +48,23 @@ void Scheduler::findDemandStops()
 {
     for(auto p: mPassengersList)
     {
-        auto searchStop = p.mStartStop;
+        auto searchStop = p.mStartStop; //tu jest blad
         auto it =std::find_if(mBusStop.begin(), mBusStop.end(), [&](auto&& s){
             return s.mName == searchStop;
         });
         if(it != mBusStop.end() ){
-            it->isDemand = true;
             signPassengerToStop(it, p);
         }
     }
 }
 
-void Scheduler::signPassengerToStop(std::vector<BusStop>::iterator it, Passenger& p )
+void Scheduler::signPassengerToStop(std::vector<BusStop>::iterator& it, Passenger& p )
 {
-    if(p.mTime <= mStartTime && p.mTime+ Time(0,p.mTimeWindow) >= mStartTime )
+    if(p.mTime <= mStartTime &&( (p.mTime+ Time(0,p.mTimeWindow) )>= mStartTime) )
+    {
         it->addPassengerToStop(p);
+        it->isDemand = true;
+    }
 }
 
 void Scheduler::setStartTime(const Time &startTime)
