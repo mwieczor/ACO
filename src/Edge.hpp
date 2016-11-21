@@ -24,9 +24,9 @@ private:
 class Edge: public IEdge{
 public:
     Edge():
-        mWeight(){}///NOTE jaka wartosc poczatkowa feromonu?
+        mWeight(0){}///NOTE jaka wartosc poczatkowa feromonu?
     Edge(Node start, Node end):
-        mStartNode(start), mEndNode(end), mWeight(){} //do testow
+        mStartNode(start), mEndNode(end), mWeight(0){} //do testow
     Edge(Node start, Node end, int lenght, Weight mW):
         mStartNode(start), mEndNode(end), mWeight(mW), mlenght(lenght){}
     void setNodes(Node first, Node second);

@@ -50,6 +50,7 @@ std::vector<std::reference_wrapper<Edge>>  WeightGraph::searchNeighbours( Node m
 	return mNeighbours; //warunek o braku sasiadow?
 }
 
-void WeightGraph::createGraph(std::vector<BusStop> &)
+void WeightGraph::createGraph(std::vector<BusStop> & pBusStop)
 {
+
 }
