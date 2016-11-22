@@ -59,6 +59,7 @@ TEST_F(TestWeightGraph, searchEdge){
 }
 
 TEST_F(TestWeightGraph, createGraph){
+    mBusStop[0].isDemand= true;
 	sut->createGraph(mBusStop);
-    //EXPECT_EQ()
+    EXPECT_TRUE(sut->searchNode(mBusStop[0].mStop).isDemand);
 }

@@ -16,6 +16,13 @@ Node Edge::startNode() const
     return mStartNode;
 }
 
+Node &Edge::getNode(Node pN)
+{
+    if(pN== mStartNode)
+        return mStartNode;
+    else return mEndNode;
+}
+
 void Edge::setWeight(const Weight &weight)
 {
     mWeight = weight;

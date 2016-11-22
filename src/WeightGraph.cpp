@@ -20,7 +20,7 @@ bool WeightGraph::isEdgeInGraph(const Edge &mE) const
     }
     return false;
 }
- void WeightGraph::changeEdgeWeight(Node mN1, Node mN2, double weight) ///SO WRONG
+ void WeightGraph::changeEdgeWeight(Node mN1, Node mN2, double weight)
 {
      for(auto& edge:*this){
          if(edge.hasNode(mN1) && edge.hasNode(mN2)){
@@ -30,7 +30,7 @@ bool WeightGraph::isEdgeInGraph(const Edge &mE) const
 
  }
 
- Edge &WeightGraph::edge(Node mN1, Node mN2) /// It doesn't work properly if there will be one-way road
+ Edge &WeightGraph::edge(Node mN1, Node mN2)
  {
      for(auto& edge:*this){
          if(edge.hasNode(mN1) && edge.hasNode(mN2)){
@@ -38,6 +38,7 @@ bool WeightGraph::isEdgeInGraph(const Edge &mE) const
          }
      }
  }
+
 
 std::vector<std::reference_wrapper<Edge>>  WeightGraph::searchNeighbours( Node mN)
 {
@@ -47,10 +48,24 @@ std::vector<std::reference_wrapper<Edge>>  WeightGraph::searchNeighbours( Node m
             mNeighbours.push_back(std::ref(edge));
         }
     }
-	return mNeighbours; //warunek o braku sasiadow?
+    return mNeighbours; //warunek o braku sasiadow?
+}
+
+Node& WeightGraph::searchNode(Node pN)
+{
+    for(auto& edge:*this){
+             if(edge.hasNode(pN)){
+                  return edge.getNode(pN);
+             }
+         }
 }
 
 void WeightGraph::createGraph(std::vector<BusStop> & pBusStop)
 {
-
+    for(auto s: pBusStop){
+        if(s.isDemand){
+            auto& temp = searchNode(s.mStop);
+            temp.isDemand = true;
+        }
+    }
 }

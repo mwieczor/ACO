@@ -15,6 +15,8 @@ public:
     void changeEdgeWeight(Node mN1, Node mN2, double weight);
     Edge& edge(Node mN1, Node mN2);
     std::vector<std::reference_wrapper<Edge> > searchNeighbours(Node mN);
+    Node &searchNode(Node pN);
+
 
 private:
 

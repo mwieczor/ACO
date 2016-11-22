@@ -15,6 +15,7 @@ public:
     }
 
     Coordinate coordinate() const;
+    bool isDemand = false;
 
 private:
     Coordinate mCoordinate;

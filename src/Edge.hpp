@@ -39,7 +39,7 @@ public:
     Node endNode() const;
 
     Node startNode() const;
-
+    Node &getNode(Node pN);
     void setWeight(const Weight &weight);
     void incrementWeight(const double &mW);
 
