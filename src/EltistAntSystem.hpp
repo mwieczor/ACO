@@ -11,11 +11,13 @@ class EltistAntSystem: public PheromonWeight,
 {
 public:
     EltistAntSystem(){}
-    EltistAntSystem(Node mStart, WeightGraph &mG):
-    startCity(mStart), mGraph(mG){}
-    void generateRoute();
+    EltistAntSystem(Node mStart, Node pFinalCity, WeightGraph &mG):
+    startCity(mStart),finalCity(pFinalCity), mGraph(mG){
+		createAntColony();
+		generateRoute();
+	}
     double getRouteLenght();
-    void createAntColony();
+
 
     Node getFinalCity() const;
 
@@ -23,10 +25,11 @@ public:
 
 private:
     bool isFinalCity();
-
-    WeightGraph mGraph;
+	void createAntColony();
+	void generateRoute();
     Node startCity;
     Node finalCity;
+	WeightGraph mGraph;
     double weight =0.1;
     void leaveAdditionalPheromon(Node lastNode, Node mN2);
     std::vector <std::pair<Ant, double>> mAntColony;

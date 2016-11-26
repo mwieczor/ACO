@@ -25,16 +25,13 @@ public:
         graph->append(edge2);
         graph->append(edge3);
         graph->append(edge4);
-        sut = std::make_shared<EltistAntSystem> (Node(Coordinate(5,6)), *graph);
+		sut = std::make_shared<EltistAntSystem> (Node(Coordinate(5,6)),Node(Coordinate(8,10)), *graph );
     }
 };
 
 
 TEST_F(testTravel, generateRoute){
     buildTest();
-    sut->createAntColony();
-    sut->setFinalCity(Node(Coordinate(8,10)));
-    sut->generateRoute();
     EXPECT_EQ(sut->getRouteLenght(), 15);
 }
 
@@ -48,11 +45,7 @@ TEST_F(testTravel, graphWithEqualWeigh)
     graph->append(edge2);
     graph->append(edge3);
     graph->append(edge4);
-    sut = std::make_shared<EltistAntSystem> (Node(Coordinate(5,6)), *graph);
-
-    sut->createAntColony();
-    sut->setFinalCity(Node(Coordinate(8,10)));
-    sut->generateRoute();
+    sut = std::make_shared<EltistAntSystem> (Node(Coordinate(5,6)),Node(Coordinate(8,10)), *graph );
     EXPECT_EQ(sut->getRouteLenght(), 15);
 }
 
@@ -66,10 +59,6 @@ TEST_F(testTravel, graphWithTwoEqualPathLenghtAndDifWeight)
     graph->append(edge2);
     graph->append(edge3);
     graph->append(edge4);
-    sut = std::make_shared<EltistAntSystem> (Node(Coordinate(5,6)), *graph);
-
-    sut->createAntColony();
-    sut->setFinalCity(Node(Coordinate(8,10)));
-    sut->generateRoute();
+	sut = std::make_shared<EltistAntSystem> (Node(Coordinate(5,6)),Node(Coordinate(8,10)), *graph );
     EXPECT_EQ(sut->getRouteLenght(), 13);
 }

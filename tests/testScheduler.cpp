@@ -21,6 +21,7 @@ public:
 		  mWeighGraphMock = std::make_unique<::testing::NiceMock<MockWeighGraph>>();
 		  mEltistAntSystemMock =  std::make_unique<::testing::NiceMock<MockEltistAntSystem>>();
           sut = std::make_shared<Scheduler>(*mBusMock, *pBusStop);
+
           //EXPECT_CALL(*mWeighGraphMock, createGraph(*pBusStop));
         }
 
@@ -43,13 +44,14 @@ public:
 
 TEST_F(TestScheduler, addPassagersToSchedule){
     addPassangers();
-        sut->setStartTime(Time(6,00));
+    sut->setStartTime(Time(6,00));
     EXPECT_EQ("Second Stop", sut->getPassanger());
 }
 
 TEST_F(TestScheduler, getBusStopForAddedPassangers){
     addPassangers();
     sut->setStartTime(Time(6,00));
+	ON_CALL(*mEltistAntSystemMock, generateRoute()).WillByDefault(Return());	
     sut->schedule();
     EXPECT_EQ("First Stop", sut->getSchedule());
 }
