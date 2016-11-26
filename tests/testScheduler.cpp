@@ -4,6 +4,8 @@
 #include "Scheduler.hpp"
 #include "MockBus.cpp"
 #include "MockWeightGraph.hpp"
+#include "MockEltistAntSystem.hpp"
+
 
 using ::testing::Return;
 
@@ -17,6 +19,7 @@ public:
 					   {{9, 10}, "Fifth Stop"}};
           pBusStop =std::make_shared<std::vector<BusStop>>(temp);
 		  mWeighGraphMock = std::make_unique<::testing::NiceMock<MockWeighGraph>>();
+		  mEltistAntSystemMock =  std::make_unique<::testing::NiceMock<MockEltistAntSystem>>();
           sut = std::make_shared<Scheduler>(*mBusMock, *pBusStop);
           //EXPECT_CALL(*mWeighGraphMock, createGraph(*pBusStop));
         }
@@ -31,7 +34,9 @@ public:
     std::unique_ptr<::testing::NiceMock<MockBus>> mBusMock;
 	std::shared_ptr<std::vector<BusStop>> pBusStop;
 	std::unique_ptr<::testing::NiceMock<MockWeighGraph>> mWeighGraphMock;
+	std::unique_ptr<::testing::NiceMock<MockEltistAntSystem>> mEltistAntSystemMock;
 	std::shared_ptr<Scheduler> sut;
+	
 
 
 };

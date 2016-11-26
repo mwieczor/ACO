@@ -3,7 +3,7 @@
 void Scheduler::schedule()
 {
     prepareDataForGraph();
-    //mAntColony->generateRoute();
+    mAntColony->generateRoute();
 }
 
 std::string Scheduler::getSchedule()
