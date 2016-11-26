@@ -3,6 +3,9 @@
 void Scheduler::schedule()
 {
     prepareDataForGraph();
+	//mAntColony = std::make_unique<EltistAntSystem>(lStartStop, lFinalCity, *mGraph);
+	auto lRawSchedule = mAntColony->getCalculateRoute();
+	calculateSchedule();
 }
 
 std::string Scheduler::getSchedule()
@@ -31,10 +34,6 @@ void Scheduler::prepareDataForGraph()
 	auto lFinalCity = Coordinate(5,6);
     findDemandStops();
     mGraph->createGraph(mBusStop);
-    //mAntColony = std::make_unique<EltistAntSystem>(lStartStop, lFinalCity, *mGraph);
-	mAntColony->getCalculateRoute();
-	
-
 }
 
 void Scheduler::findDemandStops()
@@ -57,7 +56,12 @@ void Scheduler::signPassengerToStop(std::vector<BusStop>::iterator& it, Passenge
     {
         it->addPassengerToStop(p);
         it->isDemand = true;
-    }
+	}
+}
+
+void Scheduler::calculateSchedule()
+{
+	
 }
 
 void Scheduler::setStartTime(const Time &startTime)

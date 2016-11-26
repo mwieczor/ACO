@@ -26,20 +26,31 @@ double  EltistAntSystem::getRouteLenght()
 {
     std::unique_ptr<Ant> test =  std::make_unique<Ant> (startCity);
     routeLenght=0;
+	mRoute.push_back(
+		{test->position().coordinate(),0});
             while(test->position()!=finalCity){
-                test->positionToString();
-                test->moveAnt(mGraph.searchNeighbours(test->position()));/// TODO do sth with getBest position from ANT
-                if(test->getLastPosition() != test->position())
-                    routeLenght+=mGraph.edge(test->getLastPosition(), test->position()).getLenght();
+              test->positionToString();
+              test->moveAnt(mGraph.searchNeighbours(
+                  test->position())); /// TODO do sth with getBest position from
+                                      /// ANT
+              if (test->getLastPosition() != test->position())
+                routeLenght +=
+                    mGraph.edge(test->getLastPosition(), test->position())
+                        .getLenght();
+			  mRoute.push_back(
+                  {test->position().coordinate(),
+                   mGraph.edge(test->getLastPosition(), test->position())
+                       .getLenght()});
 
             }
 			return routeLenght;
 }
 
-std::vector<Coordinate> EltistAntSystem::getCalculateRoute()
+std::vector<std::pair<Coordinate, int>> EltistAntSystem::getCalculateRoute()
 {
 	createAntColony();
 	generateRoute();
+	getRouteLenght();
 	return mRoute;
 	
 }

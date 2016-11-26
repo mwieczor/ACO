@@ -7,5 +7,5 @@ public:
 	MOCK_CONST_METHOD0(getFinalCity, Node());
 	MOCK_METHOD1(setFinalCity, void (const Node &));
 	MOCK_METHOD0(getRouteLenght, double());
-	MOCK_METHOD0(getCalculateRoute, std::vector<Coordinate>());
+	MOCK_METHOD0(getCalculateRoute, std::vector<std::pair<Coordinate, int>>());
 };

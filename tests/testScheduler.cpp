@@ -35,7 +35,13 @@ public:
     EXPECT_CALL(*mWeighGraphMock, createGraph(*pBusStop))
         .WillRepeatedly(Return());
     EXPECT_CALL(*mEltistAntSystemMock, getCalculateRoute())
-        .WillRepeatedly(Return(std::vector<Coordinate>()));
+        .WillRepeatedly(Return(mRawSchedule));
+  }
+  void createRawSchedule(){
+	  mRawSchedule.push_back({{9,10}, 0});
+	  mRawSchedule.push_back({{7,8}, 5});
+	  mRawSchedule.push_back({{7,9},2});
+	  mRawSchedule.push_back({{5,6},2});
   }
 
   std::unique_ptr<::testing::NiceMock<MockBus>> mBusMock;
@@ -43,6 +49,7 @@ public:
   std::shared_ptr<::testing::NiceMock<MockWeighGraph>> mWeighGraphMock;
   std::shared_ptr<::testing::StrictMock<MockEltistAntSystem>>
       mEltistAntSystemMock;
+  std::vector<std::pair<Coordinate,int>> mRawSchedule;
   std::shared_ptr<Scheduler> sut;
 };
 
@@ -84,10 +91,11 @@ TEST_F(TestScheduler, passengersInParticularTimeWindow) {
   sut->schedule();
   EXPECT_EQ("Fifth Stop", sut->getSchedule());
 }
-TEST_F(TestScheduler, proccedGeneratetRoute) {
+TEST_F(TestScheduler, proccedGeneratedRoute) {
   setExpectation();
   addPassangers();
   sut->setStartTime(Time(6, 0));
   ON_CALL(*mBusMock, getPosition()).WillByDefault(Return(Coordinate(9, 10)));
+  createRawSchedule();
   sut->schedule();
 }

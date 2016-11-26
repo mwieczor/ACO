@@ -15,7 +15,7 @@ public:
 
 	}
     double getRouteLenght();
-	std::vector<Coordinate> getCalculateRoute();
+	std::vector<std::pair<Coordinate, int>> getCalculateRoute();
     Node getFinalCity() const;
 
     void setFinalCity(const Node &value);
@@ -32,5 +32,5 @@ private:
     std::vector <std::pair<Ant, double>> mAntColony;
      size_t colonySize =10;
      double routeLenght;
-	 std::vector<Coordinate> mRoute;
+	 std::vector<std::pair<Coordinate, int>> mRoute;
 };

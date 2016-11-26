@@ -12,7 +12,7 @@ public:
     IEltistAntSystem(){}
 	virtual ~IEltistAntSystem() = default;
     virtual double getRouteLenght() =0;
-	virtual std::vector<Coordinate> getCalculateRoute() =0;
+	virtual std::vector<std::pair<Coordinate, int>> getCalculateRoute() =0;
 	virtual Node getFinalCity() const =0;
     virtual void setFinalCity(const Node &value) =0;
 };

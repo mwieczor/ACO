@@ -29,6 +29,8 @@ private:
     void prepareDataForGraph();
     void findDemandStops();
     void signPassengerToStop(std::vector<BusStop>::iterator &it, Passenger&);
+	void calculateSchedule();
+	
     std::shared_ptr<IEltistAntSystem> mAntColony;
     std::shared_ptr<IWeightGraph> mGraph;
     const IBus& mBus;
