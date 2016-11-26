@@ -9,7 +9,7 @@ public:
 };
 
 
-TEST_F(TestCoordinate, appendCoordinate){
+TEST_F(TestCoordinate, push_backCoordinate){
     sut.setX(5);
     sut.setY(6);
     EXPECT_EQ(sut.x(), 5); // czy jest sens?

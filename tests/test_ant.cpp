@@ -25,7 +25,7 @@ public:
 
 
 TEST_F(TestAnt, moveAntOneNode){
-    graph.append(edge1);
+    graph.push_back(edge1);
     sut->moveAnt(graph.searchNeighbours(sut->position()));
     EXPECT_EQ(sut->position(),Node(Coordinate(7,8)));
     sut->moveAnt(graph.searchNeighbours(Node(Coordinate(7,8))));
@@ -34,8 +34,8 @@ TEST_F(TestAnt, moveAntOneNode){
 
 
 TEST_F(TestAnt, moveAntTwoEdges){
-    graph.append(edge1);
-    graph.append(edge3);
+    graph.push_back(edge1);
+    graph.push_back(edge3);
     sut->moveAnt(graph.searchNeighbours(sut->position()));
     EXPECT_EQ(sut->position(),Node(Coordinate(7,8)));
     sut->moveAnt(graph.searchNeighbours(sut->position()));
@@ -43,26 +43,26 @@ TEST_F(TestAnt, moveAntTwoEdges){
 }
 
 TEST_F(TestAnt, moveAntSameEdges){ //czy zakladamy ze taka sytuacji nie wystapi?
-    graph.append(edge1);
+    graph.push_back(edge1);
     edge3.setNodes(Node(Coordinate(5,6)), Node(Coordinate(7,8)));
-    graph.append(edge3);
+    graph.push_back(edge3);
     sut->moveAnt(graph.searchNeighbours(sut->position()));
     EXPECT_EQ(sut->position(),Node(Coordinate(7,8)));
 }
 
 TEST_F(TestAnt, moveAnt){
-    graph.append(edge1);
-    graph.append(edge2);
-    graph.append(edge3);
-    graph.append(edge4);
-    graph.append(edge5);
+    graph.push_back(edge1);
+    graph.push_back(edge2);
+    graph.push_back(edge3);
+    graph.push_back(edge4);
+    graph.push_back(edge5);
     ///TODO FIRST! sth wrong with search neighbours!
     sut->moveAnt(graph.searchNeighbours(sut->position()));
    EXPECT_EQ(sut->position(),Node({7,9}));
 }
 
 //TEST_F(TestAnt, increaseWeight){ //czy zakladamy ze taka sytuacji nie wystapi?
-//    graph.append(edge1);
+//    graph.push_back(edge1);
 //    sut->setPosition(Node(Coordinate(5,6)));
 //    edge1.setWeight(Weight(1));
 //    sut->moveAnt(graph.searchNeighbours(sut->position()));

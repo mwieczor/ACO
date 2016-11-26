@@ -19,7 +19,7 @@ public:
 };
 
 //TEST_F(TestPheromonWeight, changeWeight){
-//    graph.append(edge1);
+//    graph.push_back(edge1);
 //    ant1.setPosition(Node(Coordinate(5,6)));
 //    ant1.moveAnt(graph.searchNeighbours(Node(Coordinate(5,6))));
 //    sut.leavePheromon(graph, ant1.getBestPosition());
@@ -27,7 +27,7 @@ public:
 //}
 
 //TEST_F(TestPheromonWeight, vanishPheromon){
-//    graph.append(edge1);
+//    graph.push_back(edge1);
 //    sut.evaporatePheromon(graph);
 //    EXPECT_EQ(graph[0].getWeight(), 0.95);
 //}

@@ -21,10 +21,10 @@ public:
         edge2= Edge(Node(Coordinate(5,6)), Node(Coordinate(7,9)), 3, Weight(0.33));
         edge3= Edge(Node(Coordinate(7,8)), Node(Coordinate(8,10)), 10, Weight(0.1));
         edge4= Edge(Node(Coordinate(7,9)), Node(Coordinate(8,10)), 15, Weight(0.06));
-        graph->append(edge1);
-        graph->append(edge2);
-        graph->append(edge3);
-        graph->append(edge4);
+        graph->push_back(edge1);
+        graph->push_back(edge2);
+        graph->push_back(edge3);
+        graph->push_back(edge4);
 		sut = std::make_shared<EltistAntSystem> (Node(Coordinate(5,6)),Node(Coordinate(8,10)), *graph );
     }
 };
@@ -41,10 +41,10 @@ TEST_F(testTravel, graphWithEqualWeigh)
     edge2= Edge(Node(Coordinate(5,6)), Node(Coordinate(7,9)), 3, Weight(0.1));
     edge3= Edge(Node(Coordinate(7,8)), Node(Coordinate(8,10)), 10, Weight(0.1));
     edge4= Edge(Node(Coordinate(7,9)), Node(Coordinate(8,10)), 15, Weight(0.1));
-    graph->append(edge1);
-    graph->append(edge2);
-    graph->append(edge3);
-    graph->append(edge4);
+    graph->push_back(edge1);
+    graph->push_back(edge2);
+    graph->push_back(edge3);
+    graph->push_back(edge4);
     sut = std::make_shared<EltistAntSystem> (Node(Coordinate(5,6)),Node(Coordinate(8,10)), *graph );
     EXPECT_EQ(sut->getRouteLenght(), 15);
 }
@@ -55,10 +55,10 @@ TEST_F(testTravel, graphWithTwoEqualPathLenghtAndDifWeight)
     edge2= Edge(Node(Coordinate(5,6)), Node(Coordinate(7,9)), 3, Weight(0.7));
     edge3= Edge(Node(Coordinate(7,8)), Node(Coordinate(8,10)), 10, Weight(0.1));
     edge4= Edge(Node(Coordinate(7,9)), Node(Coordinate(8,10)), 15, Weight(0.1));
-    graph->append(edge1);
-    graph->append(edge2);
-    graph->append(edge3);
-    graph->append(edge4);
+    graph->push_back(edge1);
+    graph->push_back(edge2);
+    graph->push_back(edge3);
+    graph->push_back(edge4);
 	sut = std::make_shared<EltistAntSystem> (Node(Coordinate(5,6)),Node(Coordinate(8,10)), *graph );
     EXPECT_EQ(sut->getRouteLenght(), 13);
 }

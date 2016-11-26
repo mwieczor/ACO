@@ -20,8 +20,8 @@ public:
 
     void addEdges(){
         WeightGraph wG;
-        wG.append(Edge(Node(Coordinate(5,6)), Node(Coordinate(7,8))));
-        wG.append(Edge(Node(Coordinate(5,6)), Node(Coordinate(7,9))));
+        wG.push_back(Edge(Node(Coordinate(5,6)), Node(Coordinate(7,8))));
+        wG.push_back(Edge(Node(Coordinate(5,6)), Node(Coordinate(7,9))));
         sut = std::make_unique<WeightGraph>(wG);
     }
 
@@ -30,15 +30,10 @@ public:
     Edge edge1;
     Edge edge2;
 };
-TEST_F(TestWeightGraph, appendEdges){
+TEST_F(TestWeightGraph, push_backEdges){
     EXPECT_EQ(sut->size(), 2);
     edge2.setNodes(Node(Coordinate(5,6)), Node(Coordinate(7,8)));
     EXPECT_EQ(sut->at(0), edge2);
-}
-TEST_F(TestWeightGraph, isEdgeInGraph){
-    edge1.setNodes(Node(Coordinate(5,6)), Node(Coordinate(7,8)));
-    EXPECT_TRUE(sut->isEdgeInGraph(edge1));
-    EXPECT_FALSE(sut->isEdgeInGraph(edge2));
 }
 
 TEST_F(TestWeightGraph, searchNeighbours){
@@ -61,5 +56,5 @@ TEST_F(TestWeightGraph, searchEdge){
 TEST_F(TestWeightGraph, createGraph){
     mBusStop[0].isDemand= true;
 	sut->createGraph(mBusStop);
-    EXPECT_TRUE(sut->searchNode(mBusStop[0].mStop).isDemand);
+    EXPECT_TRUE(sut->at(0).startNode().isDemand);
 }
