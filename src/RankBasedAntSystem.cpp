@@ -21,7 +21,7 @@ void RankBasedAntSystem::generateRoute()
     while(!isFinalCity());
 }
 
-void RankBasedAntSystem::leavePheromon(WeightGraph &mGraph, Node lastNode, Node position, double weight)
+void RankBasedAntSystem::leavePheromon(IWeightGraph &mGraph, Node lastNode, Node position, double weight)
 {
       weight= 1/mGraph.edge(lastNode, position).getLenght();
       mGraph.changeEdgeWeight(lastNode, position, weight);

@@ -26,13 +26,13 @@ void MMASAntSystem::generateRoute()
     while(!isFinalCity());
 }
 
-void MMASAntSystem::leavePheromon(WeightGraph &mGraph, Node lastNode, Node position, double w)
+void MMASAntSystem::leavePheromon(IWeightGraph & mGraph, Node lastNode, Node position, double w)
 {
     static double maxWeight=0.1;/// TODO search initial level of weight
     mGraph.changeEdgeWeight(lastNode, position, maxWeight);
 }
 
-void MMASAntSystem::evaporatePheromon(WeightGraph &mGraph)
+void MMASAntSystem::evaporatePheromon(IWeightGraph & mGraph)
 {
     for(auto& edge:mGraph){
         if(edge.getWeight()>minWeight)

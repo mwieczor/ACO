@@ -13,7 +13,6 @@ public:
 
     PheromonWeight sut;
     Ant ant1;
-    WeightGraph graph;
     Edge edge1;
     Edge edge2;
 };

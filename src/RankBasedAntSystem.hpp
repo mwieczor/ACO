@@ -14,5 +14,5 @@ public:
 
      // PheromonWeight interface
 protected:
-     void leavePheromon(WeightGraph &mGraph, Node lastNode, Node position, double weight) override;
+     void leavePheromon(IWeightGraph &mGraph, Node lastNode, Node position, double weight) override;
 };

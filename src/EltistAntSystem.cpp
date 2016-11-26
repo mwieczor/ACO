@@ -33,7 +33,15 @@ double  EltistAntSystem::getRouteLenght()
                     routeLenght+=mGraph.edge(test->getLastPosition(), test->position()).getLenght();
 
             }
-    return routeLenght;
+			return routeLenght;
+}
+
+std::vector<Coordinate> EltistAntSystem::getCalculateRoute()
+{
+	createAntColony();
+	generateRoute();
+	return mRoute;
+	
 }
 
 void EltistAntSystem::createAntColony()

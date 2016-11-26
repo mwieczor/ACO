@@ -32,6 +32,7 @@ public:
 
 TEST_F(testTravel, generateRoute){
     buildTest();
+	auto l = sut->getCalculateRoute();
     EXPECT_EQ(sut->getRouteLenght(), 15);
 }
 
@@ -46,6 +47,7 @@ TEST_F(testTravel, graphWithEqualWeigh)
     graph->push_back(edge3);
     graph->push_back(edge4);
     sut = std::make_shared<EltistAntSystem> (Node(Coordinate(5,6)),Node(Coordinate(8,10)), *graph );
+	auto l = sut->getCalculateRoute();
     EXPECT_EQ(sut->getRouteLenght(), 15);
 }
 
@@ -60,5 +62,6 @@ TEST_F(testTravel, graphWithTwoEqualPathLenghtAndDifWeight)
     graph->push_back(edge3);
     graph->push_back(edge4);
 	sut = std::make_shared<EltistAntSystem> (Node(Coordinate(5,6)),Node(Coordinate(8,10)), *graph );
+	auto l = sut->getCalculateRoute();
     EXPECT_EQ(sut->getRouteLenght(), 13);
 }

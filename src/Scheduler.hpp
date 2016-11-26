@@ -13,10 +13,8 @@
 
 class Scheduler{
 public:
-    Scheduler(const IBus& pBus, auto& pBusStop):
-    mBus(pBus), mStartTime(0,0),mBusStop(pBusStop) {
-        mGraph = std::make_shared<WeightGraph>();
-		mAntColony = std::make_unique<EltistAntSystem>();
+    Scheduler(const IBus& pBus, auto& pBusStop, std::shared_ptr<IWeightGraph> pGraph, std::shared_ptr<IEltistAntSystem> pEltist):
+    mBus(pBus), mStartTime(0,0),mBusStop(pBusStop), mGraph(pGraph), mAntColony(std::move(pEltist)) {
     }
     void schedule();
 	std::string getSchedule();
@@ -31,8 +29,8 @@ private:
     void prepareDataForGraph();
     void findDemandStops();
     void signPassengerToStop(std::vector<BusStop>::iterator &it, Passenger&);
-    std::unique_ptr<IEltistAntSystem> mAntColony;
-    std::shared_ptr<WeightGraph> mGraph;
+    std::shared_ptr<IEltistAntSystem> mAntColony;
+    std::shared_ptr<IWeightGraph> mGraph;
     const IBus& mBus;
 	std::map<Time, std::string> mSchedule;
     std::vector<BusStop>& mBusStop;
