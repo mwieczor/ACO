@@ -8,7 +8,7 @@ class testBus: public testing::Test
 public:
 	testBus(){
 		
-		sut = std::make_unique<Bus>(Coordinate(5,6), 5);
+		sut = std::make_unique<Bus>(Coordinate(5,6));
 	}
 	
 	std::unique_ptr<Bus> sut;
@@ -36,13 +36,13 @@ TEST_F(testBus, releaseSeat) //test do poprawy
 }
 TEST_F(testBus,increaseNbOfPassangersWhenAreNoFreeSeats){
     sut->increasePassengersNumber(5);
-    sut->increasePassengersNumber(3);
-    EXPECT_EQ(5, sut->getNbOfPassengers());
+    sut->increasePassengersNumber(53);
+    EXPECT_EQ(50, sut->getNbOfPassengers());
 }
 TEST_F(testBus, increaseNbOfPassangersWhenIsSingleFreeSeat){
-    sut->increasePassengersNumber(4);
+    sut->increasePassengersNumber(49);
     sut->increasePassengersNumber(3);
-    EXPECT_EQ(5, sut->getNbOfPassengers());
+    EXPECT_EQ(50, sut->getNbOfPassengers());
 }
 
 TEST_F(testBus, changeBusPosition){

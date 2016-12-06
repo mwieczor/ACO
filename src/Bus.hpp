@@ -48,12 +48,13 @@ struct BusStop {
   std::vector<Passenger> mPassengersList;
   void addPassengerToStop(Passenger p) { mPassengersList.push_back(p); }
   bool operator==(const BusStop &c1) const { return mStop == c1.mStop; }
+
 };
 
 class Bus : public IBus {
 public:
   Bus(Coordinate pPosition)
-      : mPosition(pPosition), mCapacity(50), mPassangers() {}
+	  : mPosition(pPosition), mCapacity(50), mPassangers(), mWorkingTime({0,0}) {}
   void ride(Coordinate) override;
   Coordinate getPosition() const override;
   void releaseSeat(std::pair<Time, std::string>) override;
@@ -61,12 +62,14 @@ public:
   void increasePassengersNumber(int) override;
   bool areFreeSeatsInBus() override;
   void takeASeat(Passenger) override;
-  
+  bool hasToBackToDepot() override;
+  ///TODO reset/increase working time
 
 private:
   Coordinate mPosition;
   int mCapacity;
   int mPassangers;
   std::vector<Passenger> mPassengersList;
+  Time mWorkingTime;
   
 };

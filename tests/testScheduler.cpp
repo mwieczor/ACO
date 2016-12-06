@@ -27,9 +27,9 @@ public:
   }
 
   void addPassangers() {
-    sut->addPassanger(Time(6, 12), 30, "First Stop", "Second Stop");
-    sut->addPassanger(Time(6, 14), 30, "Second Stop", "Third Stop");
-    sut->addPassanger(Time(6, 15), 30, "Third Stop", "Second Stop");
+    sut->addPassanger(Time(6, 12), "First Stop", "Second Stop");
+    sut->addPassanger(Time(6, 14), "Second Stop", "Third Stop");
+    sut->addPassanger(Time(6, 15), "Third Stop", "Second Stop");
   }
   void setDemand() {}
 
@@ -76,7 +76,7 @@ TEST_F(TestScheduler, getBusStopForAddedPassangers) {
 TEST_F(TestScheduler, addPassengersWithWrongBusStop) {
   setExpectation();
   sut->setStartTime(Time(7, 13));
-  sut->addPassanger(Time(7, 20), 30, "Fourth Stop", "Second Stop");
+  sut->addPassanger(Time(7, 20), "Fourth Stop", "Second Stop");
   sut->schedule();
   auto first = sut->getSchedule().begin();
   
@@ -87,7 +87,7 @@ TEST_F(TestScheduler, passengersInParticularTimeWindow) {
   setExpectation();
   addPassangers();
   sut->setStartTime(Time(7, 13));
-  sut->addPassanger(Time(7, 20), 30, "Fifth Stop", "Second Stop");
+  sut->addPassanger(Time(7, 20), "Fifth Stop", "Second Stop");
   sut->schedule();
   auto first = sut->getSchedule().begin();
   

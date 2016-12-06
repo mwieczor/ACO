@@ -20,7 +20,7 @@ public:
         mAntColony(std::move(pEltist)) {}
   void schedule();
   std::map<Time, std::string> getSchedule();
-  void addPassanger(Time, int, std::string, std::string);
+  void addPassanger(Time, std::string, std::string);
   std::string getPassanger();
   std::string getBusStop();
 
@@ -33,6 +33,7 @@ private:
   void calculateSchedule(std::vector<std::pair<Coordinate, int>> &);
   void setPassangersToSchedule(int, std::pair<Time, std::string>);
   void incraseNbOfPassangerInBus();
+  Coordinate findFinalCity();
 
   std::shared_ptr<IEltistAntSystem> mAntColony;
   std::shared_ptr<IWeightGraph> mGraph;
@@ -43,4 +44,5 @@ private:
   int mTimePeriod;
   Time mStartTime;
   bool isPassangerInTimeWindow;
+  Coordinate mDepotCoordinate;
 };

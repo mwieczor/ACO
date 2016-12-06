@@ -14,4 +14,6 @@ public:
     MOCK_METHOD1(increasePassengersNumber, void(int));
 	MOCK_METHOD1(takeASeat, void(Passenger));
 	MOCK_METHOD0(areFreeSeatsInBus, bool());
+	MOCK_METHOD0(hasToBackToDepot, bool());
+	
 };

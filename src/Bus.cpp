@@ -35,6 +35,10 @@ bool Bus::areFreeSeatsInBus() { return mPassangers < mCapacity; }
 
 void Bus::takeASeat(Passenger p)
 {
-	mPassengersList.push_back(p); 
-	
+	mPassengersList.push_back(p); 	
+}
+
+bool Bus::hasToBackToDepot()
+{
+	return mWorkingTime == Time(8,0);
 }

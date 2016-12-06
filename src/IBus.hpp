@@ -17,4 +17,5 @@ public:
   virtual void increasePassengersNumber(int) = 0;
   virtual bool areFreeSeatsInBus() = 0;
   virtual void takeASeat(Passenger) =0;
+  virtual bool hasToBackToDepot() =0;
 };

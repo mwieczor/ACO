@@ -13,10 +13,10 @@ std::map<Time, std::string> Scheduler::getSchedule()
   return mSchedule;
 }
 
-void Scheduler::addPassanger(Time pTime, int timeWindow, std::string pStartStop,
+void Scheduler::addPassanger(Time pTime, std::string pStartStop,
                              std::string pFinalStop) {
   mPassengersList.push_back(
-      Passenger(pTime, timeWindow, pStartStop, pFinalStop));
+      Passenger(pTime, pStartStop, pFinalStop));
 }
 
 std::string Scheduler::getPassanger() { return mPassengersList[0].mFinalStop; }
@@ -24,11 +24,12 @@ std::string Scheduler::getPassanger() { return mPassengersList[0].mFinalStop; }
 std::string Scheduler::getBusStop() { return mBusStop[0].mName; }
 
 void Scheduler::prepareDataForGraph() {
-  auto lStartStop = mBus.getPosition();
-  auto lFinalCity = Coordinate(5, 6);
   findDemandStops();
-  if (isPassangerInTimeWindow)
+  if (isPassangerInTimeWindow){
+	  auto lStartStop = mBus.getPosition();
+	  auto lFinalCity = findFinalCity();
   mGraph->createGraph(mBusStop);
+  }
   
   else{
 	  mSchedule.clear();
@@ -92,7 +93,7 @@ void Scheduler::incraseNbOfPassangerInBus() // wrong name, do two diff things{
   for (auto b : mSchedule) {
 
     mBus.releaseSeat(b);
-
+	
     if (mBus.areFreeSeatsInBus()) {
       auto nb = std::count_if(mPassengersList.begin(), mPassengersList.end(),
                               [=](auto p) { return b.second == p.mStartStop; });
@@ -100,6 +101,30 @@ void Scheduler::incraseNbOfPassangerInBus() // wrong name, do two diff things{
       setPassangersToSchedule(nb, b);
     }
   }
+}
+
+Coordinate Scheduler::findFinalCity()
+{
+	if(mBus.hasToBackToDepot()){
+		return mDepotCoordinate;
+	}
+	else {
+		Time bestTime= mPassengersList.begin()->mTime;
+		Passenger p1 = {Time(0,0), {}, {}};
+                for (auto p : mPassengersList) {
+                  if (bestTime > p.mTime) {
+                    bestTime = p.mTime;
+                    p1 = p;
+                  }
+                }
+				auto busStop= std::find_if(mBusStop.begin(), mBusStop.end(), [=](auto b){
+					return p1.mStartStop== b.mName;
+				});
+						return busStop->mStop;
+        }
+}
+bool isRightTime(Time passTime){
+	
 }
 
 void Scheduler::setStartTime(const Time &startTime) { mStartTime = startTime; }
