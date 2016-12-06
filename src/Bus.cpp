@@ -2,7 +2,7 @@
 #include "Coordinate.hpp"
 #include "algorithm"
 
-void Bus::ride(Coordinate pPosition) { mPosition = pPosition; }
+void Bus::ride(Coordinate pPosition, Time pTime) { mPosition = pPosition; mWorkingTime = mWorkingTime +pTime;}
 
 Coordinate Bus::getPosition() const { return mPosition; }
 
@@ -24,13 +24,13 @@ void Bus::releaseSeat(std::pair<Time, std::string> pBusStop) {
 int Bus::getNbOfPassengers() const { return mPassangers; }
 
 void Bus::increasePassengersNumber(int pPassangers) {
-  if (areFreeSeatsInBus() && mPassangers + pPassangers <= mCapacity)
+  if (mPassangers + pPassangers <= mCapacity)
     mPassangers += pPassangers;
   else
-    mPassangers = mCapacity; // blad, brak info o tym, ze nie zabrano pasazerow
+    mPassangers = mCapacity;
 }
 
-bool Bus::areFreeSeatsInBus() { return mPassangers < mCapacity; }
+int Bus::getFreeSeatsInBus() { return mCapacity-mPassangers; }
 
 
 void Bus::takeASeat(Passenger p)
@@ -40,5 +40,14 @@ void Bus::takeASeat(Passenger p)
 
 bool Bus::hasToBackToDepot()
 {
-	return mWorkingTime == Time(8,0);
+	if(mWorkingTime == Time(8,0)){
+		doWorkingTimeReset();
+		return true;
+	}
+	else return false;
+}
+
+void Bus::doWorkingTimeReset()
+{
+	mWorkingTime = Time(0,0);
 }

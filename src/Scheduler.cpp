@@ -93,12 +93,18 @@ void Scheduler::incraseNbOfPassangerInBus() // wrong name, do two diff things{
   for (auto b : mSchedule) {
 
     mBus.releaseSeat(b);
-	
-    if (mBus.areFreeSeatsInBus()) {
+	auto freeSeats = mBus.getFreeSeatsInBus();
+    if (freeSeats) {
       auto nb = std::count_if(mPassengersList.begin(), mPassengersList.end(),
                               [=](auto p) { return b.second == p.mStartStop; });
+	  if(freeSeats>nb){
       mBus.increasePassengersNumber(nb);
       setPassangersToSchedule(nb, b);
+	  }
+	  else{
+		  mBus.increasePassengersNumber(freeSeats);
+		  setPassangersToSchedule(freeSeats, b); 
+	  }
     }
   }
 }

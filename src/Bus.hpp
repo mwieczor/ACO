@@ -55,15 +55,15 @@ class Bus : public IBus {
 public:
   Bus(Coordinate pPosition)
 	  : mPosition(pPosition), mCapacity(50), mPassangers(), mWorkingTime({0,0}) {}
-  void ride(Coordinate) override;
+  void ride(Coordinate, Time) override;
   Coordinate getPosition() const override;
   void releaseSeat(std::pair<Time, std::string>) override;
   int getNbOfPassengers() const override; // Is it nessesary?
   void increasePassengersNumber(int) override;
-  bool areFreeSeatsInBus() override;
+  int getFreeSeatsInBus() override;
   void takeASeat(Passenger) override;
   bool hasToBackToDepot() override;
-  ///TODO reset/increase working time
+  ///TODO increase working time
 
 private:
   Coordinate mPosition;
@@ -71,5 +71,5 @@ private:
   int mPassangers;
   std::vector<Passenger> mPassengersList;
   Time mWorkingTime;
-  
+  void doWorkingTimeReset();
 };

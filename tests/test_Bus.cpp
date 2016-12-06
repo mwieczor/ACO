@@ -46,6 +46,6 @@ TEST_F(testBus, increaseNbOfPassangersWhenIsSingleFreeSeat){
 }
 
 TEST_F(testBus, changeBusPosition){
-	sut->ride(Coordinate(7,8));
+	sut->ride(Coordinate(7,8), Time(0,3));
 	EXPECT_EQ(sut->getPosition(), Coordinate(7,8));
 }

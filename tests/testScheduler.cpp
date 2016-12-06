@@ -107,7 +107,7 @@ TEST_F(TestScheduler, notAllPassangersTaken) {
   setExpectation();
   sut->setStartTime(Time(6, 0));
   ON_CALL(*mBusMock, getPosition()).WillByDefault(Return(Coordinate(9, 10)));
-  ON_CALL(*mBusMock, areFreeSeatsInBus()).WillByDefault(Return(false));
+  ON_CALL(*mBusMock, getFreeSeatsInBus()).WillByDefault(Return(5));
   createRawSchedule();
   sut->schedule();
   //EXPECT_EQ("One of passanger is not taken from stop", sut->getSchedule());
