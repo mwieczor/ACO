@@ -1,70 +1,105 @@
 #include "Scheduler.hpp"
 
-void Scheduler::schedule()
-{
-    prepareDataForGraph();
-	//mAntColony = std::make_unique<EltistAntSystem>(lStartStop, lFinalCity, *mGraph);
-	auto lRawSchedule = mAntColony->getCalculateRoute();
-	calculateSchedule();
+void Scheduler::schedule() {
+  prepareDataForGraph();
+  if(mSchedule.size()==0){
+	  auto lRawSchedule = mAntColony->getCalculateRoute();
+	  calculateSchedule(lRawSchedule);
+  }
 }
 
-std::string Scheduler::getSchedule()
-{
-	auto temp = std::find_if(mBusStop.begin(), mBusStop.end(), [](auto s) {return s.isDemand;});
-    return (temp!= mBusStop.end())? temp->mName: "No passengers in this time";
+std::map<Time, std::string> Scheduler::getSchedule() 
+ {
+  return mSchedule;
 }
 
-void Scheduler::addPassanger(Time pTime, int timeWindow, std::string pStartStop, std::string pFinalStop)
-{
-    mPassengersList.push_back(Passenger(pTime, timeWindow, pStartStop, pFinalStop));
+void Scheduler::addPassanger(Time pTime, int timeWindow, std::string pStartStop,
+                             std::string pFinalStop) {
+  mPassengersList.push_back(
+      Passenger(pTime, timeWindow, pStartStop, pFinalStop));
 }
 
-std::string Scheduler::getPassanger()
-{
-    return mPassengersList[0].mFinalStop;
+std::string Scheduler::getPassanger() { return mPassengersList[0].mFinalStop; }
+
+std::string Scheduler::getBusStop() { return mBusStop[0].mName; }
+
+void Scheduler::prepareDataForGraph() {
+  auto lStartStop = mBus.getPosition();
+  auto lFinalCity = Coordinate(5, 6);
+  findDemandStops();
+  if (isPassangerInTimeWindow)
+  mGraph->createGraph(mBusStop);
+  
+  else{
+	  mSchedule.clear();
+	  mSchedule.emplace(Time(0,0) , "No passengers in this time");
+  }
 }
 
-std::string Scheduler::getBusStop()
+void Scheduler::findDemandStops() 
 {
-    return mBusStop[0].mName;
-}
-void Scheduler::prepareDataForGraph()
-{
-    auto lStartStop =mBus.getPosition();
-	auto lFinalCity = Coordinate(5,6);
-    findDemandStops();
-    mGraph->createGraph(mBusStop);
-}
-
-void Scheduler::findDemandStops()
-{
-    for(auto p: mPassengersList)
-    {
-        auto searchStop = p.mStartStop; 
-        auto it =std::find_if(mBusStop.begin(), mBusStop.end(), [&](auto&& s){
-            return s.mName == searchStop;
-        });
-        if(it != mBusStop.end() ){
-            signPassengerToStop(it, p);
-        }
+  isPassangerInTimeWindow = false;
+  for (auto p : mPassengersList) {
+    if (p.mTime < mStartTime + Time(0, 30)) {
+      isPassangerInTimeWindow = true;
+      auto searchStop = p.mStartStop;
+      auto it = std::find_if(mBusStop.begin(), mBusStop.end(),
+                             [&](auto &&s) { return s.mName == searchStop; });
+      if (it != mBusStop.end()) {
+        signPassengerToStop(it, p);
+      }
     }
+  }
 }
 
-void Scheduler::signPassengerToStop(std::vector<BusStop>::iterator& it, Passenger& p )
+void Scheduler::signPassengerToStop(std::vector<BusStop>::iterator &it,
+                                    Passenger &p) {
+  if (p.mTime <= mStartTime &&
+      ((p.mTime + Time(0, p.mTimeWindow)) >= mStartTime)) {
+    it->addPassengerToStop(p);
+    it->isDemand = true;
+  }
+}
+
+void Scheduler::calculateSchedule(
+    std::vector<std::pair<Coordinate, int>> &pRawSchedule) {
+  for (auto lRawStop : pRawSchedule) {
+    auto it =
+        std::find_if(mBusStop.begin(), mBusStop.end(), [=](auto lBusStop) {
+          return lBusStop.mStop == lRawStop.first;
+        });
+    mSchedule.insert({mStartTime + Time(0, lRawStop.second), it->mName});
+  }
+  incraseNbOfPassangerInBus();
+}
+
+void Scheduler::setPassangersToSchedule(int nb, std::pair<Time, std::string> b)
 {
-    if(p.mTime <= mStartTime &&( (p.mTime+ Time(0,p.mTimeWindow) )>= mStartTime) )
-    {
-        it->addPassengerToStop(p);
-        it->isDemand = true;
+  while (nb > 0) {
+    auto passanger = std::find_if(mPassengersList.begin(), mPassengersList.end(),
+                 [&](auto p) { return b.second == p.mStartStop; });
+	if(passanger!=mPassengersList.end()){
+	mBus.takeASeat(*passanger);
+	mPassengersList.erase(passanger);
+	nb--;
 	}
+	else break;
+  }
 }
 
-void Scheduler::calculateSchedule()
+void Scheduler::incraseNbOfPassangerInBus() // wrong name, do two diff things{
 {
-	
+  for (auto b : mSchedule) {
+
+    mBus.releaseSeat(b);
+
+    if (mBus.areFreeSeatsInBus()) {
+      auto nb = std::count_if(mPassengersList.begin(), mPassengersList.end(),
+                              [=](auto p) { return b.second == p.mStartStop; });
+      mBus.increasePassengersNumber(nb);
+      setPassangersToSchedule(nb, b);
+    }
+  }
 }
 
-void Scheduler::setStartTime(const Time &startTime)
-{
-    mStartTime = startTime;
-}
+void Scheduler::setStartTime(const Time &startTime) { mStartTime = startTime; }
