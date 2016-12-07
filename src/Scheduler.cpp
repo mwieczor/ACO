@@ -1,9 +1,16 @@
 #include "Scheduler.hpp"
 
+void Scheduler::setRouteParameters()
+{
+	mAntColony->setFinalCity(mFinalCity);
+	mAntColony->setStartCity(mStartStop);
+	mAntColony->setGraph(*mGraph);	
+}
+
 void Scheduler::schedule() {
   prepareDataForGraph();
   if(mSchedule.size()==0){
-	 // mAntColony = std::make_shared<EltistAntSystem>(mStartStop, mFinalCity, *mGraph);
+	  setRouteParameters();
 	  auto lRawSchedule = mAntColony->getCalculateRoute();
 	  calculateSchedule(lRawSchedule);
   }

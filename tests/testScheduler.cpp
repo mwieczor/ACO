@@ -8,6 +8,8 @@
 
 using ::testing::Return;
 using ::testing::Invoke;
+namespace testing {
+
 
 
 class TestScheduler : public testing::Test {
@@ -39,6 +41,12 @@ public:
         .WillRepeatedly(Return());
     EXPECT_CALL(*mEltistAntSystemMock, getCalculateRoute())
         .WillRepeatedly(Return(mRawSchedule));
+	EXPECT_CALL(*mEltistAntSystemMock, setFinalCity(_))
+        .WillRepeatedly(Return());
+	EXPECT_CALL(*mEltistAntSystemMock, setStartCity(_))
+        .WillRepeatedly(Return());
+	EXPECT_CALL(*mEltistAntSystemMock, setGraph(_))
+        .WillRepeatedly(Return());
   }
   void createRawSchedule() {
     mRawSchedule.push_back({{9, 10}, 0});
@@ -111,4 +119,5 @@ TEST_F(TestScheduler, notAllPassangersTaken) {
   createRawSchedule();
   sut->schedule();
   //EXPECT_EQ("One of passanger is not taken from stop", sut->getSchedule());
+}
 }

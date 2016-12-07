@@ -17,8 +17,18 @@ void EltistAntSystem::generateRoute(){
     while(!isFinalCity());
 }
 
+void EltistAntSystem::setGraph(const IWeightGraph & graph)
+{
+	mGraph = graph;
+}
+
+void EltistAntSystem::setStartCity(Coordinate value)
+{
+	startCity = Node{value};
+}
+
 void EltistAntSystem::leaveAdditionalPheromon(Node lastNode, Node mN2){
-    mGraph.changeEdgeWeight(lastNode, mN2, weight);
+	mGraph.changeEdgeWeight(lastNode, mN2, weight);
 }
 
 
@@ -73,9 +83,9 @@ bool EltistAntSystem::isFinalCity()
 
 }
 
-void EltistAntSystem::setFinalCity(const Node &value)
+void EltistAntSystem::setFinalCity(Coordinate value)
 {
-    finalCity = value;
+	finalCity = Node{value};
 }
 
 Node EltistAntSystem::getFinalCity() const

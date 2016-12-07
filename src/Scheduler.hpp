@@ -47,4 +47,5 @@ private:
   Coordinate mDepotCoordinate;
   Coordinate mStartStop;
   Coordinate mFinalCity; 
+  void setRouteParameters();
 };

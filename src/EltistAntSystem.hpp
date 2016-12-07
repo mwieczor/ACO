@@ -18,10 +18,14 @@ public:
 	std::vector<std::pair<Coordinate, int>> getCalculateRoute();
     Node getFinalCity() const;
 
-    void setFinalCity(const Node &value);
+    void setFinalCity(Coordinate);
 
+	void setStartCity(Coordinate);
+	
+	void setGraph(const IWeightGraph & graph);
+	
 private:
-    bool isFinalCity();
+	bool isFinalCity();
 	void createAntColony();
 	void generateRoute();
     Node startCity;
