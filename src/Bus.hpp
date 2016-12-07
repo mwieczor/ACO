@@ -72,4 +72,5 @@ private:
   std::vector<Passenger> mPassengersList;
   Time mWorkingTime;
   void doWorkingTimeReset();
+  int getNbOfLeavingPassengers(std::pair<Time, std::string> pBusStop);
 };

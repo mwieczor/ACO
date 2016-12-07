@@ -45,4 +45,6 @@ private:
   Time mStartTime;
   bool isPassangerInTimeWindow;
   Coordinate mDepotCoordinate;
+  Coordinate mStartStop;
+  Coordinate mFinalCity; 
 };

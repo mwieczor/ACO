@@ -3,6 +3,7 @@
 void Scheduler::schedule() {
   prepareDataForGraph();
   if(mSchedule.size()==0){
+	 // mAntColony = std::make_shared<EltistAntSystem>(mStartStop, mFinalCity, *mGraph);
 	  auto lRawSchedule = mAntColony->getCalculateRoute();
 	  calculateSchedule(lRawSchedule);
   }
@@ -26,8 +27,8 @@ std::string Scheduler::getBusStop() { return mBusStop[0].mName; }
 void Scheduler::prepareDataForGraph() {
   findDemandStops();
   if (isPassangerInTimeWindow){
-	  auto lStartStop = mBus.getPosition();
-	  auto lFinalCity = findFinalCity();
+	  mStartStop = mBus.getPosition();
+	  mFinalCity = findFinalCity();
   mGraph->createGraph(mBusStop);
   }
   

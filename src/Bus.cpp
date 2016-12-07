@@ -6,16 +6,24 @@ void Bus::ride(Coordinate pPosition, Time pTime) { mPosition = pPosition; mWorki
 
 Coordinate Bus::getPosition() const { return mPosition; }
 
-void Bus::releaseSeat(std::pair<Time, std::string> pBusStop) { 
+int Bus::getNbOfLeavingPassengers(std::pair<Time, std::string> pBusStop)
+{
 	auto nb = std::count_if(mPassengersList.begin(), mPassengersList.end(),
                             [=](auto p) { return pBusStop.second == p.mFinalStop; });
-	mPassangers = mPassangers - nb; 
-	while (nb > 0) {
+	mPassangers = mPassangers - nb;
+	
+	return nb;
+}
+
+void Bus::releaseSeat(std::pair<Time, std::string> pBusStop) { 
+	auto passangerNumber = getNbOfLeavingPassengers(pBusStop); 
+	
+	while (passangerNumber > 0) {
 	  auto passanger = std::find_if(mPassengersList.begin(), mPassengersList.end(),
 				   [&](auto p) { return pBusStop.second == p.mStartStop; });
 	  if(passanger!=mPassengersList.end()){
 	  mPassengersList.erase(passanger);
-	  nb--;
+	  passangerNumber--;
 	  }
 	  else break;
 	}
