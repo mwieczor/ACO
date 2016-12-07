@@ -10,8 +10,8 @@ class EltistAntSystem: public PheromonWeight,
 					   public IEltistAntSystem
 {
 public:
-    EltistAntSystem(Coordinate mStart, Coordinate pFinalCity, IWeightGraph &mG):
-    startCity(Node{mStart}),finalCity(Node{pFinalCity}), mGraph(mG){
+    EltistAntSystem(IWeightGraph &mG):
+	 mGraph(mG){
 
 	}
     double getRouteLenght();
