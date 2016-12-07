@@ -19,7 +19,7 @@ public:
 
 
     void addEdges(){
-        WeightGraph wG;
+		WeightGraph wG{};
         wG.push_back(Edge(Node(Coordinate(5,6)), Node(Coordinate(7,8))));
         wG.push_back(Edge(Node(Coordinate(5,6)), Node(Coordinate(7,9))));
         sut = std::make_unique<WeightGraph>(wG);
