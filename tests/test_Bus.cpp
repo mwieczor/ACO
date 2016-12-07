@@ -9,9 +9,16 @@ public:
 	testBus(){
 		
 		sut = std::make_unique<Bus>(Coordinate(5,6));
+
 	}
-	
+
 	std::unique_ptr<Bus> sut;
+	
+	void addPassenger() {
+	  sut->takeASeat(Passenger(Time(6, 12), "First Stop", "Second Stop"));
+	  sut->takeASeat(Passenger(Time(6, 14), "Second Stop", "Third Stop"));
+	  sut->takeASeat(Passenger(Time(6, 15), "Third Stop", "Second Stop"));
+	}
 };
 
 
@@ -31,8 +38,9 @@ TEST_F(testBus, increaseNbOfPassangersWhenAreFreeSeats){
 TEST_F(testBus, releaseSeat) //test do poprawy
 {
     sut->increasePassengersNumber(3);
-	//sut->releaseSeat(1); /
-    EXPECT_EQ(2, sut->getNbOfPassengers());
+	addPassenger();
+	sut->releaseSeat({{6, 12}, "Second Stop"}); 	
+    EXPECT_EQ(1, sut->getNbOfPassengers());
 }
 TEST_F(testBus,increaseNbOfPassangersWhenAreNoFreeSeats){
     sut->increasePassengersNumber(5);

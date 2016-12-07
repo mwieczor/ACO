@@ -36,7 +36,7 @@ void Scheduler::prepareDataForGraph() {
   if (isPassangerInTimeWindow){
 	  mStartStop = mBus.getPosition();
 	  mFinalCity = findFinalCity();
-  mGraph->createGraph(mBusStop);
+	  mGraph->createGraph(mBusStop);
   }
   
   else{
