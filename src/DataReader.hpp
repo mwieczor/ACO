@@ -1,14 +1,19 @@
 #pragma once
+#include<string>
+#include <vector>
 
 
 class DataReader{
 public:
     DataReader(){}
     ~DataReader(){}
-    void readData();
+    void readDataForGraph();
+    void readPassangersData();
 
 private:
     void parseData();
+    std::vector<double> mData;
+    std::vector<std::string> mPassengerData;
 
-}
+};
 

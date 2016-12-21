@@ -2,9 +2,7 @@
 #include "Edge.hpp"
 #include <functional>
 #include "Bus.hpp"
-#include <iostream>
-#include <fstream>
-#include <string>
+
 
 
 void WeightGraph::append(const Edge &mE)
