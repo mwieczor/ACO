@@ -11,7 +11,7 @@ public:
     void changeEdgeWeight(Node mN1, Node mN2, double weight);
     Edge& edge(Node mN1, Node mN2);
     std::vector<std::reference_wrapper<Edge> > searchNeighbours(Node mN);
-		void readData();
+
 
 
 
@@ -22,5 +22,5 @@ private:
     int mNodesNumber;
 	Node &searchNode(Node pN);
 	std::vector<double> mData;
-	void parseData();
+
 };
