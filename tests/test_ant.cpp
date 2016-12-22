@@ -41,11 +41,9 @@ TEST_F(TestAnt, moveAntTwoEdges){
     std::vector<double> lVector = {5,6,7,8,5,7,8,8,10,15};
     graph = std::make_shared<WeightGraph>(lVector);
     sut->moveAnt(graph->searchNeighbours(sut->position()));
-    auto p = sut->position();
-    EXPECT_EQ(p,Node(Coordinate(7,8)));
+    EXPECT_EQ(sut->position(),Node(Coordinate(7,8)));
     sut->moveAnt(graph->searchNeighbours(sut->position()));
-     p = sut->position();
-    EXPECT_EQ(p, Node(Coordinate(8,10)));
+    EXPECT_EQ(sut->position(), Node(Coordinate(8,10)));
 }
 
 TEST_F(TestAnt, moveAntSameEdges){ //czy zakladamy ze taka sytuacji nie wystapi?
@@ -58,7 +56,7 @@ TEST_F(TestAnt, moveAntSameEdges){ //czy zakladamy ze taka sytuacji nie wystapi?
 
 TEST_F(TestAnt, moveAnt){
     ///TODO FIRST! sth wrong with search neighbours!
-    sut->moveAnt(graph->searchNeighbours(sut->position()));
+   sut->moveAnt(graph->searchNeighbours(sut->position()));
    EXPECT_EQ(sut->position(),Node({7,9}));
 }
 

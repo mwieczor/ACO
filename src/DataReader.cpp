@@ -19,7 +19,7 @@ std::vector<double> &DataReader::readDataForGraph()
 
 void DataReader::readPassangersData()
 {
-    std::ifstream file("/home/bwieczor/data1.csv");
+    std::ifstream file("/home/bwieczor/data2.csv");
     std::string temp;
     while ( file.good() )
     {
@@ -28,4 +28,20 @@ void DataReader::readPassangersData()
     }
 
 }
+
+std::vector<std::string> DataReader::readStopBusData()
+{
+    std::ifstream file("/home/bwieczor/data3.csv");
+    std::string temp;
+    while ( file.good() )
+    {
+            std::getline ( file, temp, ',' );
+            mBusStopData.push_back(temp);
+    }
+    return mBusStopData;
+
+
+}
+
+
 

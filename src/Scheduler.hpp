@@ -12,7 +12,7 @@
 // auto cmp = [](Passenger p1, Passenger p2){ return p1.mTime > p2.mTime
 // ||(p1.mTime ==p2.mTime && p1.mTimeWindow > p2.mTimeWindow);};
 
-class Scheduler {
+class   Scheduler {
 public:
   Scheduler(IBus &pBus, auto &pBusStop, std::shared_ptr<IWeightGraph> pGraph,
             std::shared_ptr<IEltistAntSystem> pEltist)

@@ -9,11 +9,13 @@ public:
     ~DataReader(){}
     std::vector<double>& readDataForGraph();
     void readPassangersData();
+    std::vector<std::string> readStopBusData();
 
 private:
-    void parseData();
     std::vector<double> mData;
     std::vector<std::string> mPassengerData;
+    std::vector<std::string> mBusStopData;
+
 
 };
 
