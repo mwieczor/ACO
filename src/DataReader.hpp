@@ -7,7 +7,7 @@ class DataReader{
 public:
     DataReader(){}
     ~DataReader(){}
-    void readDataForGraph();
+    std::vector<double>& readDataForGraph();
     void readPassangersData();
 
 private:

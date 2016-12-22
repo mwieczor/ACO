@@ -19,10 +19,8 @@ public:
 
 
     void addEdges(){
-		WeightGraph wG{};
-        wG.push_back(Edge(Node(Coordinate(5,6)), Node(Coordinate(7,8))));
-        wG.push_back(Edge(Node(Coordinate(5,6)), Node(Coordinate(7,9))));
-        sut = std::make_unique<WeightGraph>(wG);
+        std::vector<double> lVector = {5,6,7,8,1,5,6,7,9,1};
+        sut = std::make_unique<WeightGraph>(lVector);
     }
 
     std::unique_ptr<WeightGraph> sut;
@@ -32,21 +30,22 @@ public:
 };
 TEST_F(TestWeightGraph, push_backEdges){
     EXPECT_EQ(sut->size(), 2);
-    edge2.setNodes(Node(Coordinate(5,6)), Node(Coordinate(7,8)));
+    Edge edge2 {Node(Coordinate(5,6)), Node(Coordinate(7,8)), 1, 0.1};
     EXPECT_EQ(sut->at(0), edge2);
 }
 
 TEST_F(TestWeightGraph, searchNeighbours){
-    edge1.setNodes(Node(Coordinate(5,6)), Node(Coordinate(7,8)));
-    edge2.setNodes(Node(Coordinate(5,6)), Node(Coordinate(7,9)));
+    Edge edge1 {Node(Coordinate(5,6)), Node(Coordinate(7,8)), 1, 0.1};
+    Edge edge2 {Node(Coordinate(5,6)), Node(Coordinate(7,9)), 1, 0.1};
+
     EXPECT_EQ(edge1, sut->searchNeighbours(Node(Coordinate(5,6))).at(0));
-    EXPECT_EQ(edge2,  sut->searchNeighbours(Node(Coordinate(5,6))).at(1));
+    EXPECT_EQ(edge2, sut->searchNeighbours(Node(Coordinate(5,6))).at(1));
 }
 
 
 TEST_F(TestWeightGraph, changeEdgeWeight){
-    sut->changeEdgeWeight(Node(Coordinate(5,6)), Node(Coordinate(7,8)), 5);
-    EXPECT_EQ(sut->at(0).getWeight(), Weight(0.2));
+    sut->changeEdgeWeight(Node(Coordinate(5,6)), Node(Coordinate(7,8)), 2);
+    EXPECT_EQ(sut->at(0).getWeight(), Weight(0.6));
 }
 
 TEST_F(TestWeightGraph, searchEdge){
@@ -57,4 +56,8 @@ TEST_F(TestWeightGraph, createGraph){
     mBusStop[0].isDemand= true;
 	sut->createGraph(mBusStop);
     EXPECT_TRUE(sut->at(0).startNode().isDemand);
+}
+
+TEST_F(TestWeightGraph, parseData){
+
 }

@@ -5,10 +5,14 @@
 class testTravel: public testing::Test{
 public:
     testTravel(){
-
+       // std::vector<double> lVector = {5,6,7,8,5,5,6,7,9,3,7,8,8,10,10,7,9,8,10,15};
+     std::vector<double> lVector{};
+     graph  = std::make_unique<WeightGraph>(lVector);
+     sut= std::make_shared<EltistAntSystem>(*graph);
     }
-    std::unique_ptr<WeightGraph> graph  = std::make_unique<WeightGraph>();
-	std::shared_ptr<EltistAntSystem> sut= std::make_shared<EltistAntSystem>(*graph);
+
+    std::unique_ptr<WeightGraph> graph;
+    std::shared_ptr<EltistAntSystem> sut;
 
     Ant ant;
 
@@ -40,8 +44,7 @@ public:
 
 TEST_F(testTravel, generateRoute){
     buildTest();
-	
-	auto l = sut->getCalculateRoute();
+    auto l = sut->getCalculateRoute();
     EXPECT_EQ(sut->getRouteLenght(), 15);
 }
 

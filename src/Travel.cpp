@@ -3,7 +3,7 @@
 
 void Travel::setStartGraphWeight()
 {
-    for(auto &edge:mGraph)
+    for(auto &edge:*mGraph)
         edge.incrementWeight(defaultWeight);
 }
 

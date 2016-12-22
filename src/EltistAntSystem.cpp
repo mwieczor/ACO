@@ -11,7 +11,7 @@ void EltistAntSystem::generateRoute(){
         sort(mAntColony.begin(), mAntColony.end(),
              [](const std::pair<Ant, double>&firstAnt, const std::pair<Ant, double>&secondAnt)
                                                     {return firstAnt.second>secondAnt.second;});
-        leaveAdditionalPheromon(mAntColony[0].first.getLastPosition(), mAntColony[0].first.position());
+        leaveAdditionalPheromon(mAntColony[0].first.getLastPosition(), mAntColony[0].first.position()); ///TODO leave pheromon on all path, not single edge
         evaporatePheromon(mGraph);
     }
     while(!isFinalCity());

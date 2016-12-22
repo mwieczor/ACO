@@ -71,3 +71,9 @@ void WeightGraph::createGraph(std::vector<BusStop> & pBusStop)
         }
     }
 }
+
+void WeightGraph::parseData()
+{
+        for(int i= 4; i<mData.size(); i+=5)
+                append(Edge(Node({mData[i-4], mData[i-3]}), Node({mData[i-2], mData[i-1]}), mData[i], {0.1}));
+}

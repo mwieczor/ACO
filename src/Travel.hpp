@@ -7,9 +7,12 @@ class Node;
 
 class Travel{
 public:
-    Travel()=default;
-    Travel(Node mStart,Node finalCity, WeightGraph &mG):
-     mGraph(mG),  startCity(mStart), finalCity(finalCity){}
+    Travel(){}
+    Travel(Node mStart,Node finalCity):
+       startCity(mStart), finalCity(finalCity){
+        std::vector<double> l_vector {1.2, 1.3, 1.4};
+        mGraph= std::make_shared<WeightGraph>(l_vector);
+    }
     virtual void setStartGraphWeight();
     virtual void createAntColony();
     virtual void generateRoute()=0;
@@ -28,9 +31,8 @@ public:
     void setStartCity(const Node &value);
 
 protected:
-    void createGraph();
     std::vector <std::pair<Ant, double>> mAntColony;
-     WeightGraph mGraph;
+     std::shared_ptr<WeightGraph> mGraph;
 
     Node startCity;
     Node finalCity;

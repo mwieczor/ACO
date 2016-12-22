@@ -5,7 +5,7 @@
 void MMASAntSystem::setStartGraphWeight()
 {
     maxWeight=1;
-    for(auto &edge:mGraph)
+    for(auto &edge:*mGraph)
         edge.incrementWeight(maxWeight);
 }
 
@@ -14,14 +14,14 @@ void MMASAntSystem::generateRoute()
     do{
         for(auto &ant:mAntColony)
         {
-            ant.second=ant.first.moveAnt(mGraph.searchNeighbours(ant.first.position()));
+            ant.second=ant.first.moveAnt(mGraph->searchNeighbours(ant.first.position()));
 
         }
         sort(mAntColony.begin(), mAntColony.end(),
              [](const std::pair<Ant, double>&firstAnt, const std::pair<Ant, double>&secondAnt)
                                                     {return firstAnt.second>secondAnt.second;});
-        leavePheromon(mGraph, mAntColony[0].first.getLastPosition(), mAntColony[0].first.position(), 5); //to do
-        evaporatePheromon(mGraph);
+        leavePheromon(*mGraph, mAntColony[0].first.getLastPosition(), mAntColony[0].first.position(), 5); //to do
+        evaporatePheromon(*mGraph);
     }
     while(!isFinalCity());
 }
