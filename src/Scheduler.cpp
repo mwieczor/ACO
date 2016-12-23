@@ -1,4 +1,5 @@
 #include "Scheduler.hpp"
+#include <fstream>
 
 void Scheduler::setRouteParameters()
 {
@@ -15,6 +16,7 @@ void Scheduler::schedule(std::vector<std::string> pPassangerData) {
       auto lRawSchedule = mAntColony.getCalculateRoute();
 	  calculateSchedule(lRawSchedule);
   }
+  saveScheduleToFile();
 }
 
 std::map<Time, std::string> Scheduler::getSchedule() 
@@ -151,6 +153,15 @@ bool isRightTime(Time passTime){
 }
 
 void Scheduler::setStartTime(const Time &startTime) { mStartTime = startTime; }
+
+void Scheduler::saveScheduleToFile()
+{
+    std::ofstream outfile ("/home/mwieczor/data1.csv", std::ofstream::out);
+    for (auto t : mSchedule)
+    {
+        outfile<< std::to_string(t.first.hour) +","+ std::to_string(t.first.minute) +","+t.second +"\n";
+    }
+}
 
 void Scheduler::preparePassangerData(std::vector<std::__cxx11::string> & pData)
 {

@@ -29,6 +29,7 @@ public:
   void setStartTime(const Time &startTime);
 
 private:
+  void saveScheduleToFile();
   void preparePassangerData(std::vector<std::string>&);
   void prepareDataForGraph();
   void findDemandStops();

@@ -28,9 +28,6 @@ public:
 
   void addPassangers() {
       mPassangerData = {"6","12","First Stop", "Second Stop", "6", "14", "Second Stop", "Third Stop", "6", "15", "Third Stop", "Second Stop"};
-//    sut->addPassanger(Time(6, 12), "First Stop", "Second Stop");
-//    sut->addPassanger(Time(6, 14), "Second Stop", "Third Stop");
-//    sut->addPassanger(Time(6, 15), "Third Stop", "Second Stop");
   }
   void setDemand() {}
 
