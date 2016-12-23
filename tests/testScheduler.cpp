@@ -16,16 +16,15 @@ class TestScheduler : public testing::Test {
 public:
   TestScheduler() {
     mBusMock = std::make_unique<::testing::NiceMock<MockBus>>();
-    std::vector<BusStop> temp = {{{5, 6}, "First Stop"},
-                                 {{7, 8}, "Second Stop"},
-                                 {{7, 9}, "Third Stop"},
-                                 {{9, 10}, "Fifth Stop"}};
-    pBusStop = std::make_shared<std::vector<BusStop>>(temp);
+    std::vector<std::string> temp = {"5", "6", "First Stop",
+                                 "7", "8", "Second Stop",
+                                 "7", "9", "Third Stop",
+                                 "9", "10", "Fifth Stop"};
+
     mWeighGraphMock = std::make_shared<::testing::NiceMock<MockWeighGraph>>();
     mEltistAntSystemMock =
         std::make_shared<::testing::StrictMock<MockEltistAntSystem>>();
-    sut = std::make_shared<Scheduler>(*mBusMock, *pBusStop, mWeighGraphMock,
-                                      mEltistAntSystemMock);
+    sut = std::make_shared<Scheduler>( *mEltistAntSystemMock, temp, mWeighGraphMock);
   }
 
   void addPassangers() {
@@ -37,7 +36,7 @@ public:
 
   void setExpectation() {
     createRawSchedule();
-    EXPECT_CALL(*mWeighGraphMock, createGraph(*pBusStop))
+    EXPECT_CALL(*mWeighGraphMock, createGraph(_))
         .WillRepeatedly(Return());
     EXPECT_CALL(*mEltistAntSystemMock, getCalculateRoute())
         .WillRepeatedly(Return(mRawSchedule));
@@ -71,7 +70,7 @@ TEST_F(TestScheduler, addPassagersToSchedule) {
 }
 
 TEST_F(TestScheduler, getBusStopForAddedPassangers) {
-  ON_CALL(*mWeighGraphMock, createGraph(*pBusStop));
+  ON_CALL(*mWeighGraphMock, createGraph(_));
   addPassangers();
   setExpectation();
   sut->setStartTime(Time(6, 15));

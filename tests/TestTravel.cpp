@@ -5,13 +5,12 @@
 class testTravel: public testing::Test{
 public:
     testTravel(){
-       // std::vector<double> lVector = {5,6,7,8,5,5,6,7,9,3,7,8,8,10,10,7,9,8,10,15};
      std::vector<double> lVector{};
-     graph  = std::make_unique<WeightGraph>(lVector);
-     sut= std::make_shared<EltistAntSystem>(*graph);
+     graph  = std::make_shared<WeightGraph>(lVector);
+     sut= std::make_shared<EltistAntSystem>();
     }
 
-    std::unique_ptr<WeightGraph> graph;
+    std::shared_ptr<WeightGraph> graph;
     std::shared_ptr<EltistAntSystem> sut;
 
     Ant ant;
@@ -36,7 +35,7 @@ public:
 	{
 		sut->setFinalCity(Coordinate(8,10));
 		sut->setStartCity(Coordinate(5,6));
-			sut->setGraph(graph);	
+        sut->setGraph(graph);
 	}
 };
 

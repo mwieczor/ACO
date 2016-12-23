@@ -5,12 +5,6 @@
 class TestAnt: public testing::Test{
 public:
     TestAnt(){
-        ///NOTE BW nie rób tego w testach, tylko tutaj, nie duplikuj kodu
-        edge1= Edge(Node(Coordinate(5,6)), Node(Coordinate(7,8)), 5, Weight(1));
-        edge2= Edge(Node(Coordinate(5,6)), Node(Coordinate(7,9)), 3, Weight(5));
-        edge3= Edge(Node(Coordinate(7,8)), Node(Coordinate(8,10)), 15, Weight(1));
-        edge4= Edge(Node(Coordinate(7,9)), Node(Coordinate(8,10)), 5, Weight(15));
-
             std::vector<double> lVector = {5,6,7,8,5,5,6,7,9,3,7,8,8,10,15,7,9,8,10,5};
             graph = std::make_shared<WeightGraph>(lVector);
     }
@@ -18,12 +12,6 @@ public:
     std::unique_ptr<Ant> sut = std::make_unique<Ant>(Node(Coordinate(5,6)));
     std::shared_ptr<WeightGraph> graph;
 
-    ///NOTE BW może lepiej vector<Edge> ?
-    Edge edge1;
-    Edge edge2;
-    Edge edge3;
-    Edge edge4;
-    Edge edge5;
 };
 
 

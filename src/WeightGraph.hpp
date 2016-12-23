@@ -5,7 +5,8 @@
 class WeightGraph: public IWeightGraph
 {
 public:
-    WeightGraph(std::vector<double>& pData):
+    WeightGraph(){}
+    WeightGraph(std::vector<double> pData):
     mData(pData)
     {
         parseData();
@@ -21,7 +22,7 @@ private:
     void parseData();
     int mNodesNumber;
 	Node &searchNode(Node pN);
-    std::vector<double>& mData;
+    std::vector<double> mData;
 
 
 };

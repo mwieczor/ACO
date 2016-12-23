@@ -2,16 +2,16 @@
 
 void Scheduler::setRouteParameters()
 {
-	mAntColony->setFinalCity(mFinalCity);
-	mAntColony->setStartCity(mStartStop);
-	mAntColony->setGraph(*mGraph);	
+    mAntColony.setFinalCity(mFinalCity);
+    mAntColony.setStartCity(mStartStop);
+    mAntColony.setGraph(*mGraph);
 }
 
 void Scheduler::schedule() {
   prepareDataForGraph();
   if(mSchedule.size()==0){
-	  setRouteParameters();
-	  auto lRawSchedule = mAntColony->getCalculateRoute();
+      setRouteParameters();
+      auto lRawSchedule = mAntColony.getCalculateRoute();
 	  calculateSchedule(lRawSchedule);
   }
 }
@@ -34,7 +34,7 @@ std::string Scheduler::getBusStop() { return mBusStop[0].mName; }
 void Scheduler::prepareDataForGraph() {
   findDemandStops();
   if (isPassangerInTimeWindow){
-	  mStartStop = mBus.getPosition();
+      mStartStop = mBus->getPosition();
 	  mFinalCity = findFinalCity();
 	  mGraph->createGraph(mBusStop);
   }
@@ -88,7 +88,7 @@ void Scheduler::setPassangersToSchedule(int nb, std::pair<Time, std::string> b)
     auto passanger = std::find_if(mPassengersList.begin(), mPassengersList.end(),
                  [&](auto p) { return b.second == p.mStartStop; });
 	if(passanger!=mPassengersList.end()){
-	mBus.takeASeat(*passanger);
+    mBus->takeASeat(*passanger);
 	mPassengersList.erase(passanger);
 	nb--;
 	}
@@ -100,26 +100,34 @@ void Scheduler::incraseNbOfPassangerInBus() // wrong name, do two diff things{
 {
   for (auto b : mSchedule) {
 
-    mBus.releaseSeat(b);
-	auto freeSeats = mBus.getFreeSeatsInBus();
+    mBus->releaseSeat(b);
+    auto freeSeats = mBus->getFreeSeatsInBus();
     if (freeSeats) {
       auto nb = std::count_if(mPassengersList.begin(), mPassengersList.end(),
                               [=](auto p) { return b.second == p.mStartStop; });
 	  if(freeSeats>nb){
-      mBus.increasePassengersNumber(nb);
+      mBus->increasePassengersNumber(nb);
       setPassangersToSchedule(nb, b);
 	  }
 	  else{
-		  mBus.increasePassengersNumber(freeSeats);
+          mBus->increasePassengersNumber(freeSeats);
 		  setPassangersToSchedule(freeSeats, b); 
 	  }
     }
   }
 }
 
+void Scheduler::parseData(std::vector<std::__cxx11::string> pData)
+{
+    for(int i =pData.size()-1; i>=0 ; i=i-3)
+    {
+    mBusStop.push_back(BusStop({Coordinate(std::stoi(pData[i-2], nullptr), std::stoi(pData[i-1], nullptr)), pData[i]}));
+    }
+}
+
 Coordinate Scheduler::findFinalCity()
 {
-	if(mBus.hasToBackToDepot()){
+    if(mBus->hasToBackToDepot()){
 		return mDepotCoordinate;
 	}
 	else {

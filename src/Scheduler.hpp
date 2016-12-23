@@ -14,10 +14,12 @@
 
 class   Scheduler {
 public:
-  Scheduler(IBus &pBus, auto &pBusStop, std::shared_ptr<IWeightGraph> pGraph,
-            std::shared_ptr<IEltistAntSystem> pEltist)
-      : mBus(pBus), mStartTime(0, 0), mBusStop(pBusStop), mGraph(pGraph),
-        mAntColony(std::move(pEltist)) {}
+  Scheduler(IEltistAntSystem& pAntColony, std::vector<std::string> pBusStop, std::shared_ptr<IWeightGraph> pGraph)
+      :  mAntColony(pAntColony), mStartTime(0, 0), mGraph(pGraph)
+  {
+      parseData(pBusStop);
+      mBus = std::make_shared<Bus>(Coordinate(0,0));
+  }
   void schedule();
   std::map<Time, std::string> getSchedule();
   void addPassanger(Time, std::string, std::string);
@@ -33,13 +35,14 @@ private:
   void calculateSchedule(std::vector<std::pair<Coordinate, int>> &);
   void setPassangersToSchedule(int, std::pair<Time, std::string>);
   void incraseNbOfPassangerInBus();
+  void parseData(std::vector<std::string>);
   Coordinate findFinalCity();
 
-  std::shared_ptr<IEltistAntSystem> mAntColony;
+  IEltistAntSystem& mAntColony;
   std::shared_ptr<IWeightGraph> mGraph;
-  IBus &mBus;
+  std::shared_ptr<IBus> mBus;
   std::map<Time, std::string> mSchedule;
-  std::vector<BusStop> &mBusStop;
+  std::vector<BusStop> mBusStop;
   std::vector<Passenger> mPassengersList;
   int mTimePeriod;
   Time mStartTime;
