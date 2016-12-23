@@ -17,7 +17,7 @@ std::vector<double> &DataReader::readDataForGraph()
         return mData;
 }
 
-void DataReader::readPassangersData()
+std::vector<std::string> DataReader::readPassangersData()
 {
     std::ifstream file("/home/bwieczor/data2.csv");
     std::string temp;

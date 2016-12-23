@@ -8,7 +8,7 @@ public:
     DataReader(){}
     ~DataReader(){}
     std::vector<double>& readDataForGraph();
-    void readPassangersData();
+    std::vector<std::__cxx11::string> readPassangersData();
     std::vector<std::string> readStopBusData();
 
 private:

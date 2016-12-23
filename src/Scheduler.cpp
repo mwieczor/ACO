@@ -7,7 +7,8 @@ void Scheduler::setRouteParameters()
     mAntColony.setGraph(*mGraph);
 }
 
-void Scheduler::schedule() {
+void Scheduler::schedule(std::vector<std::string> pPassangerData) {
+  preparePassangerData(pPassangerData);
   prepareDataForGraph();
   if(mSchedule.size()==0){
       setRouteParameters();
@@ -150,3 +151,11 @@ bool isRightTime(Time passTime){
 }
 
 void Scheduler::setStartTime(const Time &startTime) { mStartTime = startTime; }
+
+void Scheduler::preparePassangerData(std::vector<std::__cxx11::string> & pData)
+{
+    for(int i =pData.size()-1; i>=0 ; i=i-4)
+    {
+    addPassanger(Time(std::stoi(pData[i-3], nullptr), std::stoi(pData[i-2], nullptr)), pData[i-1], pData[i]);
+    }
+}

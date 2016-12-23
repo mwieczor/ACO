@@ -20,7 +20,6 @@ public:
                                  "7", "8", "Second Stop",
                                  "7", "9", "Third Stop",
                                  "9", "10", "Fifth Stop"};
-
     mWeighGraphMock = std::make_shared<::testing::NiceMock<MockWeighGraph>>();
     mEltistAntSystemMock =
         std::make_shared<::testing::StrictMock<MockEltistAntSystem>>();
@@ -28,9 +27,10 @@ public:
   }
 
   void addPassangers() {
-    sut->addPassanger(Time(6, 12), "First Stop", "Second Stop");
-    sut->addPassanger(Time(6, 14), "Second Stop", "Third Stop");
-    sut->addPassanger(Time(6, 15), "Third Stop", "Second Stop");
+      mPassangerData = {"6","12","First Stop", "Second Stop", "6", "14", "Second Stop", "Third Stop", "6", "15", "Third Stop", "Second Stop"};
+//    sut->addPassanger(Time(6, 12), "First Stop", "Second Stop");
+//    sut->addPassanger(Time(6, 14), "Second Stop", "Third Stop");
+//    sut->addPassanger(Time(6, 15), "Third Stop", "Second Stop");
   }
   void setDemand() {}
 
@@ -54,6 +54,7 @@ public:
     mRawSchedule.push_back({{5, 6}, 2});
   }
 
+  std::vector<std::string> mPassangerData;
   std::unique_ptr<::testing::NiceMock<MockBus>> mBusMock;
   std::shared_ptr<std::vector<BusStop>> pBusStop;
   std::shared_ptr<::testing::NiceMock<MockWeighGraph>> mWeighGraphMock;
@@ -65,7 +66,9 @@ public:
 
 TEST_F(TestScheduler, addPassagersToSchedule) {
   addPassangers();
+  setExpectation();
   sut->setStartTime(Time(6, 00));
+  sut->schedule(mPassangerData);
   EXPECT_EQ("Second Stop", sut->getPassanger());
 }
 
@@ -74,7 +77,7 @@ TEST_F(TestScheduler, getBusStopForAddedPassangers) {
   addPassangers();
   setExpectation();
   sut->setStartTime(Time(6, 15));
-  sut->schedule();
+  sut->schedule(mPassangerData);
   auto first = sut->getSchedule().begin();
   first++;
   EXPECT_EQ("Third Stop", first->second);
@@ -84,7 +87,7 @@ TEST_F(TestScheduler, addPassengersWithWrongBusStop) {
   setExpectation();
   sut->setStartTime(Time(7, 13));
   sut->addPassanger(Time(7, 20), "Fourth Stop", "Second Stop");
-  sut->schedule();
+  sut->schedule(mPassangerData);
   auto first = sut->getSchedule().begin();
   
   EXPECT_EQ("No passengers in this time", first->second);
@@ -95,7 +98,7 @@ TEST_F(TestScheduler, passengersInParticularTimeWindow) {
   addPassangers();
   sut->setStartTime(Time(7, 13));
   sut->addPassanger(Time(7, 20), "Fifth Stop", "Second Stop");
-  sut->schedule();
+  sut->schedule(mPassangerData);
   auto first = sut->getSchedule().begin();
   
   EXPECT_EQ("Fifth Stop", first->second);
@@ -106,7 +109,7 @@ TEST_F(TestScheduler, proccedGeneratedRoute) {
   sut->setStartTime(Time(6, 0));
   ON_CALL(*mBusMock, getPosition()).WillByDefault(Return(Coordinate(9, 10)));
   createRawSchedule();
-  sut->schedule();
+  sut->schedule(mPassangerData);
  // EXPECT_EQ("Fifth Stop", sut->getSchedule());
 }
 
@@ -116,7 +119,7 @@ TEST_F(TestScheduler, notAllPassangersTaken) {
   ON_CALL(*mBusMock, getPosition()).WillByDefault(Return(Coordinate(9, 10)));
   ON_CALL(*mBusMock, getFreeSeatsInBus()).WillByDefault(Return(5));
   createRawSchedule();
-  sut->schedule();
+  sut->schedule(mPassangerData);
   //EXPECT_EQ("One of passanger is not taken from stop", sut->getSchedule());
 }
 }

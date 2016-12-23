@@ -20,7 +20,7 @@ public:
       parseData(pBusStop);
       mBus = std::make_shared<Bus>(Coordinate(0,0));
   }
-  void schedule();
+  void schedule(std::vector<std::string> );
   std::map<Time, std::string> getSchedule();
   void addPassanger(Time, std::string, std::string);
   std::string getPassanger();
@@ -29,6 +29,7 @@ public:
   void setStartTime(const Time &startTime);
 
 private:
+  void preparePassangerData(std::vector<std::string>&);
   void prepareDataForGraph();
   void findDemandStops();
   void signPassengerToStop(std::vector<BusStop>::iterator &it, Passenger &);
