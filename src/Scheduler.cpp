@@ -156,7 +156,7 @@ void Scheduler::setStartTime(const Time &startTime) { mStartTime = startTime; }
 
 void Scheduler::saveScheduleToFile()
 {
-    std::ofstream outfile ("/home/mwieczor/data1.csv", std::ofstream::out);
+    std::ofstream outfile ("/home/mwieczor/gotowyRozklad.csv", std::ofstream::out);
     for (auto t : mSchedule)
     {
         outfile<< std::to_string(t.first.hour) +","+ std::to_string(t.first.minute) +","+t.second +"\n";

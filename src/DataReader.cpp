@@ -7,7 +7,7 @@
 
 std::vector<double> &DataReader::readDataForGraph()
 {
-        std::ifstream file("/home/bwieczor/data1.csv");
+        std::ifstream file("/home/mwieczor/src/ACO/rozkladJazdy.csv");
         std::string temp;
         while ( file.good() )
         {
@@ -19,7 +19,7 @@ std::vector<double> &DataReader::readDataForGraph()
 
 std::vector<std::string> DataReader::readPassangersData()
 {
-    std::ifstream file("/home/bwieczor/data2.csv");
+    std::ifstream file("/home/mwieczor/src/ACO/data2.csv");
     std::string temp;
     while ( file.good() )
     {
@@ -31,7 +31,7 @@ std::vector<std::string> DataReader::readPassangersData()
 
 std::vector<std::string> DataReader::readStopBusData()
 {
-    std::ifstream file("/home/bwieczor/data3.csv");
+    std::ifstream file("/home/mwieczor/src/ACO/mapaPrzystankow.csv");
     std::string temp;
     while ( file.good() )
     {
